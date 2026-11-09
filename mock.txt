@@ -1,15 +1,10 @@
-{
+const MOCK = {
     educationals: [
         { id: 1, name: 'Школа №1' }
     ],
     teachers: [
         { id: 1, fio: 'Иванов Иван Иванович', educational_id: 1 }
     ],
-    // teacher_id -> курсы
-    teacherCourses: {
-        1: [ { id: 1, name: 'Математика, 5 класс' }, { id: 2, name: 'Алгебра, 7 класс' } ]
-         
-    },
     // "teacher_id-course_id" -> предметы
     teacherCourseSubjects: {
         '1-1': [ { id: 1, name: 'Математика' }, { id: 2, name: 'Геометрия' } ],
