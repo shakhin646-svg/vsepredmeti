@@ -97,8 +97,8 @@
             <div class="educational-buttons" id="educationalButtons"></div>
         </div>
 
-        <!-- 🔽 СЕКЦИЯ ПРЕПОДАВАТЕЛЕЙ (id для управления видимостью) -->
-        <div id="teachersSection" class="section" style="margin-bottom: 1px;">
+        <!-- 🔽 СЕКЦИЯ ПРЕПОДАВАТЕЛЕЙ (изначально скрыта) -->
+        <div id="teachersSection" class="section hidden" style="margin-bottom: 1px;">
             <h2 style="margin-bottom: 10px;">Преподаватели</h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите преподавателя</p>
             <div id="allTeachersList" class="teachers-list"></div>
@@ -108,7 +108,7 @@
             </div>
         </div>
 
-        <!-- 🔽 СЕКЦИЯ ПРЕДМЕТОВ ПРЕПОДАВАТЕЛЯ (id для управления видимостью) -->
+        <!-- 🔽 СЕКЦИЯ ПРЕДМЕТОВ ПРЕПОДАВАТЕЛЯ (изначально скрыта) -->
         <div id="teacherSubjectsContainer" style="display: none;" class="section">
             <h2 style="margin-bottom: 10px;">Предметы преподавателя</h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите предмет для просмотра материалов</p>
@@ -256,9 +256,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         currentCourse: null,
         currentSubject: null,
         currentTopic: null,
-        isTopicExpanded: false,
-        // 🔽 Флаг: скрыты ли преподаватели/предметы (режим "только школы")
-        isTeachersHiddenBySchool: false
+        isTopicExpanded: false
     };
 
     /* ---------- Рендер ---------- */
@@ -284,28 +282,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             `<p class="${config.classes.emptyMessage}">Нет доступных преподавателей</p>`;
     }
 
-    /* ---------- Управление видимостью секций ---------- */
-    // Применяет видимость секций согласно флагу isTeachersHiddenBySchool
-    function applyTeachersVisibility() {
-        if (state.isTeachersHiddenBySchool) {
-            teachersSection.classList.add('hidden');
-            teacherSubjectsSection.classList.add('hidden');
-        } else {
-            teachersSection.classList.remove('hidden');
-            // Секция предметов преподавателя показывается только если был выбран курс
-            if (state.currentCourse && state.currentTeacher) {
-                teacherSubjectsSection.classList.remove('hidden');
-            } else {
-                teacherSubjectsSection.classList.add('hidden');
-            }
-        }
-    }
-
     /* ---------- Обработчики ---------- */
     function handleEducationalClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.educationalId, 10);
-
         const isSame = state.currentEducational === id;
 
         // Сбрасываем активный класс со всех кнопок учреждений
@@ -313,20 +293,27 @@ document.addEventListener('DOMContentLoaded', async function () {
             b.classList.remove(config.classes.activeEducational));
 
         if (isSame) {
-            // 🔽 Повторное нажатие на ту же школу — раскрываем преподавателей и предметы
+            // 🔽 Повторное нажатие на ту же школу — скрываем преподавателей и предметы
             state.currentEducational = 0;
-            state.isTeachersHiddenBySchool = false;
-            applyTeachersVisibility();
+            teachersSection.classList.add('hidden');
+            teacherSubjectsSection.style.display = 'none';
+            teacherSubjectsSection.classList.add('hidden');
+            resetTeacherSelection();
             return;
         }
 
-        // 🔽 Нажатие на школу — скрываем преподавателей и предметы
+        // 🔽 Нажатие на школу — показываем преподавателей, скрываем предметы преподавателя
         state.currentEducational = id;
-        state.isTeachersHiddenBySchool = true;
         btn.classList.add(config.classes.activeEducational);
         filterTeachers();
+
+        // Секция преподавателей видима
+        teachersSection.classList.remove('hidden');
+        // Секция предметов преподавателя скрыта до выбора курса
+        teacherSubjectsSection.style.display = 'none';
+        teacherSubjectsSection.classList.add('hidden');
+
         resetTeacherSelection();
-        applyTeachersVisibility();
     }
     function handleTeacherClick(e) {
         const btn = e.currentTarget;
@@ -411,10 +398,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         const data = await fetchData('', {
             ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
         });
-        // Показываем секцию предметов, если не скрыто режимом "только школы"
-        if (!state.isTeachersHiddenBySchool) {
-            elements.teacherSubjectsContainer.style.display = 'block';
-        }
+        // Показываем секцию предметов преподавателя
+        elements.teacherSubjectsContainer.classList.remove('hidden');
+        elements.teacherSubjectsContainer.style.display = 'block';
         if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
         if (!data.length) {
             showEmptyMessage(elements.teacherSubjectsList, 'У преподавателя нет предметов на этом курсе'); return;
@@ -506,10 +492,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
             b.classList.remove(config.classes.activeTeacher));
         elements.teacherCoursesContainer.style.display = 'none';
-        // Секцию предметов прячем, если не режим "только школы"
-        if (!state.isTeachersHiddenBySchool) {
-            elements.teacherSubjectsContainer.style.display = 'none';
-        }
+        elements.teacherSubjectsContainer.classList.add('hidden');
+        elements.teacherSubjectsContainer.style.display = 'none';
         state.currentTeacher = null;
         state.currentCourse = null;
     }
@@ -559,9 +543,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
         b.addEventListener('click', handleTeacherClick));
     filterTeachers();
-    // Изначально преподаватели и предметы видны
-    state.isTeachersHiddenBySchool = false;
-    applyTeachersVisibility();
+
+    // 🔽 В начале показываем ТОЛЬКО школы (преподаватели и предметы скрыты)
+    teachersSection.classList.add('hidden');
+    teacherSubjectsSection.classList.add('hidden');
+    teacherSubjectsSection.style.display = 'none';
 });
 
 function openMaterial(fileUrl) {
