@@ -65,8 +65,26 @@
              border-radius: 8px; margin: 10px 0; white-space: pre-wrap;
              font-family: monospace; font-size: 13px; }
 
-    .topics-list, .teachers-list, .courses-list, .subjects-list {
-        display: flex; flex-wrap: wrap; justify-content: center; }
+.topics-list, .teachers-list, .courses-list, .subjects-list {
+    display: flex; flex-wrap: wrap; justify-content: center; }
+
+/* Шесть кнопок в ряд для уроков и тем */
+#teacherSubjectsList,
+#topicsList {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    justify-content: stretch;
+}
+
+/* Кнопки внутри растягиваются на всю ячейку */
+#teacherSubjectsList .subject-button,
+#topicsList .topic-button {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
     .fade-in { opacity: 1; height: auto; transition: all .3s ease; }
 
     .external-link { color: #0515f0; text-decoration: none; font-size: 14px;
