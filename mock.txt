@@ -1,6 +1,6 @@
 const MOCK = {
  educationals: [
-        { id: 1, name: 'Школа №1' } 
+        { id: 1, name: 'Уроки' } 
     ],
     teachers: [
         { id: 1, fio: '5 класс',  educational_id: 1 },
@@ -9,9 +9,9 @@ const MOCK = {
     ],
     // teacher_id -> курсы
     teacherCourses: {
-        1: [ { id: 1, name: 'Математика, 5 класс' }, { id: 2, name: 'Алгебра, 7 класс' } ],
-        2: [ { id: 3, name: 'Русский язык, 6 класс' } ],
-        3: [ { id: 4, name: 'Физика, 8 класс' } ]
+        1: [ { id: 1, name: 'Математика' } ],
+        2: [ { id: 2, name: 'Инд_проект' }, { id: 3, name: 'Информатика_ПР' }  ],
+        3: [ { id: 4, name: 'Информационные технологии' }, { id: 5, name: 'Арх апп средств' } ]
     },
     // "teacher_id-course_id" -> предметы
     teacherCourseSubjects: {
