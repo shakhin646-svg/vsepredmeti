@@ -68,9 +68,8 @@
     .topics-list, .teachers-list, .courses-list, .subjects-list {
         display: flex; flex-wrap: wrap; justify-content: center; }
 
-    /* Шесть кнопок в ряд для уроков и тем */
-    #teacherSubjectsList,
-    #topicsList {
+    /* Шесть кнопок в ряд для уроков */
+    #teacherSubjectsList {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: 8px;
@@ -78,8 +77,7 @@
     }
 
     /* Кнопки внутри растягиваются на всю ячейку */
-    #teacherSubjectsList .subject-button,
-    #topicsList .topic-button {
+    #teacherSubjectsList .subject-button {
         width: 100%;
         margin: 0;
         text-align: center;
@@ -92,8 +90,7 @@
 
     @media (max-width: 768px) {
         .container { border-radius: 0; box-shadow: none; }
-        #teacherSubjectsList,
-        #topicsList {
+        #teacherSubjectsList {
             grid-template-columns: repeat(3, 1fr);
         }
     }
@@ -107,11 +104,9 @@
         <h1 class="title">vsepredmeti.ru</h1>
     </div>
 
-    <!-- 🔽 Новые служебные элементы -->
     <div id="appLoading" class="loading">Загрузка данных из mock.txt…</div>
     <div id="appError" class="error hidden"></div>
 
-    <!-- 🔽 Всё содержимое обёрнуто в appContent -->
     <div id="appContent" class="hidden">
 
         <div class="section" style="margin-bottom: 1px;">
@@ -119,7 +114,7 @@
             <div class="educational-buttons" id="educationalButtons"></div>
         </div>
 
-        <!-- 🔽 СЕКЦИЯ ПРЕПОДАВАТЕЛЕЙ (изначально скрыта) -->
+        <!-- СЕКЦИЯ КУРСОВ / КЛАССОВ (изначально скрыта) -->
         <div id="teachersSection" class="section hidden" style="margin-bottom: 1px;">
             <h2 style="margin-bottom: 10px;">Курсы / Классы </h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите курс / класс</p>
@@ -130,17 +125,16 @@
             </div>
         </div>
 
-        <!-- 🔽 СЕКЦИЯ ПРЕДМЕТОВ ПРЕПОДАВАТЕЛЯ (изначально скрыта) -->
+        <!-- СЕКЦИЯ УРОКОВ (изначально скрыта) -->
         <div id="teacherSubjectsContainer" style="display: none;" class="section">
             <h2 style="margin-bottom: 10px;">Уроки </h2>
-            <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите урок для просмотра материалов</p>
+            <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите урок для просмотра описания</p>
             <div id="teacherSubjectsList" class="subjects-list" style="margin: 10px 0;"></div>
         </div>
 
-        <div id="topicsContainer" style="display: none;" class="section">
-            <h3 id="selectedSubjectTitle" style="font-size: 1.2rem; text-align: center; margin-top: 15px;"></h3>
-            <div id="topicsList" class="topics-list" style="margin: 10px 0;"></div>
-            <div id="topicDescription" style="display: none; margin-top: 15px; padding: 15px;
+        <!-- ОПИСАНИЕ ТЕМЫ (изначально скрыто) -->
+        <div id="topicDescriptionSection" style="display: none;" class="section">
+            <div id="topicDescription" style="margin-top: 5px; padding: 15px;
                                               background: #f5f5f5; border-radius: 5px;">
                 <h4 style="margin-bottom: 10px; color: #333;">Описание темы</h4>
                 <p id="descriptionText" style="color: #666;">Описание отсутствует</p>
@@ -150,7 +144,7 @@
         <div class="section" style="margin-bottom: 10px;">
             <h2 style="margin-bottom: 10px;">Материалы урока</h2>
             <div id="lessonMaterials">
-                <p class="empty-message">Выберите предмет и тему для просмотра материалов</p>
+                <p class="empty-message">Выберите урок для просмотра материалов</p>
             </div>
         </div>
 
@@ -173,15 +167,12 @@ function evalMockSource(text) {
     const src = text.trim();
     if (!src) throw new Error('mock.txt пуст');
 
-    // A) const/let/var MOCK = ...
     if (/^(?:const|let|var)\s+MOCK\s*=/m.test(src)) {
         return new Function(src + '\nreturn MOCK;')();
     }
-    // B) начинается с { — оборачиваем в скобки, чтобы распарсилось как выражение
     if (src.startsWith('{')) {
         return new Function('return (' + src + ');')();
     }
-    // C) прочее — пробуем как есть
     const result = new Function(src + '\nreturn typeof MOCK !== "undefined" ? MOCK : null;')();
     if (!result) throw new Error('В mock.txt не найден объект MOCK');
     return result;
@@ -219,10 +210,6 @@ function mockAjax(params) {
     if (action === 'get_teacher_course_subjects') {
         return MOCK.teacherCourseSubjects?.[params.teacher_id + '-' + params.course_id] || [];
     }
-    if (action === 'get_topics') {
-        const key = `${params.teacher_id}-${params.course_id}-${params.subject_id}`;
-        return MOCK.topics?.[key] || [];
-    }
     if (action === 'get_materials') {
         return MOCK.materials?.[params.topic_id] || [];
     }
@@ -256,20 +243,18 @@ document.addEventListener('DOMContentLoaded', async function () {
             courseButtons: '.course-button',
             teacherCoursesContainer: '#teacherCoursesContainer',
             teacherSubjectsContainer: '#teacherSubjectsContainer',
-            topicsContainer: '#topicsContainer',
             allTeachersList: '#allTeachersList',
             teacherCoursesList: '#teacherCoursesList',
             teacherSubjectsList: '#teacherSubjectsList',
-            topicsList: '#topicsList',
             selectedTeacherTitle: '#selectedTeacherTitle',
-            selectedSubjectTitle: '#selectedSubjectTitle',
+            topicDescriptionSection: '#topicDescriptionSection',
             topicDescription: '#topicDescription',
             descriptionText: '#descriptionText',
             lessonMaterials: '#lessonMaterials'
         },
         classes: {
             hidden: 'hidden', error: 'error', emptyMessage: 'empty-message',
-            activeSubject: 'active-subject', activeTopic: 'active-topic',
+            activeSubject: 'active-subject',
             activeEducational: 'active-educational', activeTeacher: 'active-teacher',
             activeCourse: 'active-course'
         }
@@ -277,7 +262,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const elements = {};
     for (const [k, sel] of Object.entries(config.selectors)) elements[k] = document.querySelector(sel);
 
-    // 🔽 Элементы для управления видимостью
     const teachersSection = document.getElementById('teachersSection');
     const teacherSubjectsSection = document.getElementById('teacherSubjectsContainer');
 
@@ -285,9 +269,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         currentEducational: 0,
         currentTeacher: null,
         currentCourse: null,
-        currentSubject: null,
-        currentTopic: null,
-        isTopicExpanded: false
+        currentSubject: null
     };
 
     /* ---------- Рендер ---------- */
@@ -319,12 +301,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         const id = parseInt(btn.dataset.educationalId, 10);
         const isSame = state.currentEducational === id;
 
-        // Сбрасываем активный класс со всех кнопок учреждений
         document.querySelectorAll(config.selectors.educationalButtons).forEach(b =>
             b.classList.remove(config.classes.activeEducational));
 
         if (isSame) {
-            // 🔽 Повторное нажатие на ту же школу — скрываем преподавателей и предметы
             state.currentEducational = 0;
             teachersSection.classList.add('hidden');
             teacherSubjectsSection.style.display = 'none';
@@ -333,14 +313,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             return;
         }
 
-        // 🔽 Нажатие на школу — показываем преподавателей, скрываем предметы преподавателя
         state.currentEducational = id;
         btn.classList.add(config.classes.activeEducational);
         filterTeachers();
 
-        // Секция преподавателей видима
         teachersSection.classList.remove('hidden');
-        // Секция предметов преподавателя скрыта до выбора курса
         teacherSubjectsSection.style.display = 'none';
         teacherSubjectsSection.classList.add('hidden');
 
@@ -357,7 +334,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         state.currentTeacher = id;
         loadTeacherCourses(id, name);
         resetSubjectSelection();
-        resetTopicSelection();
     }
     function handleTeacherCourseClick(e) {
         const id = parseInt(e.currentTarget.dataset.courseId, 10);
@@ -372,27 +348,24 @@ document.addEventListener('DOMContentLoaded', async function () {
     function handleSubjectClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.subjectId, 10);
-        const name = btn.dataset.subjectName;
-        if (state.currentSubject === id) { resetSubjectSelection(); return; }
+        const description = btn.dataset.subjectDescription || '';
+
+        if (state.currentSubject === id) {
+            resetSubjectSelection();
+            return;
+        }
+
         document.querySelectorAll('.subject-button').forEach(b =>
             b.classList.remove(config.classes.activeSubject));
         btn.classList.add(config.classes.activeSubject);
         state.currentSubject = id;
-        loadTopics(id, name);
-        resetTopicSelection();
-    }
-    function handleTopicClick(e) {
-        const btn = e.currentTarget;
-        const id = parseInt(btn.dataset.topicId, 10);
-        const desc = btn.dataset.description;
-        if (state.currentTopic === id) { toggleTopicVisibility(); return; }
-        document.querySelectorAll('.topic-button').forEach(b =>
-            b.classList.remove(config.classes.activeTopic));
-        btn.classList.add(config.classes.activeTopic);
-        state.currentTopic = id;
-        state.isTopicExpanded = true;
-        showTopicDescription(desc);
-        loadMaterials(state.currentSubject, id);
+
+        // Показываем только описание темы
+        elements.topicDescriptionSection.style.display = 'block';
+        elements.descriptionText.textContent = description || 'Описание отсутствует';
+
+        // Материалы урока
+        loadMaterials(id);
     }
 
     /* ---------- Фильтр ---------- */
@@ -429,32 +402,16 @@ document.addEventListener('DOMContentLoaded', async function () {
         const data = await fetchData('', {
             ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
         });
-        // Показываем секцию предметов преподавателя
         elements.teacherSubjectsContainer.classList.remove('hidden');
         elements.teacherSubjectsContainer.style.display = 'block';
         if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
         if (!data.length) {
             showEmptyMessage(elements.teacherSubjectsList, 'Материалы для этого урока ещё готовятся'); return;
         }
-        elements.selectedSubjectTitle.textContent = `Предметы: ${teacherName} — ${courseName}`;
         renderSubjects(data); bindSubjectEvents();
     }
-    async function loadTopics(subjectId, subjectName) {
-        elements.topicsList.innerHTML = '';
-        elements.topicsContainer.style.display = 'block';
-        elements.selectedSubjectTitle.textContent = `Темы: ${subjectName}`;
-        const data = await fetchData('', {
-            ajax: 'get_topics',
-            teacher_id: state.currentTeacher,
-            course_id: state.currentCourse,
-            subject_id: subjectId
-        });
-        if (data.error) { showError(elements.topicsList, data.error); return; }
-        if (!data.length) { showEmptyMessage(elements.topicsList, 'Нет тем для этого предмета'); return; }
-        renderTopics(data); bindTopicEvents();
-    }
-    async function loadMaterials(subjectId, topicId) {
-        const data = await fetchData('', { ajax: 'get_materials', topic_id: topicId });
+    async function loadMaterials(subjectId) {
+        const data = await fetchData('', { ajax: 'get_materials', topic_id: subjectId });
         if (data.error) { showError(elements.lessonMaterials, data.error); return; }
         if (!data.length) showEmptyMessage(elements.lessonMaterials, 'Материалы для этой темы не найдены');
         else renderMaterials(data);
@@ -471,17 +428,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     function renderSubjects(subjects) {
         elements.teacherSubjectsList.innerHTML = subjects.map(s => `
-            <button class="subject-button" data-subject-id="${s.id}" data-subject-name="${escapeHtml(s.name)}">
+            <button class="subject-button"
+                    data-subject-id="${s.id}"
+                    data-subject-name="${escapeHtml(s.name)}"
+                    data-subject-description="${escapeHtml(s.description || '')}">
                 ${escapeHtml(s.name)}
-            </button>
-        `).join('');
-    }
-    function renderTopics(topics) {
-        elements.topicsList.innerHTML = topics.map(t => `
-            <button class="topic-button"
-                    data-topic-id="${t.id}"
-                    data-description="${escapeHtml(t.description || '')}">
-                ${escapeHtml(t.name || t.topic_name || '')}
             </button>
         `).join('');
     }
@@ -518,14 +469,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     /* ---------- Утилиты ---------- */
-    function showTopicDescription(d) {
-        elements.descriptionText.textContent = d || 'Описание отсутствует';
-        elements.topicDescription.style.display = 'block';
-    }
-    function toggleTopicVisibility() {
-        state.isTopicExpanded = !state.isTopicExpanded;
-        elements.lessonMaterials.style.display = state.isTopicExpanded ? 'block' : 'none';
-    }
     function resetTeacherSelection() {
         document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
             b.classList.remove(config.classes.activeTeacher));
@@ -534,19 +477,15 @@ document.addEventListener('DOMContentLoaded', async function () {
         elements.teacherSubjectsContainer.style.display = 'none';
         state.currentTeacher = null;
         state.currentCourse = null;
+        resetSubjectSelection();
     }
     function resetSubjectSelection() {
         document.querySelectorAll('.subject-button').forEach(b =>
             b.classList.remove(config.classes.activeSubject));
-        elements.topicsContainer.style.display = 'none';
-        elements.topicDescription.style.display = 'none';
+        elements.topicDescriptionSection.style.display = 'none';
+        elements.lessonMaterials.innerHTML =
+            '<p class="empty-message">Выберите урок для просмотра материалов</p>';
         state.currentSubject = null;
-    }
-    function resetTopicSelection() {
-        document.querySelectorAll('.topic-button').forEach(b =>
-            b.classList.remove(config.classes.activeTopic));
-        elements.lessonMaterials.style.display = 'none';
-        state.currentTopic = null; state.isTopicExpanded = false;
     }
     function bindTeacherCourseEvents() {
         document.querySelectorAll('#teacherCoursesList .course-button').forEach(b =>
@@ -555,10 +494,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     function bindSubjectEvents() {
         document.querySelectorAll('#teacherSubjectsList .subject-button').forEach(b =>
             b.addEventListener('click', handleSubjectClick));
-    }
-    function bindTopicEvents() {
-        document.querySelectorAll('#topicsList .topic-button').forEach(b =>
-            b.addEventListener('click', handleTopicClick));
     }
     function showError(container, msg) {
         container.innerHTML = `<p class="${config.classes.error}">${escapeHtml(msg)}</p>`;
@@ -582,7 +517,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         b.addEventListener('click', handleTeacherClick));
     filterTeachers();
 
-    // 🔽 В начале показываем ТОЛЬКО школы (преподаватели и предметы скрыты)
     teachersSection.classList.add('hidden');
     teacherSubjectsSection.classList.add('hidden');
     teacherSubjectsSection.style.display = 'none';
