@@ -1,0 +1,54 @@
+{
+    educationals: [
+        { id: 1, name: 'Школа №1' },
+        { id: 2, name: 'Гимназия №5' }
+    ],
+    teachers: [
+        { id: 1, fio: 'Иванов Иван Иванович',  educational_id: 1 },
+        { id: 2, fio: 'Петрова Анна Сергеевна', educational_id: 1 },
+        { id: 3, fio: 'Сидоров Пётр Алексеевич', educational_id: 2 }
+    ],
+    // teacher_id -> курсы
+    teacherCourses: {
+        1: [ { id: 1, name: 'Математика, 5 класс' }, { id: 2, name: 'Алгебра, 7 класс' } ],
+        2: [ { id: 3, name: 'Русский язык, 6 класс' } ],
+        3: [ { id: 4, name: 'Физика, 8 класс' } ]
+    },
+    // "teacher_id-course_id" -> предметы
+    teacherCourseSubjects: {
+        '1-1': [ { id: 1, name: 'Математика' }, { id: 2, name: 'Геометрия' } ],
+        '1-2': [ { id: 3, name: 'Алгебра' } ],
+        '2-3': [ { id: 4, name: 'Русский язык' }, { id: 5, name: 'Литература' } ],
+        '3-4': [ { id: 6, name: 'Физика' } ]
+    },
+    // subject_id -> темы
+    topics: {
+        1: [
+            { id: 1, topic_name: 'Натуральные числа',  description: 'Понятие натурального числа, сравнение и запись чисел.' },
+            { id: 2, topic_name: 'Обыкновенные дроби', description: 'Доли, обыкновенные дроби, сравнение дробей.' }
+        ],
+        2: [ { id: 3, topic_name: 'Точка, прямая, отрезок', description: 'Основные геометрические фигуры.' } ],
+        3: [ { id: 4, topic_name: 'Линейные уравнения', description: 'Решение уравнений вида ax + b = 0.' } ],
+        4: [ { id: 5, topic_name: 'Части речи', description: 'Самостоятельные и служебные части речи.' } ],
+        5: [ { id: 6, topic_name: 'Русские народные сказки', description: 'Классификация и анализ сказок.' } ],
+        6: [ { id: 7, topic_name: 'Механическое движение', description: 'Скорость, путь, время.' } ]
+    },
+    // topic_id -> материалы
+    materials: {
+        1: [
+            { title: 'Схема-конспект.png', file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dbeafe"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%232563eb">IMG</text></svg>' },
+            { title: 'Урок.mp4',           file_type: 'video',    file_url: '#' },
+            { title: 'Аудиоурок.mp3',      file_type: 'audio',    file_url: '#' },
+            { title: 'Конспект.pdf',       file_type: 'document', file_url: '#' }
+        ],
+        2: [
+            { title: 'Дроби.png',          file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dcfce7"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%2316a34a">IMG</text></svg>' },
+            { title: 'Задания.docx',       file_type: 'document', file_url: '#' }
+        ],
+        3: [ { title: 'Геометрия.pdf', file_type: 'document', file_url: '#' } ],
+        4: [ { title: 'Уравнения.pdf', file_type: 'document', file_url: '#' } ],
+        5: [ { title: 'Части речи.mp4', file_type: 'video', file_url: '#' } ],
+        6: [ { title: 'Сказки.pdf', file_type: 'document', file_url: '#' } ],
+        7: [ { title: 'Движение.png', file_type: 'image', file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23fef3c7"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%23d97706">IMG</text></svg>' } ]
+    }
+};
