@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         elements.teacherSubjectsContainer.style.display = 'block';
         if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
         if (!data.length) {
-            showEmptyMessage(elements.teacherSubjectsList, 'У преподавателя нет предметов на этом курсе'); return;
+            showEmptyMessage(elements.teacherSubjectsList, 'Материалы для этого урока ещё готовятся'); return;
         }
         elements.selectedSubjectTitle.textContent = `Предметы: ${teacherName} — ${courseName}`;
         renderSubjects(data); bindSubjectEvents();
