@@ -1,4 +1,4 @@
-const MOCK = {
+{
     educationals: [
         { id: 1, name: 'Школа №1' }
     ],
