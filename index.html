@@ -211,8 +211,10 @@ function mockAjax(params) {
     const action = params.ajax;
     if (action === 'get_teacher_courses')         return MOCK.teacherCourses?.[params.teacher_id] || [];
     if (action === 'get_teacher_course_subjects') return MOCK.teacherCourseSubjects?.[params.teacher_id + '-' + params.course_id] || [];
-    if (action === 'get_topics')                  return MOCK.topics?.[params.subject_id] || [];
-    if (action === 'get_materials')               return MOCK.materials?.[params.topic_id] || [];
+if (action === 'get_topics') {
+    const key = `${params.teacher_id}-${params.course_id}-${params.subject_id}`;
+    return MOCK.topics?.[key] || [];
+}    if (action === 'get_materials')               return MOCK.materials?.[params.topic_id] || [];
     return { error: 'Неизвестный AJAX-запрос' };
 }
 
