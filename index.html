@@ -68,12 +68,21 @@
     .topics-list, .teachers-list, .courses-list, .subjects-list {
         display: flex; flex-wrap: wrap; justify-content: center; }
 
-    /* Шесть кнопок в ряд для уроков */
+    /* 🔽 СЕКЦИЯ УРОКОВ — центрируем содержимое по горизонтали */
+    #teacherSubjectsContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 🔽 Сетка уроков: 6 в ряд */
     #teacherSubjectsList {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: 8px;
-        justify-content: stretch;
+        width: 100%;
+        max-width: 560px;
+        margin: 0 auto;
     }
 
     #teacherSubjectsList .subject-button {
@@ -82,6 +91,20 @@
         text-align: center;
         box-sizing: border-box;
     }
+
+    /* 🔽 Когда выбран один урок — центрируем его в одиночку */
+    #teacherSubjectsList.single-active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #teacherSubjectsList.single-active .subject-button {
+        width: auto;
+        min-width: 120px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
     .fade-in { opacity: 1; height: auto; transition: all .3s ease; }
 
     .external-link { color: #0515f0; text-decoration: none; font-size: 14px;
@@ -113,29 +136,22 @@
             <div class="educational-buttons" id="educationalButtons"></div>
         </div>
 
-        <!-- СЕКЦИЯ КУРСОВ / КЛАССОВ -->
         <div id="teachersSection" class="section hidden" style="margin-bottom: 1px;">
             <h2 style="margin-bottom: 10px;">Курсы / Классы </h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите курс / класс</p>
-
-            <!-- Список классов -->
             <div id="allTeachersList" class="teachers-list"></div>
-
-            <!-- Блок курсов выбранного класса -->
             <div id="teacherCoursesContainer" style="display: none;">
                 <h3 id="selectedTeacherTitle" style="font-size: 1.2rem; text-align: center; margin-top: 15px;"></h3>
                 <div id="teacherCoursesList" class="courses-list" style="margin: 10px 0;"></div>
             </div>
         </div>
 
-        <!-- СЕКЦИЯ УРОКОВ -->
-        <div id="teacherSubjectsContainer" style="display: none;" class="section">
+        <div id="teacherSubjectsContainer" class="section" style="display: none;">
             <h2 style="margin-bottom: 10px;">Уроки </h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите урок для просмотра описания</p>
             <div id="teacherSubjectsList" class="subjects-list" style="margin: 10px 0;"></div>
         </div>
 
-        <!-- ОПИСАНИЕ ТЕМЫ -->
         <div id="topicDescriptionSection" style="display: none;" class="section">
             <div id="topicDescription" style="margin-top: 5px; padding: 15px;
                                               background: #f5f5f5; border-radius: 5px;">
@@ -161,15 +177,11 @@
 </a>
 
 <script>
-/* =========================================================================
-   1. ЗАГРУЗЧИК mock.txt
-   ========================================================================= */
 let MOCK = null;
 
 function evalMockSource(text) {
     const src = text.trim();
     if (!src) throw new Error('mock.txt пуст');
-
     if (/^(?:const|let|var)\s+MOCK\s*=/m.test(src)) {
         return new Function(src + '\nreturn MOCK;')();
     }
@@ -202,9 +214,6 @@ async function loadMock() {
     return result;
 }
 
-/* =========================================================================
-   2. Эмулятор PHP-эндпоинтов
-   ========================================================================= */
 function mockAjax(params) {
     const action = params.ajax;
     if (action === 'get_teacher_courses') {
@@ -219,9 +228,6 @@ function mockAjax(params) {
     return { error: 'Неизвестный AJAX-запрос' };
 }
 
-/* =========================================================================
-   3. ИНИЦИАЛИЗАЦИЯ
-   ========================================================================= */
 document.addEventListener('DOMContentLoaded', async function () {
     const loadingEl = document.getElementById('appLoading');
     const errorEl   = document.getElementById('appError');
@@ -275,7 +281,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         currentSubject: null
     };
 
-    /* ---------- Рендер ---------- */
     function renderEducationals() {
         const list = MOCK.educationals || [];
         document.getElementById('educationalButtons').innerHTML =
@@ -298,7 +303,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             `<p class="${config.classes.emptyMessage}">Нет доступных преподавателей</p>`;
     }
 
-    /* ---------- Обработчики ---------- */
     function handleEducationalClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.educationalId, 10);
@@ -327,19 +331,16 @@ document.addEventListener('DOMContentLoaded', async function () {
         resetTeacherSelection();
     }
 
-    /* 🔽 КЛАССЫ: аккордеон — клик скрывает остальные классы, повторный клик раскрывает */
     function handleTeacherClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.teacherId, 10);
         const name = btn.dataset.teacherName;
         const isSame = state.currentTeacher === id;
 
-        // Снимаем активность со всех классов
         document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
             b.classList.remove(config.classes.activeTeacher));
 
         if (isSame) {
-            // Повторный клик: вернуть все классы, скрыть курсы/уроки/описание
             state.currentTeacher = null;
             state.currentCourse = null;
             state.currentSubject = null;
@@ -354,7 +355,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             return;
         }
 
-        // Первый клик: скрыть остальные классы, показать курсы этого класса
         state.currentTeacher = id;
         state.currentCourse = null;
         state.currentSubject = null;
@@ -366,17 +366,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         btn.classList.add(config.classes.activeTeacher);
 
-        // Курсы: показываем заново (могут быть скрыты от прошлого клика)
         elements.teacherCoursesContainer.style.display = 'block';
         loadTeacherCourses(id, name);
 
-        // Уроки/описание — сброс
         teacherSubjectsSection.classList.add('hidden');
         teacherSubjectsSection.style.display = 'none';
         resetSubjectSelection();
     }
 
-    /* 🔽 КУРСЫ: аккордеон — клик скрывает остальные курсы */
     function handleTeacherCourseClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.courseId, 10);
@@ -387,7 +384,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             b.classList.remove(config.classes.activeCourse));
 
         if (isSame) {
-            // Повторный клик: вернуть все курсы, скрыть уроки/описание
             state.currentCourse = null;
             state.currentSubject = null;
 
@@ -400,7 +396,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             return;
         }
 
-        // Первый клик: скрыть остальные курсы, показать уроки
         state.currentCourse = id;
         state.currentSubject = null;
         btn.classList.add(config.classes.activeCourse);
@@ -415,7 +410,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         resetSubjectSelection();
     }
 
-    /* 🔽 УРОКИ: аккордеон — клик скрывает остальные уроки, повторный клик раскрывает */
     function handleSubjectClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.subjectId, 10);
@@ -426,11 +420,12 @@ document.addEventListener('DOMContentLoaded', async function () {
             b.classList.remove(config.classes.activeSubject));
 
         if (isSame) {
-            // Повторный клик: вернуть все уроки, скрыть описание
             state.currentSubject = null;
-
             document.querySelectorAll('.subject-button').forEach(b =>
                 b.style.display = 'inline-block');
+
+            // 🔽 Вернуть сетку 6-в-ряд
+            elements.teacherSubjectsList.classList.remove('single-active');
 
             elements.topicDescriptionSection.style.display = 'none';
             elements.lessonMaterials.innerHTML =
@@ -438,7 +433,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             return;
         }
 
-        // Первый клик: скрыть остальные уроки, показать описание
         state.currentSubject = id;
         btn.classList.add(config.classes.activeSubject);
 
@@ -447,13 +441,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             else b.style.display = 'none';
         });
 
+        // 🔽 Оставить только нажатый урок по центру
+        elements.teacherSubjectsList.classList.add('single-active');
+
         elements.topicDescriptionSection.style.display = 'block';
         elements.descriptionText.textContent = description || 'Описание отсутствует';
 
         loadMaterials(id);
     }
 
-    /* ---------- Фильтр ---------- */
     function filterTeachers() {
         const edu = state.currentEducational;
         document.querySelectorAll(config.selectors.teacherItems).forEach(t => {
@@ -467,7 +463,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    /* ---------- Загрузка ---------- */
     async function fetchData(url, params = {}) {
         try {
             await new Promise(r => setTimeout(r, 30));
@@ -488,7 +483,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
         });
         elements.teacherSubjectsContainer.classList.remove('hidden');
-        elements.teacherSubjectsContainer.style.display = 'block';
+        elements.teacherSubjectsContainer.style.display = 'flex';
+        // 🔽 при новом списке сбрасываем «одиночный» режим
+        elements.teacherSubjectsList.classList.remove('single-active');
         if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
         if (!data.length) {
             showEmptyMessage(elements.teacherSubjectsList, 'Материалы для этого урока ещё готовятся'); return;
@@ -503,7 +500,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         elements.lessonMaterials.style.display = 'block';
     }
 
-    /* ---------- Рендер списков ---------- */
     function renderCourses(courses) {
         elements.teacherCoursesList.innerHTML = courses.map(c => `
             <button class="course-button" data-course-id="${c.id}" data-course-name="${escapeHtml(c.name)}">
@@ -553,7 +549,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         return { image: 'Изображение', video: 'Видео', audio: 'Аудио', document: 'Текст' }[type] || 'Файл';
     }
 
-    /* ---------- Утилиты ---------- */
     function resetTeacherSelection() {
         document.querySelectorAll(config.selectors.teacherItems).forEach(b => {
             b.classList.remove(config.classes.activeTeacher);
@@ -571,6 +566,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             b.classList.remove(config.classes.activeSubject);
             b.style.display = 'inline-block';
         });
+        // 🔽 сбросить «одиночный» режим
+        elements.teacherSubjectsList.classList.remove('single-active');
         elements.topicDescriptionSection.style.display = 'none';
         elements.lessonMaterials.innerHTML =
             '<p class="empty-message">Выберите урок для просмотра материалов</p>';
@@ -597,7 +594,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         openMaterial(card.dataset.url);
     });
 
-    /* ---------- Старт ---------- */
     renderEducationals();
     renderAllTeachers();
     document.querySelectorAll(config.selectors.educationalButtons).forEach(b =>
