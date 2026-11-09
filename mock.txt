@@ -1,16 +1,29 @@
 const MOCK = {
-    educationals: [ { id: 1, name: 'Школа №1' } ],
-    teachers:     [ { id: 1, fio: 'Иванов Иван Иванович', educational_id: 1 } ],
+    educationals: [
+        { id: 1, name: 'Школа №1' }
+    ],
+    teachers: [
+        { id: 1, fio: 'Иванов Иван Иванович', educational_id: 1 }
+    ],
 
-    // teacher_id -> предметы (плоский список)
-   teacherCourseSubjects: {
-    '1': [ { id: 1, name: 'Математика' }, { id: 2, name: 'Геометрия' } ],
-    '1': [ { id: 3, name: 'Алгебра' } ],
-    '1': [ { id: 4, name: 'Русский язык' }, { id: 5, name: 'Литература' } ],
-    '1': [ { id: 6, name: 'Физика' } ]
-},
+    // ⬇️ ВОССТАНОВЛЕНО: teacher_id -> курсы
+    teacherCourses: {
+        1: [
+            { id: 1, name: 'Математика, 5 класс' },
+            { id: 2, name: 'Алгебра, 7 класс' },
+            { id: 3, name: 'Русский язык, 6 класс' },
+            { id: 4, name: 'Физика, 8 класс' }
+        ]
+    },
 
-    // subject_id -> темы
+    // ⬇️ Ключи формата 'teacher_id-course_id', БЕЗ дубликатов
+    teacherCourseSubjects: {
+        '1-1': [ { id: 1, name: 'Математика' }, { id: 2, name: 'Геометрия' } ],
+        '1-2': [ { id: 3, name: 'Алгебра' } ],
+        '1-3': [ { id: 4, name: 'Русский язык' }, { id: 5, name: 'Литература' } ],
+        '1-4': [ { id: 6, name: 'Физика' } ]
+    },
+
     topics: {
         1: [
             { id: 1, topic_name: 'Натуральные числа',  description: 'Понятие натурального числа, сравнение и запись чисел.' },
@@ -22,7 +35,7 @@ const MOCK = {
         5: [ { id: 6, topic_name: 'Русские народные сказки', description: 'Классификация и анализ сказок.' } ],
         6: [ { id: 7, topic_name: 'Механическое движение', description: 'Скорость, путь, время.' } ]
     },
-    // topic_id -> материалы
+
     materials: {
         1: [
             { title: 'Схема-конспект.png', file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dbeafe"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%232563eb">IMG</text></svg>' },
