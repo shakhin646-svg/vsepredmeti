@@ -65,26 +65,26 @@
              border-radius: 8px; margin: 10px 0; white-space: pre-wrap;
              font-family: monospace; font-size: 13px; }
 
-.topics-list, .teachers-list, .courses-list, .subjects-list {
-    display: flex; flex-wrap: wrap; justify-content: center; }
+    .topics-list, .teachers-list, .courses-list, .subjects-list {
+        display: flex; flex-wrap: wrap; justify-content: center; }
 
-/* Шесть кнопок в ряд для уроков и тем */
-#teacherSubjectsList,
-#topicsList {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
-    justify-content: stretch;
-}
+    /* Шесть кнопок в ряд для уроков и тем */
+    #teacherSubjectsList,
+    #topicsList {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+        justify-content: stretch;
+    }
 
-/* Кнопки внутри растягиваются на всю ячейку */
-#teacherSubjectsList .subject-button,
-#topicsList .topic-button {
-    width: 100%;
-    margin: 0;
-    text-align: center;
-    box-sizing: border-box;
-}
+    /* Кнопки внутри растягиваются на всю ячейку */
+    #teacherSubjectsList .subject-button,
+    #topicsList .topic-button {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+        box-sizing: border-box;
+    }
     .fade-in { opacity: 1; height: auto; transition: all .3s ease; }
 
     .external-link { color: #0515f0; text-decoration: none; font-size: 14px;
@@ -92,6 +92,10 @@
 
     @media (max-width: 768px) {
         .container { border-radius: 0; box-shadow: none; }
+        #teacherSubjectsList,
+        #topicsList {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 </style>
 </head>
@@ -209,12 +213,19 @@ async function loadMock() {
    ========================================================================= */
 function mockAjax(params) {
     const action = params.ajax;
-    if (action === 'get_teacher_courses')         return MOCK.teacherCourses?.[params.teacher_id] || [];
-    if (action === 'get_teacher_course_subjects') return MOCK.teacherCourseSubjects?.[params.teacher_id + '-' + params.course_id] || [];
-if (action === 'get_topics') {
-    const key = `${params.teacher_id}-${params.course_id}-${params.subject_id}`;
-    return MOCK.topics?.[key] || [];
-}    if (action === 'get_materials')               return MOCK.materials?.[params.topic_id] || [];
+    if (action === 'get_teacher_courses') {
+        return MOCK.teacherCourses?.[params.teacher_id] || [];
+    }
+    if (action === 'get_teacher_course_subjects') {
+        return MOCK.teacherCourseSubjects?.[params.teacher_id + '-' + params.course_id] || [];
+    }
+    if (action === 'get_topics') {
+        const key = `${params.teacher_id}-${params.course_id}-${params.subject_id}`;
+        return MOCK.topics?.[key] || [];
+    }
+    if (action === 'get_materials') {
+        return MOCK.materials?.[params.topic_id] || [];
+    }
     return { error: 'Неизвестный AJAX-запрос' };
 }
 
@@ -432,7 +443,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         elements.topicsList.innerHTML = '';
         elements.topicsContainer.style.display = 'block';
         elements.selectedSubjectTitle.textContent = `Темы: ${subjectName}`;
-        const data = await fetchData('', { ajax: 'get_topics', subject_id: subjectId });
+        const data = await fetchData('', {
+            ajax: 'get_topics',
+            teacher_id: state.currentTeacher,
+            course_id: state.currentCourse,
+            subject_id: subjectId
+        });
         if (data.error) { showError(elements.topicsList, data.error); return; }
         if (!data.length) { showEmptyMessage(elements.topicsList, 'Нет тем для этого предмета'); return; }
         renderTopics(data); bindTopicEvents();
@@ -462,8 +478,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     function renderTopics(topics) {
         elements.topicsList.innerHTML = topics.map(t => `
-            <button class="topic-button" data-topic-id="${t.id}" data-description="${escapeHtml(t.description || '')}">
-                ${escapeHtml(t.topic_name)}
+            <button class="topic-button"
+                    data-topic-id="${t.id}"
+                    data-description="${escapeHtml(t.description || '')}">
+                ${escapeHtml(t.name || t.topic_name || '')}
             </button>
         `).join('');
     }
