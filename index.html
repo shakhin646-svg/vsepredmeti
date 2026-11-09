@@ -76,7 +76,6 @@
         justify-content: stretch;
     }
 
-    /* Кнопки внутри растягиваются на всю ячейку */
     #teacherSubjectsList .subject-button {
         width: 100%;
         margin: 0;
@@ -114,12 +113,12 @@
             <div class="educational-buttons" id="educationalButtons"></div>
         </div>
 
-        <!-- СЕКЦИЯ КУРСОВ / КЛАССОВ (изначально скрыта) -->
+        <!-- СЕКЦИЯ КУРСОВ / КЛАССОВ -->
         <div id="teachersSection" class="section hidden" style="margin-bottom: 1px;">
             <h2 style="margin-bottom: 10px;">Курсы / Классы </h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите курс / класс</p>
 
-            <!-- Список классов (преподавателей) -->
+            <!-- Список классов -->
             <div id="allTeachersList" class="teachers-list"></div>
 
             <!-- Блок курсов выбранного класса -->
@@ -129,14 +128,14 @@
             </div>
         </div>
 
-        <!-- СЕКЦИЯ УРОКОВ (изначально скрыта) -->
+        <!-- СЕКЦИЯ УРОКОВ -->
         <div id="teacherSubjectsContainer" style="display: none;" class="section">
             <h2 style="margin-bottom: 10px;">Уроки </h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите урок для просмотра описания</p>
             <div id="teacherSubjectsList" class="subjects-list" style="margin: 10px 0;"></div>
         </div>
 
-        <!-- ОПИСАНИЕ ТЕМЫ (изначально скрыто) -->
+        <!-- ОПИСАНИЕ ТЕМЫ -->
         <div id="topicDescriptionSection" style="display: none;" class="section">
             <div id="topicDescription" style="margin-top: 5px; padding: 15px;
                                               background: #f5f5f5; border-radius: 5px;">
@@ -163,7 +162,7 @@
 
 <script>
 /* =========================================================================
-   1. УНИВЕРСАЛЬНЫЙ ЗАГРУЗЧИК mock.txt
+   1. ЗАГРУЗЧИК mock.txt
    ========================================================================= */
 let MOCK = null;
 
@@ -338,7 +337,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         btn.classList.add(config.classes.activeTeacher);
         state.currentTeacher = id;
         state.currentCourse = null;
-        // Показываем блок курсов, список классов пока видим
+
+        // Показываем классы + курсы
         elements.allTeachersList.classList.remove('hidden');
         loadTeacherCourses(id, name);
         resetSubjectSelection();
@@ -349,29 +349,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         const id = parseInt(btn.dataset.courseId, 10);
         const name = btn.dataset.courseName;
 
-        const isSame = state.currentCourse === id;
-
-        // Снимаем активность со всех курсов
         document.querySelectorAll(config.selectors.courseButtons).forEach(b =>
             b.classList.remove(config.classes.activeCourse));
-
-        if (isSame) {
-            // Повторный клик по тому же курсу: показываем список классов и курсы,
-            // скрываем уроки и описание
-            state.currentCourse = null;
-            elements.allTeachersList.classList.remove('hidden');
-            elements.teacherCoursesContainer.style.display = 'block';
-            teacherSubjectsSection.style.display = 'none';
-            teacherSubjectsSection.classList.add('hidden');
-            resetSubjectSelection();
-            return;
-        }
-
-        // Первый клик по курсу: скрываем список классов и блок курсов,
-        // показываем уроки
-        state.currentCourse = id;
         btn.classList.add(config.classes.activeCourse);
 
+        state.currentCourse = id;
+        state.currentSubject = null;
+
+        // 🔽 Оставляем ТОЛЬКО уроки: скрываем блок классов и блок курсов
         elements.allTeachersList.classList.add('hidden');
         elements.teacherCoursesContainer.style.display = 'none';
 
@@ -385,20 +370,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         const id = parseInt(btn.dataset.subjectId, 10);
         const description = btn.dataset.subjectDescription || '';
 
-        if (state.currentSubject === id) {
-            // Повторный клик: вернуть список уроков, скрыть описание
-            resetSubjectSelection();
-            teacherSubjectsSection.classList.remove('hidden');
-            teacherSubjectsSection.style.display = 'block';
-            return;
-        }
-
         document.querySelectorAll('.subject-button').forEach(b =>
             b.classList.remove(config.classes.activeSubject));
         btn.classList.add(config.classes.activeSubject);
         state.currentSubject = id;
 
-        // Клик по уроку: скрыть список уроков, показать описание
+        // 🔽 Оставляем ТОЛЬКО описание: скрываем список уроков
         teacherSubjectsSection.classList.add('hidden');
         teacherSubjectsSection.style.display = 'none';
 
