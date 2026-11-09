@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moburok.ru - образовательная платформа</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    :root {
+        --primary-hover: #3d8a3f;
+        --bg-light: #f0d1d1;
+        --educational-color: #0515f0;
+        --teachers-color: #0515f0;
+        --subjects-color: #0515f0;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-color: white;
+        color: #000000;
+        line-height: 1.6;
+        padding: 10px;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .material-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s;
+        background: #fffafa;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .material-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .material-thumbnail {
+        width: 80%;
+        height: 80px;
+        object-fit: cover;
+    }
+
+    .material-info {
+        padding: 1px;
+        flex-grow: 1;
+    }
+
+    .material-title {
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 5px;
+        color: #000000;
+        word-break: break-word;
+    }
+
+    .material-type {
+        font-size: 16px;
+        color: #000000;
+        padding: 1px 2px;
+        border-radius: 1px;
+        display: inline-block;
+    }
+
+    .type-image,
+    .type-video,
+    .type-audio,
+    .type-document,
+    .type-other {
+        background-color: #ffffff;
+    }
+
+    h1, h2 {
+        text-align: center;
+        color: #1eb300;
+    }
+
+    .section {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        text-align: center;
+        border: 1px solid var(--bg-light);
+    }
+
+    .subject-button {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s;
+        text-decoration: none;
+        background-color: var(--subjects-color);
+        width: calc(100% - 10px);
+        font-size: 16px;
+        margin: 5px;
+    }
+
+    .topic-button {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s;
+        text-decoration: none;
+        background-color: var(--subjects-color);
+        border-radius: 4px;
+        margin: 5px;
+        padding: 8px 12px;
+        font-size: 16px;
+    }
+
+    .educational-button {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s;
+        text-decoration: none;
+        background-color: var(--educational-color);
+        width: calc(100% - 10px);
+        font-size: 16px;
+        margin: 5px;
+    }
+
+    .educational-button:hover {
+        background-color: #1976D2;
+    }
+
+    .teacher-item {
+        background-color: var(--teachers-color);
+        color: #ffffff;
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin: 5px;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .course-button {
+        background-color: #0515f0;
+        color: #ffffff;
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin: 5px;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .topic-button:hover, .subject-button:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
+    }
+
+    .active-subject,
+    .active-topic,
+    .active-educational,
+    .active-teacher,
+    .active-course {
+        background-color: var(--primary-hover) !important;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .empty-message {
+        text-align: center;
+        padding: 20px;
+        color: #7a7a7a;
+        font-style: italic;
+    }
+
+    .error {
+        color: #7a7a7a;
+        padding: 20px;
+        text-align: center;
+        background-color: #ffebee;
+        border-radius: 8px;
+        margin: 10px 0;
+    }
+
+    .topics-list,
+    .teachers-list,
+    .courses-list,
+    .subjects-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .fade-in {
+        opacity: 1;
+        height: auto;
+        transition: all 0.3s ease;
+    }
+
+    .sub-section {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+    }
+
+    .navigation-path {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .external-link {
+        color: #0515f0;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 15px;
+        padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .materials-grid {
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        }
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1 class="title">Moburok</h1>
+    </div>
+
+    <!-- Блок образовательных учреждений -->
+    <div class="section" style="margin-bottom: 1px;">
+        <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите учреждение для фильтрации преподавателей</p>
+        <div class="educational-buttons" id="educationalButtons"></div>
+    </div>
+
+    <!-- Блок всех преподавателей -->
+    <div class="section" style="margin-bottom: 1px;">
+        <h2 style="margin-bottom: 10px;">Преподаватели</h2>
+        <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите преподавателя</p>
+
+        <div id="allTeachersList" class="teachers-list"></div>
+
+        <!-- Контейнер для курсов выбранного преподавателя -->
+        <div id="teacherCoursesContainer" style="display: none;">
+            <h3 id="selectedTeacherTitle" style="font-size: 1.2rem; text-align: center; margin-top: 15px;"></h3>
+            <div id="teacherCoursesList" class="courses-list" style="margin: 10px 0;"></div>
+        </div>
+    </div>
+
+    <!-- Блок предметов преподавателя -->
+    <div id="teacherSubjectsContainer" style="display: none;" class="section">
+        <h2 style="margin-bottom: 10px;">Предметы преподавателя</h2>
+        <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите предмет для просмотра материалов</p>
+        <div id="teacherSubjectsList" class="subjects-list" style="margin: 10px 0;"></div>
+    </div>
+
+    <!-- Блок тем -->
+    <div id="topicsContainer" style="display: none;" class="section">
+        <h3 id="selectedSubjectTitle" style="font-size: 1.2rem; text-align: center; margin-top: 15px;"></h3>
+        <div id="topicsList" class="topics-list" style="margin: 10px 0;"></div>
+
+        <div id="topicDescription" style="display: none; margin-top: 15px; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+            <h4 style="margin-bottom: 10px; color: #333;">Описание темы</h4>
+            <p id="descriptionText" style="color: #666;">Описание отсутствует</p>
+        </div>
+    </div>
+
+    <!-- Блок материалов -->
+    <div class="section" style="margin-bottom: 10px;">
+        <h2 style="margin-bottom: 10px;">Материалы урока</h2>
+        <div id="lessonMaterials">
+            <p class="empty-message">Выберите предмет и тему для просмотра материалов</p>
+        </div>
+    </div>
+</div>
+
+<a href="https://shakhin.site/" class="external-link"
+   style="display: block; width: fit-content; margin: 0 auto;"
+   target="_blank" rel="noopener noreferrer">
+    <i class="fas fa-external-link-alt"></i> Разработчик образовательной платформы
+</a>
+
+<script>
+/* =========================================================================
+   1. ДЕМО-ДАННЫЕ (замена ответов PHP)
+   ========================================================================= */
+const MOCK = {
+    educationals: [
+        { id: 1, name: 'Школа №1' },
+        { id: 2, name: 'Гимназия №5' }
+    ],
+    teachers: [
+        { id: 1, fio: 'Иванов Иван Иванович',  educational_id: 1 },
+        { id: 2, fio: 'Петрова Анна Сергеевна', educational_id: 1 },
+        { id: 3, fio: 'Сидоров Пётр Алексеевич', educational_id: 2 }
+    ],
+    // teacher_id -> курсы
+    teacherCourses: {
+        1: [ { id: 1, name: 'Математика, 5 класс' }, { id: 2, name: 'Алгебра, 7 класс' } ],
+        2: [ { id: 3, name: 'Русский язык, 6 класс' } ],
+        3: [ { id: 4, name: 'Физика, 8 класс' } ]
+    },
+    // "teacher_id-course_id" -> предметы
+    teacherCourseSubjects: {
+        '1-1': [ { id: 1, name: 'Математика' }, { id: 2, name: 'Геометрия' } ],
+        '1-2': [ { id: 3, name: 'Алгебра' } ],
+        '2-3': [ { id: 4, name: 'Русский язык' }, { id: 5, name: 'Литература' } ],
+        '3-4': [ { id: 6, name: 'Физика' } ]
+    },
+    // subject_id -> темы
+    topics: {
+        1: [
+            { id: 1, topic_name: 'Натуральные числа',  description: 'Понятие натурального числа, сравнение и запись чисел.' },
+            { id: 2, topic_name: 'Обыкновенные дроби', description: 'Доли, обыкновенные дроби, сравнение дробей.' }
+        ],
+        2: [ { id: 3, topic_name: 'Точка, прямая, отрезок', description: 'Основные геометрические фигуры.' } ],
+        3: [ { id: 4, topic_name: 'Линейные уравнения', description: 'Решение уравнений вида ax + b = 0.' } ],
+        4: [ { id: 5, topic_name: 'Части речи', description: 'Самостоятельные и служебные части речи.' } ],
+        5: [ { id: 6, topic_name: 'Русские народные сказки', description: 'Классификация и анализ сказок.' } ],
+        6: [ { id: 7, topic_name: 'Механическое движение', description: 'Скорость, путь, время.' } ]
+    },
+    // topic_id -> материалы
+    materials: {
+        1: [
+            { title: 'Схема-конспект.png', file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dbeafe"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%232563eb">IMG</text></svg>' },
+            { title: 'Урок.mp4',           file_type: 'video',    file_url: '#' },
+            { title: 'Аудиоурок.mp3',      file_type: 'audio',    file_url: '#' },
+            { title: 'Конспект.pdf',       file_type: 'document', file_url: '#' }
+        ],
+        2: [
+            { title: 'Дроби.png',          file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dcfce7"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%2316a34a">IMG</text></svg>' },
+            { title: 'Задания.docx',       file_type: 'document', file_url: '#' }
+        ],
+        3: [ { title: 'Геометрия.pdf', file_type: 'document', file_url: '#' } ],
+        4: [ { title: 'Уравнения.pdf', file_type: 'document', file_url: '#' } ],
+        5: [ { title: 'Части речи.mp4', file_type: 'video', file_url: '#' } ],
+        6: [ { title: 'Сказки.pdf', file_type: 'document', file_url: '#' } ],
+        7: [ { title: 'Движение.png', file_type: 'image', file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23fef3c7"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%23d97706">IMG</text></svg>' } ]
+    }
+};
+
+/* Эмулятор PHP-эндпоинтов (??ajax=...) */
+function mockAjax(params) {
+    const action = params.ajax;
+
+    if (action === 'get_teacher_courses') {
+        return MOCK.teacherCourses[params.teacher_id] || [];
+    }
+    if (action === 'get_teacher_course_subjects') {
+        return MOCK.teacherCourseSubjects[params.teacher_id + '-' + params.course_id] || [];
+    }
+    if (action === 'get_topics') {
+        return MOCK.topics[params.subject_id] || [];
+    }
+    if (action === 'get_materials') {
+        return MOCK.materials[params.topic_id] || [];
+    }
+    return { error: 'Неизвестный AJAX-запрос' };
+}
+
+/* =========================================================================
+   2. ЛОГИКА ИНТЕРФЕЙСА
+   ========================================================================= */
+document.addEventListener('DOMContentLoaded', function () {
+    const config = {
+        selectors: {
+            educationalButtons: '.educational-button',
+            teacherItems: '.teacher-item',
+            courseButtons: '.course-button',
+            teacherCoursesContainer: '#teacherCoursesContainer',
+            teacherSubjectsContainer: '#teacherSubjectsContainer',
+            topicsContainer: '#topicsContainer',
+            allTeachersList: '#allTeachersList',
+            teacherCoursesList: '#teacherCoursesList',
+            teacherSubjectsList: '#teacherSubjectsList',
+            topicsList: '#topicsList',
+            selectedTeacherTitle: '#selectedTeacherTitle',
+            selectedSubjectTitle: '#selectedSubjectTitle',
+            topicDescription: '#topicDescription',
+            descriptionText: '#descriptionText',
+            lessonMaterials: '#lessonMaterials'
+        },
+        classes: {
+            hidden: 'hidden',
+            error: 'error',
+            emptyMessage: 'empty-message',
+            activeSubject: 'active-subject',
+            activeTopic: 'active-topic',
+            activeEducational: 'active-educational',
+            activeTeacher: 'active-teacher',
+            activeCourse: 'active-course'
+        }
+    };
+
+    const elements = {};
+    for (const [key, selector] of Object.entries(config.selectors)) {
+        elements[key] = document.querySelector(selector);
+    }
+
+    const state = {
+        currentEducational: 0, // 0 = все учреждения
+        currentTeacher: null,
+        currentCourse: null,
+        currentSubject: null,
+        currentTopic: null,
+        isTopicExpanded: false
+    };
+
+    /* ---------- Инициализация ---------- */
+    function init() {
+        renderEducationals();
+        renderAllTeachers();
+        bindEvents();
+        filterTeachers();
+    }
+
+    function bindEvents() {
+        document.querySelectorAll(config.selectors.educationalButtons).forEach(button => {
+            button.addEventListener('click', handleEducationalClick);
+        });
+
+        document.querySelectorAll(config.selectors.teacherItems).forEach(button => {
+            button.addEventListener('click', handleTeacherClick);
+        });
+    }
+
+    /* ---------- Рендер стартовых списков ---------- */
+    function renderEducationals() {
+        const container = document.getElementById('educationalButtons');
+        container.innerHTML = MOCK.educationals.map(item => `
+            <button class="educational-button"
+                    data-educational-id="${item.id}"
+                    data-original-text="${escapeHtml(item.name)}">
+                ${escapeHtml(item.name)}
+            </button>
+        `).join('') || `<p class="${config.classes.emptyMessage}">Нет доступных образовательных учреждений</p>`;
+    }
+
+    function renderAllTeachers() {
+        elements.allTeachersList.innerHTML = MOCK.teachers.map(teacher => `
+            <button class="teacher-item"
+                    data-teacher-id="${teacher.id}"
+                    data-teacher-name="${escapeHtml(teacher.fio)}"
+                    data-educational-id="${teacher.educational_id}">
+                ${escapeHtml(teacher.fio)}
+            </button>
+        `).join('') || `<p class="${config.classes.emptyMessage}">Нет доступных преподавателей</p>`;
+    }
+
+    /* ---------- Обработчики ---------- */
+    function handleEducationalClick(event) {
+        const button = event.currentTarget;
+        const educationalId = parseInt(button.dataset.educationalId, 10);
+
+        if (state.currentEducational === educationalId) {
+            return;
+        }
+
+        document.querySelectorAll(config.selectors.educationalButtons).forEach(btn => {
+            btn.classList.remove(config.classes.activeEducational);
+        });
+        button.classList.add(config.classes.activeEducational);
+
+        state.currentEducational = educationalId;
+        filterTeachers();
+        resetTeacherSelection();
+    }
+
+    function handleTeacherClick(event) {
+        const button = event.currentTarget;
+        const teacherId = parseInt(button.dataset.teacherId, 10);
+        const teacherName = button.dataset.teacherName;
+
+        if (state.currentTeacher === teacherId) {
+            resetTeacherSelection();
+            return;
+        }
+
+        document.querySelectorAll(config.selectors.teacherItems).forEach(btn => {
+            btn.classList.remove(config.classes.activeTeacher);
+        });
+        button.classList.add(config.classes.activeTeacher);
+
+        state.currentTeacher = teacherId;
+
+        loadTeacherCourses(teacherId, teacherName);
+
+        resetSubjectSelection();
+        resetTopicSelection();
+    }
+
+    function handleTeacherCourseClick(event) {
+        const courseId = parseInt(event.currentTarget.dataset.courseId, 10);
+        const courseName = event.currentTarget.dataset.courseName;
+        const teacherName = document.querySelector('.teacher-item.active-teacher')?.dataset.teacherName || '';
+
+        document.querySelectorAll(config.selectors.courseButtons).forEach(btn => {
+            btn.classList.remove(config.classes.activeCourse);
+        });
+        event.currentTarget.classList.add(config.classes.activeCourse);
+
+        state.currentCourse = courseId;
+        loadTeacherCourseSubjects(state.currentTeacher, teacherName, courseId, courseName);
+    }
+
+    function handleSubjectClick(event) {
+        const button = event.currentTarget;
+        const subjectId = parseInt(button.dataset.subjectId, 10);
+        const subjectName = button.dataset.subjectName;
+
+        if (state.currentSubject === subjectId) {
+            resetSubjectSelection();
+            return;
+        }
+
+        document.querySelectorAll('.subject-button').forEach(btn => {
+            btn.classList.remove(config.classes.activeSubject);
+        });
+        button.classList.add(config.classes.activeSubject);
+
+        state.currentSubject = subjectId;
+        loadTopics(subjectId, subjectName);
+        resetTopicSelection();
+    }
+
+    function handleTopicClick(event) {
+        const button = event.currentTarget;
+        const topicId = parseInt(button.dataset.topicId, 10);
+        const description = button.dataset.description;
+
+        if (state.currentTopic === topicId) {
+            toggleTopicVisibility();
+            return;
+        }
+
+        document.querySelectorAll('.topic-button').forEach(btn => {
+            btn.classList.remove(config.classes.activeTopic);
+        });
+        button.classList.add(config.classes.activeTopic);
+
+        state.currentTopic = topicId;
+        state.isTopicExpanded = true;
+        showTopicDescription(description);
+        loadMaterials(state.currentSubject, topicId);
+    }
+
+    /* ---------- Фильтрация преподавателей ---------- */
+    function filterTeachers() {
+        const educationalId = state.currentEducational;
+
+        document.querySelectorAll(config.selectors.teacherItems).forEach(teacher => {
+            const teacherEducationalId = parseInt(teacher.dataset.educationalId, 10);
+            if (educationalId === 0 || teacherEducationalId === educationalId) {
+                teacher.style.display = 'inline-block';
+            } else {
+                teacher.style.display = 'none';
+                teacher.classList.remove(config.classes.activeTeacher);
+            }
+        });
+
+        if (state.currentTeacher && educationalId !== 0) {
+            const activeTeacher = document.querySelector('.teacher-item.active-teacher');
+            if (activeTeacher) {
+                const teacherEducationalId = parseInt(activeTeacher.dataset.educationalId, 10);
+                if (teacherEducationalId !== educationalId) {
+                    resetTeacherSelection();
+                }
+            }
+        }
+    }
+
+    /* ---------- Загрузка данных ---------- */
+    async function fetchData(url, params = {}) {
+        /* ВАРИАНТ ДЛЯ РАБОТЫ С PHP-БЭКЕНДОМ — раскомментируйте:
+        try {
+            const queryString = new URLSearchParams(params).toString();
+            const response = await fetch(`${url}?${queryString}`);
+            if (!response.ok) throw new Error('Ошибка сети');
+            return await response.json();
+        } catch (error) {
+            console.error('Ошибка загрузки данных:', error);
+            return { error: error.message };
+        }
+        */
+
+        // Демо-режим: данные из MOCK
+        try {
+            return mockAjax(params);
+        } catch (error) {
+            return { error: error.message };
+        }
+    }
+
+    async function loadTeacherCourses(teacherId, teacherName) {
+        elements.teacherCoursesList.innerHTML = '';
+        elements.selectedTeacherTitle.textContent = teacherName;
+        elements.teacherCoursesContainer.style.display = 'block';
+
+        const data = await fetchData('', { ajax: 'get_teacher_courses', teacher_id: teacherId });
+
+        if (data.error) { showError(elements.teacherCoursesList, data.error); return; }
+        if (data.length === 0) { showEmptyMessage(elements.teacherCoursesList, 'У преподавателя нет курсов'); return; }
+
+        renderCourses(data);
+        bindTeacherCourseEvents();
+    }
+
+    async function loadTeacherCourseSubjects(teacherId, teacherName, courseId, courseName) {
+        const data = await fetchData('', {
+            ajax: 'get_teacher_course_subjects',
+            teacher_id: teacherId,
+            course_id: courseId
+        });
+
+        elements.teacherSubjectsContainer.style.display = 'block';
+
+        if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
+        if (data.length === 0) {
+            showEmptyMessage(elements.teacherSubjectsList, 'У преподавателя нет предметов на этом курсе');
+            return;
+        }
+
+        elements.selectedSubjectTitle.textContent = `Предметы: ${teacherName} — ${courseName}`;
+        renderSubjects(data);
+        bindSubjectEvents();
+    }
+
+    async function loadTopics(subjectId, subjectName) {
+        elements.topicsList.innerHTML = '';
+        elements.topicsContainer.style.display = 'block';
+        elements.selectedSubjectTitle.textContent = `Темы: ${subjectName}`;
+
+        const data = await fetchData('', { ajax: 'get_topics', subject_id: subjectId });
+
+        if (data.error) { showError(elements.topicsList, data.error); return; }
+        if (data.length === 0) { showEmptyMessage(elements.topicsList, 'Нет тем для этого предмета'); return; }
+
+        renderTopics(data);
+        bindTopicEvents();
+    }
+
+    async function loadMaterials(subjectId, topicId) {
+        const data = await fetchData('', { ajax: 'get_materials', topic_id: topicId });
+
+        if (data.error) { showError(elements.lessonMaterials, data.error); return; }
+        if (data.length === 0) {
+            showEmptyMessage(elements.lessonMaterials, 'Материалы для этой темы не найдены');
+        } else {
+            renderMaterials(data);
+        }
+
+        elements.lessonMaterials.style.display = 'block';
+    }
+
+    /* ---------- Рендер списков ---------- */
+    function renderCourses(courses) {
+        elements.teacherCoursesList.innerHTML = courses.map(course => `
+            <button class="course-button"
+                    data-course-id="${course.id}"
+                    data-course-name="${escapeHtml(course.name)}">
+                ${escapeHtml(course.name)}
+            </button>
+        `).join('');
+    }
+
+    function renderSubjects(subjects) {
+        elements.teacherSubjectsList.innerHTML = subjects.map(subject => `
+            <button class="subject-button"
+                    data-subject-id="${subject.id}"
+                    data-subject-name="${escapeHtml(subject.name)}">
+                ${escapeHtml(subject.name)}
+            </button>
+        `).join('');
+    }
+
+    function renderTopics(topics) {
+        elements.topicsList.innerHTML = topics.map(topic => `
+            <button class="topic-button"
+                    data-topic-id="${topic.id}"
+                    data-description="${escapeHtml(topic.description || '')}">
+                ${escapeHtml(topic.topic_name)}
+            </button>
+        `).join('');
+    }
+
+    function renderMaterials(materials) {
+        elements.lessonMaterials.innerHTML = `
+            <div class="materials-container fade-in">
+                <div class="materials-grid">
+                    ${materials.map(renderMaterialCard).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    function renderMaterialCard(material) {
+        const icon = getMaterialIcon(material.file_type, material.file_url);
+        const typeLabel = getMaterialTypeLabel(material.file_type);
+
+        return `
+            <div class="material-card" data-url="${escapeHtml(material.file_url)}">
+                <div style="position: relative;">
+                    ${icon}
+                </div>
+                <div class="material-info">
+                    <div class="material-title">${escapeHtml(material.title)}</div>
+                    <span class="material-type type-${material.file_type}">
+                        ${typeLabel}
+                    </span>
+                </div>
+            </div>
+        `;
+    }
+
+    function getMaterialIcon(type, url) {
+        const icons = {
+            image: `<img src="${url}" class="material-thumbnail" alt="">`,
+            video: `<div class="material-thumbnail" style="background:#111; display:flex; align-items:center; justify-content:center;">
+                        <i class="fas fa-play" style="font-size:26px; color:#fff;"></i>
+                    </div>`,
+            audio: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;">
+                        <i class="fas fa-music" style="font-size:30px; color:#9c27b0;"></i>
+                    </div>`,
+            document: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;">
+                           <i class="fas fa-file-alt" style="font-size:30px; color:#ff9800;"></i>
+                       </div>`,
+            default: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;">
+                          <i class="fas fa-file" style="font-size:30px; color:#6c757d;"></i>
+                      </div>`
+        };
+        return icons[type] || icons.default;
+    }
+
+    function getMaterialTypeLabel(type) {
+        const labels = {
+            image: 'Изображение',
+            video: 'Видео',
+            audio: 'Аудио',
+            document: 'Текст'
+        };
+        return labels[type] || 'Файл';
+    }
+
+    /* ---------- Вспомогательные ---------- */
+    function showTopicDescription(description) {
+        elements.descriptionText.textContent = description || 'Описание отсутствует';
+        elements.topicDescription.style.display = 'block';
+    }
+
+    function toggleTopicVisibility() {
+        state.isTopicExpanded = !state.isTopicExpanded;
+        elements.lessonMaterials.style.display = state.isTopicExpanded ? 'block' : 'none';
+    }
+
+    function resetTeacherSelection() {
+        document.querySelectorAll(config.selectors.teacherItems).forEach(btn => {
+            btn.classList.remove(config.classes.activeTeacher);
+        });
+        elements.teacherCoursesContainer.style.display = 'none';
+        elements.teacherSubjectsContainer.style.display = 'none';
+        state.currentTeacher = null;
+        state.currentCourse = null;
+    }
+
+    function resetSubjectSelection() {
+        document.querySelectorAll('.subject-button').forEach(btn => {
+            btn.classList.remove(config.classes.activeSubject);
+        });
+        elements.topicsContainer.style.display = 'none';
+        elements.topicDescription.style.display = 'none';
+        state.currentSubject = null;
+    }
+
+    function resetTopicSelection() {
+        document.querySelectorAll('.topic-button').forEach(btn => {
+            btn.classList.remove(config.classes.activeTopic);
+        });
+        elements.lessonMaterials.style.display = 'none';
+        state.currentTopic = null;
+        state.isTopicExpanded = false;
+    }
+
+    function bindTeacherCourseEvents() {
+        document.querySelectorAll('#teacherCoursesList .course-button').forEach(button => {
+            button.addEventListener('click', handleTeacherCourseClick);
+        });
+    }
+
+    function bindSubjectEvents() {
+        document.querySelectorAll('#teacherSubjectsList .subject-button').forEach(button => {
+            button.addEventListener('click', handleSubjectClick);
+        });
+    }
+
+    function bindTopicEvents() {
+        document.querySelectorAll('#topicsList .topic-button').forEach(button => {
+            button.addEventListener('click', handleTopicClick);
+        });
+    }
+
+    function showError(container, message) {
+        container.innerHTML = `<p class="${config.classes.error}">${escapeHtml(message)}</p>`;
+    }
+
+    function showEmptyMessage(container, message) {
+        container.innerHTML = `<p class="${config.classes.emptyMessage}">${escapeHtml(message)}</p>`;
+    }
+
+    /* Делегирование клика по карточке материала */
+    elements.lessonMaterials.addEventListener('click', function (event) {
+        const card = event.target.closest('.material-card');
+        if (!card) return;
+        openMaterial(card.dataset.url, card.dataset.fileType || '');
+    });
+
+    init();
+});
+
+/* ---------- Глобальные утилиты ---------- */
+function openMaterial(fileUrl, contentType) {
+    if (!fileUrl || fileUrl === '#') {
+        alert('Демо-режим: файл не подключён.');
+        return;
+    }
+    window.open(fileUrl, '_blank');
+}
+
+function escapeHtml(unsafe) {
+    return String(unsafe ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+function escapeSingleQuotes(str) {
+    return String(str ?? '').replace(/'/g, "\\'");
+}
+</script>
+</body>
+</html>
