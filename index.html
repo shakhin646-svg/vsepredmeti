@@ -337,86 +337,81 @@
 
 <script>
 /* =========================================================================
-   1. ДЕМО-ДАННЫЕ (замена ответов PHP)
+   1. ЗАГРУЗКА MOCK ИЗ mock.txt
    ========================================================================= */
-const MOCK = {
-    educationals: [
-        { id: 1, name: 'Школа №1' },
-        { id: 2, name: 'Гимназия №5' }
-    ],
-    teachers: [
-        { id: 1, fio: 'Иванов Иван Иванович',  educational_id: 1 },
-        { id: 2, fio: 'Петрова Анна Сергеевна', educational_id: 1 },
-        { id: 3, fio: 'Сидоров Пётр Алексеевич', educational_id: 2 }
-    ],
-    // teacher_id -> курсы
-    teacherCourses: {
-        1: [ { id: 1, name: 'Математика, 5 класс' }, { id: 2, name: 'Алгебра, 7 класс' } ],
-        2: [ { id: 3, name: 'Русский язык, 6 класс' } ],
-        3: [ { id: 4, name: 'Физика, 8 класс' } ]
-    },
-    // "teacher_id-course_id" -> предметы
-    teacherCourseSubjects: {
-        '1-1': [ { id: 1, name: 'Математика' }, { id: 2, name: 'Геометрия' } ],
-        '1-2': [ { id: 3, name: 'Алгебра' } ],
-        '2-3': [ { id: 4, name: 'Русский язык' }, { id: 5, name: 'Литература' } ],
-        '3-4': [ { id: 6, name: 'Физика' } ]
-    },
-    // subject_id -> темы
-    topics: {
-        1: [
-            { id: 1, topic_name: 'Натуральные числа',  description: 'Понятие натурального числа, сравнение и запись чисел.' },
-            { id: 2, topic_name: 'Обыкновенные дроби', description: 'Доли, обыкновенные дроби, сравнение дробей.' }
-        ],
-        2: [ { id: 3, topic_name: 'Точка, прямая, отрезок', description: 'Основные геометрические фигуры.' } ],
-        3: [ { id: 4, topic_name: 'Линейные уравнения', description: 'Решение уравнений вида ax + b = 0.' } ],
-        4: [ { id: 5, topic_name: 'Части речи', description: 'Самостоятельные и служебные части речи.' } ],
-        5: [ { id: 6, topic_name: 'Русские народные сказки', description: 'Классификация и анализ сказок.' } ],
-        6: [ { id: 7, topic_name: 'Механическое движение', description: 'Скорость, путь, время.' } ]
-    },
-    // topic_id -> материалы
-    materials: {
-        1: [
-            { title: 'Схема-конспект.png', file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dbeafe"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%232563eb">IMG</text></svg>' },
-            { title: 'Урок.mp4',           file_type: 'video',    file_url: '#' },
-            { title: 'Аудиоурок.mp3',      file_type: 'audio',    file_url: '#' },
-            { title: 'Конспект.pdf',       file_type: 'document', file_url: '#' }
-        ],
-        2: [
-            { title: 'Дроби.png',          file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dcfce7"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%2316a34a">IMG</text></svg>' },
-            { title: 'Задания.docx',       file_type: 'document', file_url: '#' }
-        ],
-        3: [ { title: 'Геометрия.pdf', file_type: 'document', file_url: '#' } ],
-        4: [ { title: 'Уравнения.pdf', file_type: 'document', file_url: '#' } ],
-        5: [ { title: 'Части речи.mp4', file_type: 'video', file_url: '#' } ],
-        6: [ { title: 'Сказки.pdf', file_type: 'document', file_url: '#' } ],
-        7: [ { title: 'Движение.png', file_type: 'image', file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23fef3c7"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%23d97706">IMG</text></svg>' } ]
-    }
-};
+let MOCK = null;
 
-/* Эмулятор PHP-эндпоинтов (??ajax=...) */
+/**
+ * Читает mock.txt и вычисляет его содержимое.
+ * Файл должен содержать JS-код вида:
+ *   const MOCK = { ... };
+ */
+async function loadMock() {
+    // Предупреждение, если открыто как file://
+    if (location.protocol === 'file:') {
+        throw new Error(
+            'Файл открыт напрямую (file://). Браузер блокирует fetch для локальных файлов.\n' +
+            'Запустите локальный сервер, например: python -m http.server 8000\n' +
+            'и откройте http://localhost:8000/index.html'
+        );
+    }
+
+    const response = await fetch('mock.txt', { cache: 'no-store' });
+    if (!response.ok) {
+        throw new Error(`Не удалось загрузить mock.txt (HTTP ${response.status})`);
+    }
+
+    const text = await response.text();
+    if (!text.trim()) {
+        throw new Error('mock.txt пуст');
+    }
+
+    // Выполняем содержимое в изолированной области видимости
+    // и возвращаем объект MOCK.
+    const factory = new Function(text + '\nreturn typeof MOCK !== "undefined" ? MOCK : null;');
+    const result = factory();
+
+    if (!result || typeof result !== 'object') {
+        throw new Error('В mock.txt не найден объект MOCK');
+    }
+
+    return result;
+}
+
+/* =========================================================================
+   2. Эмулятор PHP-эндпоинтов (работает с уже загруженным MOCK)
+   ========================================================================= */
 function mockAjax(params) {
     const action = params.ajax;
-
-    if (action === 'get_teacher_courses') {
-        return MOCK.teacherCourses[params.teacher_id] || [];
-    }
-    if (action === 'get_teacher_course_subjects') {
-        return MOCK.teacherCourseSubjects[params.teacher_id + '-' + params.course_id] || [];
-    }
-    if (action === 'get_topics') {
-        return MOCK.topics[params.subject_id] || [];
-    }
-    if (action === 'get_materials') {
-        return MOCK.materials[params.topic_id] || [];
-    }
+    if (action === 'get_teacher_courses')         return MOCK.teacherCourses?.[params.teacher_id] || [];
+    if (action === 'get_teacher_course_subjects') return MOCK.teacherCourseSubjects?.[params.teacher_id + '-' + params.course_id] || [];
+    if (action === 'get_topics')                  return MOCK.topics?.[params.subject_id] || [];
+    if (action === 'get_materials')               return MOCK.materials?.[params.topic_id] || [];
     return { error: 'Неизвестный AJAX-запрос' };
 }
 
 /* =========================================================================
-   2. ЛОГИКА ИНТЕРФЕЙСА
+   3. ИНИЦИАЛИЗАЦИЯ ИНТЕРФЕЙСА
    ========================================================================= */
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+    const loadingEl = document.getElementById('appLoading');
+    const errorEl   = document.getElementById('appError');
+    const contentEl = document.getElementById('appContent');
+
+    // ---- 3.1. Загружаем данные ----
+    try {
+        MOCK = await loadMock();
+        loadingEl.classList.add('hidden');
+        contentEl.classList.remove('hidden');
+    } catch (err) {
+        console.error(err);
+        loadingEl.classList.add('hidden');
+        errorEl.classList.remove('hidden');
+        errorEl.innerText = 'Ошибка загрузки данных:\n' + err.message;
+        return;
+    }
+
+    // ---- 3.2. Дальше — всё как было ----
     const config = {
         selectors: {
             educationalButtons: '.educational-button',
@@ -436,13 +431,9 @@ document.addEventListener('DOMContentLoaded', function () {
             lessonMaterials: '#lessonMaterials'
         },
         classes: {
-            hidden: 'hidden',
-            error: 'error',
-            emptyMessage: 'empty-message',
-            activeSubject: 'active-subject',
-            activeTopic: 'active-topic',
-            activeEducational: 'active-educational',
-            activeTeacher: 'active-teacher',
+            hidden: 'hidden', error: 'error', emptyMessage: 'empty-message',
+            activeSubject: 'active-subject', activeTopic: 'active-topic',
+            activeEducational: 'active-educational', activeTeacher: 'active-teacher',
             activeCourse: 'active-course'
         }
     };
@@ -453,7 +444,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const state = {
-        currentEducational: 0, // 0 = все учреждения
+        currentEducational: 0,
         currentTeacher: null,
         currentCourse: null,
         currentSubject: null,
@@ -461,59 +452,40 @@ document.addEventListener('DOMContentLoaded', function () {
         isTopicExpanded: false
     };
 
-    /* ---------- Инициализация ---------- */
-    function init() {
-        renderEducationals();
-        renderAllTeachers();
-        bindEvents();
-        filterTeachers();
-    }
-
-    function bindEvents() {
-        document.querySelectorAll(config.selectors.educationalButtons).forEach(button => {
-            button.addEventListener('click', handleEducationalClick);
-        });
-
-        document.querySelectorAll(config.selectors.teacherItems).forEach(button => {
-            button.addEventListener('click', handleTeacherClick);
-        });
-    }
-
-    /* ---------- Рендер стартовых списков ---------- */
+    // ---- 3.3. Рендер стартовых списков ----
     function renderEducationals() {
-        const container = document.getElementById('educationalButtons');
-        container.innerHTML = MOCK.educationals.map(item => `
-            <button class="educational-button"
-                    data-educational-id="${item.id}"
-                    data-original-text="${escapeHtml(item.name)}">
-                ${escapeHtml(item.name)}
-            </button>
-        `).join('') || `<p class="${config.classes.emptyMessage}">Нет доступных образовательных учреждений</p>`;
+        document.getElementById('educationalButtons').innerHTML =
+            MOCK.educationals.map(item => `
+                <button class="educational-button"
+                        data-educational-id="${item.id}"
+                        data-original-text="${escapeHtml(item.name)}">
+                    ${escapeHtml(item.name)}
+                </button>
+            `).join('') ||
+            `<p class="${config.classes.emptyMessage}">Нет доступных образовательных учреждений</p>`;
     }
 
     function renderAllTeachers() {
-        elements.allTeachersList.innerHTML = MOCK.teachers.map(teacher => `
-            <button class="teacher-item"
-                    data-teacher-id="${teacher.id}"
-                    data-teacher-name="${escapeHtml(teacher.fio)}"
-                    data-educational-id="${teacher.educational_id}">
-                ${escapeHtml(teacher.fio)}
-            </button>
-        `).join('') || `<p class="${config.classes.emptyMessage}">Нет доступных преподавателей</p>`;
+        elements.allTeachersList.innerHTML =
+            MOCK.teachers.map(teacher => `
+                <button class="teacher-item"
+                        data-teacher-id="${teacher.id}"
+                        data-teacher-name="${escapeHtml(teacher.fio)}"
+                        data-educational-id="${teacher.educational_id}">
+                    ${escapeHtml(teacher.fio)}
+                </button>
+            `).join('') ||
+            `<p class="${config.classes.emptyMessage}">Нет доступных преподавателей</p>`;
     }
 
-    /* ---------- Обработчики ---------- */
+    // ---- 3.4. Обработчики ----
     function handleEducationalClick(event) {
         const button = event.currentTarget;
         const educationalId = parseInt(button.dataset.educationalId, 10);
+        if (state.currentEducational === educationalId) return;
 
-        if (state.currentEducational === educationalId) {
-            return;
-        }
-
-        document.querySelectorAll(config.selectors.educationalButtons).forEach(btn => {
-            btn.classList.remove(config.classes.activeEducational);
-        });
+        document.querySelectorAll(config.selectors.educationalButtons).forEach(btn =>
+            btn.classList.remove(config.classes.activeEducational));
         button.classList.add(config.classes.activeEducational);
 
         state.currentEducational = educationalId;
@@ -526,20 +498,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const teacherId = parseInt(button.dataset.teacherId, 10);
         const teacherName = button.dataset.teacherName;
 
-        if (state.currentTeacher === teacherId) {
-            resetTeacherSelection();
-            return;
-        }
+        if (state.currentTeacher === teacherId) { resetTeacherSelection(); return; }
 
-        document.querySelectorAll(config.selectors.teacherItems).forEach(btn => {
-            btn.classList.remove(config.classes.activeTeacher);
-        });
+        document.querySelectorAll(config.selectors.teacherItems).forEach(btn =>
+            btn.classList.remove(config.classes.activeTeacher));
         button.classList.add(config.classes.activeTeacher);
 
         state.currentTeacher = teacherId;
-
         loadTeacherCourses(teacherId, teacherName);
-
         resetSubjectSelection();
         resetTopicSelection();
     }
@@ -549,9 +515,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const courseName = event.currentTarget.dataset.courseName;
         const teacherName = document.querySelector('.teacher-item.active-teacher')?.dataset.teacherName || '';
 
-        document.querySelectorAll(config.selectors.courseButtons).forEach(btn => {
-            btn.classList.remove(config.classes.activeCourse);
-        });
+        document.querySelectorAll(config.selectors.courseButtons).forEach(btn =>
+            btn.classList.remove(config.classes.activeCourse));
         event.currentTarget.classList.add(config.classes.activeCourse);
 
         state.currentCourse = courseId;
@@ -563,14 +528,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const subjectId = parseInt(button.dataset.subjectId, 10);
         const subjectName = button.dataset.subjectName;
 
-        if (state.currentSubject === subjectId) {
-            resetSubjectSelection();
-            return;
-        }
+        if (state.currentSubject === subjectId) { resetSubjectSelection(); return; }
 
-        document.querySelectorAll('.subject-button').forEach(btn => {
-            btn.classList.remove(config.classes.activeSubject);
-        });
+        document.querySelectorAll('.subject-button').forEach(btn =>
+            btn.classList.remove(config.classes.activeSubject));
         button.classList.add(config.classes.activeSubject);
 
         state.currentSubject = subjectId;
@@ -583,14 +544,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const topicId = parseInt(button.dataset.topicId, 10);
         const description = button.dataset.description;
 
-        if (state.currentTopic === topicId) {
-            toggleTopicVisibility();
-            return;
-        }
+        if (state.currentTopic === topicId) { toggleTopicVisibility(); return; }
 
-        document.querySelectorAll('.topic-button').forEach(btn => {
-            btn.classList.remove(config.classes.activeTopic);
-        });
+        document.querySelectorAll('.topic-button').forEach(btn =>
+            btn.classList.remove(config.classes.activeTopic));
         button.classList.add(config.classes.activeTopic);
 
         state.currentTopic = topicId;
@@ -599,10 +556,9 @@ document.addEventListener('DOMContentLoaded', function () {
         loadMaterials(state.currentSubject, topicId);
     }
 
-    /* ---------- Фильтрация преподавателей ---------- */
+    // ---- 3.5. Фильтрация ----
     function filterTeachers() {
         const educationalId = state.currentEducational;
-
         document.querySelectorAll(config.selectors.teacherItems).forEach(teacher => {
             const teacherEducationalId = parseInt(teacher.dataset.educationalId, 10);
             if (educationalId === 0 || teacherEducationalId === educationalId) {
@@ -617,29 +573,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const activeTeacher = document.querySelector('.teacher-item.active-teacher');
             if (activeTeacher) {
                 const teacherEducationalId = parseInt(activeTeacher.dataset.educationalId, 10);
-                if (teacherEducationalId !== educationalId) {
-                    resetTeacherSelection();
-                }
+                if (teacherEducationalId !== educationalId) resetTeacherSelection();
             }
         }
     }
 
-    /* ---------- Загрузка данных ---------- */
+    // ---- 3.6. Загрузка через AJAX-эмулятор ----
     async function fetchData(url, params = {}) {
-        /* ВАРИАНТ ДЛЯ РАБОТЫ С PHP-БЭКЕНДОМ — раскомментируйте:
         try {
-            const queryString = new URLSearchParams(params).toString();
-            const response = await fetch(`${url}?${queryString}`);
-            if (!response.ok) throw new Error('Ошибка сети');
-            return await response.json();
-        } catch (error) {
-            console.error('Ошибка загрузки данных:', error);
-            return { error: error.message };
-        }
-        */
-
-        // Демо-режим: данные из MOCK
-        try {
+            await new Promise(r => setTimeout(r, 30)); // имитация сети
             return mockAjax(params);
         } catch (error) {
             return { error: error.message };
@@ -652,9 +594,8 @@ document.addEventListener('DOMContentLoaded', function () {
         elements.teacherCoursesContainer.style.display = 'block';
 
         const data = await fetchData('', { ajax: 'get_teacher_courses', teacher_id: teacherId });
-
         if (data.error) { showError(elements.teacherCoursesList, data.error); return; }
-        if (data.length === 0) { showEmptyMessage(elements.teacherCoursesList, 'У преподавателя нет курсов'); return; }
+        if (!data.length) { showEmptyMessage(elements.teacherCoursesList, 'У преподавателя нет курсов'); return; }
 
         renderCourses(data);
         bindTeacherCourseEvents();
@@ -662,15 +603,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadTeacherCourseSubjects(teacherId, teacherName, courseId, courseName) {
         const data = await fetchData('', {
-            ajax: 'get_teacher_course_subjects',
-            teacher_id: teacherId,
-            course_id: courseId
+            ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
         });
-
         elements.teacherSubjectsContainer.style.display = 'block';
 
         if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
-        if (data.length === 0) {
+        if (!data.length) {
             showEmptyMessage(elements.teacherSubjectsList, 'У преподавателя нет предметов на этом курсе');
             return;
         }
@@ -686,9 +624,8 @@ document.addEventListener('DOMContentLoaded', function () {
         elements.selectedSubjectTitle.textContent = `Темы: ${subjectName}`;
 
         const data = await fetchData('', { ajax: 'get_topics', subject_id: subjectId });
-
         if (data.error) { showError(elements.topicsList, data.error); return; }
-        if (data.length === 0) { showEmptyMessage(elements.topicsList, 'Нет тем для этого предмета'); return; }
+        if (!data.length) { showEmptyMessage(elements.topicsList, 'Нет тем для этого предмета'); return; }
 
         renderTopics(data);
         bindTopicEvents();
@@ -696,44 +633,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadMaterials(subjectId, topicId) {
         const data = await fetchData('', { ajax: 'get_materials', topic_id: topicId });
-
         if (data.error) { showError(elements.lessonMaterials, data.error); return; }
-        if (data.length === 0) {
-            showEmptyMessage(elements.lessonMaterials, 'Материалы для этой темы не найдены');
-        } else {
-            renderMaterials(data);
-        }
+
+        if (!data.length) showEmptyMessage(elements.lessonMaterials, 'Материалы для этой темы не найдены');
+        else renderMaterials(data);
 
         elements.lessonMaterials.style.display = 'block';
     }
 
-    /* ---------- Рендер списков ---------- */
+    // ---- 3.7. Рендер ----
     function renderCourses(courses) {
-        elements.teacherCoursesList.innerHTML = courses.map(course => `
-            <button class="course-button"
-                    data-course-id="${course.id}"
-                    data-course-name="${escapeHtml(course.name)}">
-                ${escapeHtml(course.name)}
+        elements.teacherCoursesList.innerHTML = courses.map(c => `
+            <button class="course-button" data-course-id="${c.id}" data-course-name="${escapeHtml(c.name)}">
+                ${escapeHtml(c.name)}
             </button>
         `).join('');
     }
 
     function renderSubjects(subjects) {
-        elements.teacherSubjectsList.innerHTML = subjects.map(subject => `
-            <button class="subject-button"
-                    data-subject-id="${subject.id}"
-                    data-subject-name="${escapeHtml(subject.name)}">
-                ${escapeHtml(subject.name)}
+        elements.teacherSubjectsList.innerHTML = subjects.map(s => `
+            <button class="subject-button" data-subject-id="${s.id}" data-subject-name="${escapeHtml(s.name)}">
+                ${escapeHtml(s.name)}
             </button>
         `).join('');
     }
 
     function renderTopics(topics) {
-        elements.topicsList.innerHTML = topics.map(topic => `
-            <button class="topic-button"
-                    data-topic-id="${topic.id}"
-                    data-description="${escapeHtml(topic.description || '')}">
-                ${escapeHtml(topic.topic_name)}
+        elements.topicsList.innerHTML = topics.map(t => `
+            <button class="topic-button" data-topic-id="${t.id}" data-description="${escapeHtml(t.description || '')}">
+                ${escapeHtml(t.topic_name)}
             </button>
         `).join('');
     }
@@ -741,27 +669,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderMaterials(materials) {
         elements.lessonMaterials.innerHTML = `
             <div class="materials-container fade-in">
-                <div class="materials-grid">
-                    ${materials.map(renderMaterialCard).join('')}
-                </div>
+                <div class="materials-grid">${materials.map(renderMaterialCard).join('')}</div>
             </div>
         `;
     }
 
     function renderMaterialCard(material) {
-        const icon = getMaterialIcon(material.file_type, material.file_url);
-        const typeLabel = getMaterialTypeLabel(material.file_type);
-
         return `
             <div class="material-card" data-url="${escapeHtml(material.file_url)}">
-                <div style="position: relative;">
-                    ${icon}
-                </div>
+                <div style="position:relative;">${getMaterialIcon(material.file_type, material.file_url)}</div>
                 <div class="material-info">
                     <div class="material-title">${escapeHtml(material.title)}</div>
-                    <span class="material-type type-${material.file_type}">
-                        ${typeLabel}
-                    </span>
+                    <span class="material-type type-${material.file_type}">${getMaterialTypeLabel(material.file_type)}</span>
                 </div>
             </div>
         `;
@@ -770,109 +689,85 @@ document.addEventListener('DOMContentLoaded', function () {
     function getMaterialIcon(type, url) {
         const icons = {
             image: `<img src="${url}" class="material-thumbnail" alt="">`,
-            video: `<div class="material-thumbnail" style="background:#111; display:flex; align-items:center; justify-content:center;">
-                        <i class="fas fa-play" style="font-size:26px; color:#fff;"></i>
-                    </div>`,
-            audio: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;">
-                        <i class="fas fa-music" style="font-size:30px; color:#9c27b0;"></i>
-                    </div>`,
-            document: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;">
-                           <i class="fas fa-file-alt" style="font-size:30px; color:#ff9800;"></i>
-                       </div>`,
-            default: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;">
-                          <i class="fas fa-file" style="font-size:30px; color:#6c757d;"></i>
-                      </div>`
+            video: `<div class="material-thumbnail" style="background:#111; display:flex; align-items:center; justify-content:center;"><i class="fas fa-play" style="font-size:26px; color:#fff;"></i></div>`,
+            audio: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-music" style="font-size:30px; color:#9c27b0;"></i></div>`,
+            document: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-file-alt" style="font-size:30px; color:#ff9800;"></i></div>`,
+            default: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-file" style="font-size:30px; color:#6c757d;"></i></div>`
         };
         return icons[type] || icons.default;
     }
 
     function getMaterialTypeLabel(type) {
-        const labels = {
-            image: 'Изображение',
-            video: 'Видео',
-            audio: 'Аудио',
-            document: 'Текст'
-        };
-        return labels[type] || 'Файл';
+        return { image: 'Изображение', video: 'Видео', audio: 'Аудио', document: 'Текст' }[type] || 'Файл';
     }
 
-    /* ---------- Вспомогательные ---------- */
-    function showTopicDescription(description) {
-        elements.descriptionText.textContent = description || 'Описание отсутствует';
+    // ---- 3.8. Вспомогательное ----
+    function showTopicDescription(d) {
+        elements.descriptionText.textContent = d || 'Описание отсутствует';
         elements.topicDescription.style.display = 'block';
     }
-
     function toggleTopicVisibility() {
         state.isTopicExpanded = !state.isTopicExpanded;
         elements.lessonMaterials.style.display = state.isTopicExpanded ? 'block' : 'none';
     }
-
     function resetTeacherSelection() {
-        document.querySelectorAll(config.selectors.teacherItems).forEach(btn => {
-            btn.classList.remove(config.classes.activeTeacher);
-        });
+        document.querySelectorAll(config.selectors.teacherItems).forEach(btn =>
+            btn.classList.remove(config.classes.activeTeacher));
         elements.teacherCoursesContainer.style.display = 'none';
         elements.teacherSubjectsContainer.style.display = 'none';
-        state.currentTeacher = null;
-        state.currentCourse = null;
+        state.currentTeacher = null; state.currentCourse = null;
     }
-
     function resetSubjectSelection() {
-        document.querySelectorAll('.subject-button').forEach(btn => {
-            btn.classList.remove(config.classes.activeSubject);
-        });
+        document.querySelectorAll('.subject-button').forEach(btn =>
+            btn.classList.remove(config.classes.activeSubject));
         elements.topicsContainer.style.display = 'none';
         elements.topicDescription.style.display = 'none';
         state.currentSubject = null;
     }
-
     function resetTopicSelection() {
-        document.querySelectorAll('.topic-button').forEach(btn => {
-            btn.classList.remove(config.classes.activeTopic);
-        });
+        document.querySelectorAll('.topic-button').forEach(btn =>
+            btn.classList.remove(config.classes.activeTopic));
         elements.lessonMaterials.style.display = 'none';
-        state.currentTopic = null;
-        state.isTopicExpanded = false;
+        state.currentTopic = null; state.isTopicExpanded = false;
     }
-
     function bindTeacherCourseEvents() {
-        document.querySelectorAll('#teacherCoursesList .course-button').forEach(button => {
-            button.addEventListener('click', handleTeacherCourseClick);
-        });
+        document.querySelectorAll('#teacherCoursesList .course-button').forEach(b =>
+            b.addEventListener('click', handleTeacherCourseClick));
     }
-
     function bindSubjectEvents() {
-        document.querySelectorAll('#teacherSubjectsList .subject-button').forEach(button => {
-            button.addEventListener('click', handleSubjectClick);
-        });
+        document.querySelectorAll('#teacherSubjectsList .subject-button').forEach(b =>
+            b.addEventListener('click', handleSubjectClick));
     }
-
     function bindTopicEvents() {
-        document.querySelectorAll('#topicsList .topic-button').forEach(button => {
-            button.addEventListener('click', handleTopicClick);
-        });
+        document.querySelectorAll('#topicsList .topic-button').forEach(b =>
+            b.addEventListener('click', handleTopicClick));
+    }
+    function showError(container, msg) {
+        container.innerHTML = `<p class="${config.classes.error}">${escapeHtml(msg)}</p>`;
+    }
+    function showEmptyMessage(container, msg) {
+        container.innerHTML = `<p class="${config.classes.emptyMessage}">${escapeHtml(msg)}</p>`;
     }
 
-    function showError(container, message) {
-        container.innerHTML = `<p class="${config.classes.error}">${escapeHtml(message)}</p>`;
-    }
-
-    function showEmptyMessage(container, message) {
-        container.innerHTML = `<p class="${config.classes.emptyMessage}">${escapeHtml(message)}</p>`;
-    }
-
-    /* Делегирование клика по карточке материала */
-    elements.lessonMaterials.addEventListener('click', function (event) {
+    // ---- 3.9. Клик по карточке материала ----
+    elements.lessonMaterials.addEventListener('click', event => {
         const card = event.target.closest('.material-card');
         if (!card) return;
-        openMaterial(card.dataset.url, card.dataset.fileType || '');
+        openMaterial(card.dataset.url);
     });
 
-    init();
+    // ---- 3.10. Старт ----
+    renderEducationals();
+    renderAllTeachers();
+    document.querySelectorAll(config.selectors.educationalButtons).forEach(b =>
+        b.addEventListener('click', handleEducationalClick));
+    document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
+        b.addEventListener('click', handleTeacherClick));
+    filterTeachers();
 });
 
 /* ---------- Глобальные утилиты ---------- */
-function openMaterial(fileUrl, contentType) {
+function openMaterial(fileUrl) {
     if (!fileUrl || fileUrl === '#') {
         alert('Демо-режим: файл не подключён.');
         return;
@@ -882,15 +777,9 @@ function openMaterial(fileUrl, contentType) {
 
 function escapeHtml(unsafe) {
     return String(unsafe ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
-}
-
-function escapeSingleQuotes(str) {
-    return String(str ?? '').replace(/'/g, "\\'");
 }
 </script>
 </body>
