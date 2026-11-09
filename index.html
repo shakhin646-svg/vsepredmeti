@@ -6,9 +6,7 @@
 <title>Vsepredmeti.ru - образовательная платформа</title>
 <link rel="icon" type="image/svg+xml"
       href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231eb300'/><path d='M32 18 L54 27 L32 36 L10 27 Z' fill='white'/><path d='M20 31 V40 C20 44 26 47 32 47 C38 47 44 44 44 40 V31 L32 36 Z' fill='white' opacity='0.9'/></svg>">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 <style>
     :root {
         --primary-hover: #3d8a3f;
@@ -99,7 +97,8 @@
             <div class="educational-buttons" id="educationalButtons"></div>
         </div>
 
-        <div class="section" style="margin-bottom: 1px;">
+        <!-- 🔽 СЕКЦИЯ ПРЕПОДАВАТЕЛЕЙ (id для управления видимостью) -->
+        <div id="teachersSection" class="section" style="margin-bottom: 1px;">
             <h2 style="margin-bottom: 10px;">Преподаватели</h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите преподавателя</p>
             <div id="allTeachersList" class="teachers-list"></div>
@@ -109,6 +108,7 @@
             </div>
         </div>
 
+        <!-- 🔽 СЕКЦИЯ ПРЕДМЕТОВ ПРЕПОДАВАТЕЛЯ (id для управления видимостью) -->
         <div id="teacherSubjectsContainer" style="display: none;" class="section">
             <h2 style="margin-bottom: 10px;">Предметы преподавателя</h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите предмет для просмотра материалов</p>
@@ -144,10 +144,6 @@
 <script>
 /* =========================================================================
    1. УНИВЕРСАЛЬНЫЙ ЗАГРУЗЧИК mock.txt
-   Поддерживает:
-     • const MOCK = { ... };
-     • { ... }              (голый объект с комментариями/одинарными кавычками)
-     • { "a": 1 }           (чистый JSON)
    ========================================================================= */
 let MOCK = null;
 
@@ -250,6 +246,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     const elements = {};
     for (const [k, sel] of Object.entries(config.selectors)) elements[k] = document.querySelector(sel);
 
+    // 🔽 Дополнительные элементы для управления видимостью
+    const teachersSection = document.getElementById('teachersSection');
+    const teacherSubjectsSection = document.getElementById('teacherSubjectsContainer');
+
     const state = {
         currentEducational: 0, currentTeacher: null, currentCourse: null,
         currentSubject: null, currentTopic: null, isTopicExpanded: false
@@ -282,6 +282,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     function handleEducationalClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.educationalId, 10);
+
+        // 🔽 Скрываем преподавателей и предметы при клике на учреждение
+        if (teachersSection) teachersSection.classList.add('hidden');
+        if (teacherSubjectsSection) teacherSubjectsSection.classList.add('hidden');
+
         if (state.currentEducational === id) return;
         document.querySelectorAll(config.selectors.educationalButtons).forEach(b =>
             b.classList.remove(config.classes.activeEducational));
@@ -514,6 +519,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
         b.addEventListener('click', handleTeacherClick));
     filterTeachers();
+
+    // 🔽 Изначально показываем секции преподавателей и предметов
+    if (teachersSection) teachersSection.classList.remove('hidden');
+    if (teacherSubjectsSection) teacherSubjectsSection.classList.remove('hidden');
 });
 
 function openMaterial(fileUrl) {
