@@ -15,7 +15,7 @@ const MOCK = {
     },
     // "teacher_id-course_id" -> предметы
     teacherCourseSubjects: {
-        '1-1': [ { id: 1, name: 'Математика' }, { id: 2, name: 'Геометрия' } ],
+        '1-1': [ { id: 1, name: 'Урок 1' }, { id: 2, name: 'Урок 2' } ],
         '1-2': [ { id: 3, name: 'Алгебра' } ],
         '2-3': [ { id: 4, name: 'Русский язык' }, { id: 5, name: 'Литература' } ],
         '3-4': [ { id: 6, name: 'Физика' } ]
