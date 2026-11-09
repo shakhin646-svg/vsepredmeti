@@ -1,18 +1,19 @@
 const MOCK = {
-    educationals: [
-        { id: 1, name: 'Школа №1' }
-    ],
-    teachers: [
-        { id: 1, fio: 'Иванов Иван Иванович', educational_id: 1 }
-    ],
-    // "teacher_id-course_id" -> предметы
-    teacherCourseSubjects: {
-        '1': [ { id: 1, name: 'Математика' }, { id: 2, name: 'Геометрия' } ],
-        '1': [ { id: 3, name: 'Алгебра' } ],
-        '1': [ { id: 4, name: 'Русский язык' }, 
-        { id: 5, name: 'Литература' } ],
-        '1': [ { id: 6, name: 'Физика' } ]
+    educationals: [ { id: 1, name: 'Школа №1' } ],
+    teachers:     [ { id: 1, fio: 'Иванов Иван Иванович', educational_id: 1 } ],
+
+    // teacher_id -> предметы (плоский список)
+    teacherSubjects: {
+        1: [
+            { id: 1, name: 'Математика' },
+            { id: 2, name: 'Геометрия' },
+            { id: 3, name: 'Алгебра' },
+            { id: 4, name: 'Русский язык' },
+            { id: 5, name: 'Литература' },
+            { id: 6, name: 'Физика' }
+        ]
     },
+
     // subject_id -> темы
     topics: {
         1: [
