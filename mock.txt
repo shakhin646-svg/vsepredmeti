@@ -3,9 +3,9 @@ const MOCK = {
         { id: 1, name: 'Школа №1' } 
     ],
     teachers: [
-        { id: 1, fio: 'Иванов Иван Иванович',  educational_id: 1 },
-        { id: 2, fio: 'Петрова Анна Сергеевна', educational_id: 1 },
-        { id: 3, fio: 'Сидоров Пётр Алексеевич', educational_id: 1 }
+        { id: 1, fio: '5 класс',  educational_id: 1 },
+        { id: 2, fio: '1 курс', educational_id: 1 },
+        { id: 3, fio: '2 курс', educational_id: 1 }
     ],
     // teacher_id -> курсы
     teacherCourses: {
