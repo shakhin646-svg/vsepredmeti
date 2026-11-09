@@ -144,8 +144,6 @@ const MOCK = {
             { id: 37, topic_name: 'Урок 16', description: 'Практическое занятие «Разработка интерфейса в фигме»' },
             { id: 38, topic_name: 'Урок 17', description: 'Практическое занятие «Нейронные сети»' },
             { id: 40, topic_name: 'Урок 18', description: 'Практическое занятие «Интеллектуальные информационные технологии»' }
-        ],
-        2: [
             { id: 1,  topic_name: 'Урок 01', description: 'Практическое занятие «Подходы к измерению информации. Архив информации»' },
             { id: 2,  topic_name: 'Урок 02', description: 'Практическое занятие «Кодирование информации»' },
             { id: 3,  topic_name: 'Урок 03', description: 'Практическое занятие «Перевод чисел из 2-ной, 8-ной, 16-ной систем счисления в десятичную и наоборот. Арифметические действия в разных системах счисления».' },
@@ -194,8 +192,6 @@ const MOCK = {
             { id: 61, topic_name: 'Урок 08', description: 'Практическое занятие. «Оформление документации проекта и презентации».' },
             { id: 62, topic_name: 'Урок 09', description: 'Практическое занятие. «Предзащита проекта».' },
             { id: 63, topic_name: 'Урок 10', description: 'Практическое занятие. «Предзащита проекта».' }
-        ],
-        17: [
             { id: 33, topic_name: 'Урок 01', description: '"Понятия аппаратных средств ЭВМ, архитектуры аппаратных средств. История развития вычислительных устройств и приборов. Классификация ЭВМ: по принципу действия, по поколения, назначению, по размерам и функциональным возможностям" ' },
             { id: 64, topic_name: 'Урок 02', description: 'Практическое занятие. "Сравнительный анализ конфигурации вычислительных машин".' },
             { id: 65, topic_name: 'Урок 03', description: 'Базовые логические операции и схемы: конъюнкция, дизъюнкция, отрицание. Схемные логические элементы. Таблицы истинности, синтез и оптимизация схем.' },
@@ -222,22 +218,4 @@ const MOCK = {
         ]
     },
 
-    // topic_id -> материалы (демо)
-    materials: {
-        1: [
-            { title: 'Схема-конспект.png', file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dbeafe"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%232563eb">IMG</text></svg>' },
-            { title: 'Урок.mp4',           file_type: 'video',    file_url: '#' },
-            { title: 'Аудиоурок.mp3',      file_type: 'audio',    file_url: '#' },
-            { title: 'Конспект.pdf',       file_type: 'document', file_url: '#' }
-        ],
-        2: [
-            { title: 'Дроби.png',          file_type: 'image',    file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23dcfce7"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%2316a34a">IMG</text></svg>' },
-            { title: 'Задания.docx',       file_type: 'document', file_url: '#' }
-        ],
-        3: [ { title: 'Геометрия.pdf', file_type: 'document', file_url: '#' } ],
-        4: [ { title: 'Уравнения.pdf', file_type: 'document', file_url: '#' } ],
-        5: [ { title: 'Части речи.mp4', file_type: 'video', file_url: '#' } ],
-        6: [ { title: 'Сказки.pdf', file_type: 'document', file_url: '#' } ],
-        7: [ { title: 'Движение.png', file_type: 'image', file_url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80"><rect width="100%" height="100%" fill="%23fef3c7"/><text x="50%" y="55%" font-size="13" text-anchor="middle" fill="%23d97706">IMG</text></svg>' } ]
-    }
 };
