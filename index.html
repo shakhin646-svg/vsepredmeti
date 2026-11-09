@@ -327,57 +327,125 @@ document.addEventListener('DOMContentLoaded', async function () {
         resetTeacherSelection();
     }
 
+    /* 🔽 КЛАССЫ: аккордеон — клик скрывает остальные классы, повторный клик раскрывает */
     function handleTeacherClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.teacherId, 10);
         const name = btn.dataset.teacherName;
-        if (state.currentTeacher === id) { resetTeacherSelection(); return; }
+        const isSame = state.currentTeacher === id;
+
+        // Снимаем активность со всех классов
         document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
             b.classList.remove(config.classes.activeTeacher));
-        btn.classList.add(config.classes.activeTeacher);
+
+        if (isSame) {
+            // Повторный клик: вернуть все классы, скрыть курсы/уроки/описание
+            state.currentTeacher = null;
+            state.currentCourse = null;
+            state.currentSubject = null;
+
+            document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
+                b.style.display = 'inline-block');
+
+            elements.teacherCoursesContainer.style.display = 'none';
+            teacherSubjectsSection.classList.add('hidden');
+            teacherSubjectsSection.style.display = 'none';
+            resetSubjectSelection();
+            return;
+        }
+
+        // Первый клик: скрыть остальные классы, показать курсы этого класса
         state.currentTeacher = id;
         state.currentCourse = null;
+        state.currentSubject = null;
 
-        // Показываем классы + курсы
-        elements.allTeachersList.classList.remove('hidden');
+        document.querySelectorAll(config.selectors.teacherItems).forEach(b => {
+            if (b === btn) b.style.display = 'inline-block';
+            else b.style.display = 'none';
+        });
+
+        btn.classList.add(config.classes.activeTeacher);
+
+        // Курсы: показываем заново (могут быть скрыты от прошлого клика)
+        elements.teacherCoursesContainer.style.display = 'block';
         loadTeacherCourses(id, name);
+
+        // Уроки/описание — сброс
+        teacherSubjectsSection.classList.add('hidden');
+        teacherSubjectsSection.style.display = 'none';
         resetSubjectSelection();
     }
 
+    /* 🔽 КУРСЫ: аккордеон — клик скрывает остальные курсы */
     function handleTeacherCourseClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.courseId, 10);
         const name = btn.dataset.courseName;
+        const isSame = state.currentCourse === id;
 
         document.querySelectorAll(config.selectors.courseButtons).forEach(b =>
             b.classList.remove(config.classes.activeCourse));
-        btn.classList.add(config.classes.activeCourse);
 
+        if (isSame) {
+            // Повторный клик: вернуть все курсы, скрыть уроки/описание
+            state.currentCourse = null;
+            state.currentSubject = null;
+
+            document.querySelectorAll(config.selectors.courseButtons).forEach(b =>
+                b.style.display = 'inline-block');
+
+            teacherSubjectsSection.classList.add('hidden');
+            teacherSubjectsSection.style.display = 'none';
+            resetSubjectSelection();
+            return;
+        }
+
+        // Первый клик: скрыть остальные курсы, показать уроки
         state.currentCourse = id;
         state.currentSubject = null;
+        btn.classList.add(config.classes.activeCourse);
 
-        // 🔽 Оставляем ТОЛЬКО уроки: скрываем блок классов и блок курсов
-        elements.allTeachersList.classList.add('hidden');
-        elements.teacherCoursesContainer.style.display = 'none';
+        document.querySelectorAll(config.selectors.courseButtons).forEach(b => {
+            if (b === btn) b.style.display = 'inline-block';
+            else b.style.display = 'none';
+        });
 
         const teacherName = document.querySelector('.teacher-item.active-teacher')?.dataset.teacherName || '';
         loadTeacherCourseSubjects(state.currentTeacher, teacherName, id, name);
         resetSubjectSelection();
     }
 
+    /* 🔽 УРОКИ: аккордеон — клик скрывает остальные уроки, повторный клик раскрывает */
     function handleSubjectClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.subjectId, 10);
         const description = btn.dataset.subjectDescription || '';
+        const isSame = state.currentSubject === id;
 
         document.querySelectorAll('.subject-button').forEach(b =>
             b.classList.remove(config.classes.activeSubject));
-        btn.classList.add(config.classes.activeSubject);
-        state.currentSubject = id;
 
-        // 🔽 Оставляем ТОЛЬКО описание: скрываем список уроков
-        teacherSubjectsSection.classList.add('hidden');
-        teacherSubjectsSection.style.display = 'none';
+        if (isSame) {
+            // Повторный клик: вернуть все уроки, скрыть описание
+            state.currentSubject = null;
+
+            document.querySelectorAll('.subject-button').forEach(b =>
+                b.style.display = 'inline-block');
+
+            elements.topicDescriptionSection.style.display = 'none';
+            elements.lessonMaterials.innerHTML =
+                '<p class="empty-message">Выберите урок для просмотра материалов</p>';
+            return;
+        }
+
+        // Первый клик: скрыть остальные уроки, показать описание
+        state.currentSubject = id;
+        btn.classList.add(config.classes.activeSubject);
+
+        document.querySelectorAll('.subject-button').forEach(b => {
+            if (b === btn) b.style.display = 'inline-block';
+            else b.style.display = 'none';
+        });
 
         elements.topicDescriptionSection.style.display = 'block';
         elements.descriptionText.textContent = description || 'Описание отсутствует';
@@ -487,19 +555,22 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     /* ---------- Утилиты ---------- */
     function resetTeacherSelection() {
-        document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
-            b.classList.remove(config.classes.activeTeacher));
+        document.querySelectorAll(config.selectors.teacherItems).forEach(b => {
+            b.classList.remove(config.classes.activeTeacher);
+            b.style.display = 'inline-block';
+        });
         elements.teacherCoursesContainer.style.display = 'none';
         elements.teacherSubjectsContainer.classList.add('hidden');
         elements.teacherSubjectsContainer.style.display = 'none';
-        elements.allTeachersList.classList.remove('hidden');
         state.currentTeacher = null;
         state.currentCourse = null;
         resetSubjectSelection();
     }
     function resetSubjectSelection() {
-        document.querySelectorAll('.subject-button').forEach(b =>
-            b.classList.remove(config.classes.activeSubject));
+        document.querySelectorAll('.subject-button').forEach(b => {
+            b.classList.remove(config.classes.activeSubject);
+            b.style.display = 'inline-block';
+        });
         elements.topicDescriptionSection.style.display = 'none';
         elements.lessonMaterials.innerHTML =
             '<p class="empty-message">Выберите урок для просмотра материалов</p>';
