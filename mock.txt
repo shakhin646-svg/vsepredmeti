@@ -1,18 +1,16 @@
 {
     educationals: [
         { id: 1, name: 'Школа №1' },
-        { id: 2, name: 'Гимназия №5' }
+         
     ],
     teachers: [
         { id: 1, fio: 'Иванов Иван Иванович',  educational_id: 1 },
-        { id: 2, fio: 'Петрова Анна Сергеевна', educational_id: 1 },
-        { id: 3, fio: 'Сидоров Пётр Алексеевич', educational_id: 2 }
+         
     ],
     // teacher_id -> курсы
     teacherCourses: {
-        1: [ { id: 1, name: 'Математика, 5 класс' }, { id: 2, name: 'Алгебра, 7 класс' } ],
-        2: [ { id: 3, name: 'Русский язык, 6 класс' } ],
-        3: [ { id: 4, name: 'Физика, 8 класс' } ]
+        1: [ { id: 1, name: 'Математика, 5 класс' }, { id: 2, name: 'Алгебра, 7 класс' } ]
+         
     },
     // "teacher_id-course_id" -> предметы
     teacherCourseSubjects: {
