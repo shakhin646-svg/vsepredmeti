@@ -1291,7 +1291,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
     </div>
 </div>`
     }
-]
+], 
 '3-5-3': [
     {
         id: 13, section_number: 1,
