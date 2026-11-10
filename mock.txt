@@ -140,7 +140,6 @@ teacherCourseSubjectsSection: {
         {
             id: 1, section_number: 1,
             title: 'Выбор типа продукта для проекта',
-            description: 'Из материала SQL: topic_id 13, section 1',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -160,7 +159,6 @@ teacherCourseSubjectsSection: {
         {
             id: 2, section_number: 2,
             title: 'Выбор темы проекта с учётом продукта',
-            description: 'Из материала SQL: topic_id 13, section 2',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -179,7 +177,6 @@ teacherCourseSubjectsSection: {
         {
             id: 3, section_number: 3,
             title: 'Обоснование актуальности',
-            description: 'Из материала SQL: topic_id 13, section 3',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -198,7 +195,6 @@ teacherCourseSubjectsSection: {
         {
             id: 4, section_number: 4,
             title: 'Определение цели и задач',
-            description: 'Из материала SQL: topic_id 13, section 4',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -217,7 +213,6 @@ teacherCourseSubjectsSection: {
         {
             id: 5, section_number: 5,
             title: 'Объект и предмет исследования',
-            description: 'Из материала SQL: topic_id 13, section 5',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -239,7 +234,6 @@ teacherCourseSubjectsSection: {
         {
             id: 6, section_number: 1,
             title: 'План реализации и практическая значимость',
-            description: 'Из материала SQL: topic_id 13, section 6',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -280,7 +274,6 @@ teacherCourseSubjectsSection: {
         {
             id: 8, section_number: 1,
             title: 'Обоснование выбора и анализ предметной области',
-            description: 'Из материала SQL: topic_id 14 (веб-сайт)',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -303,7 +296,6 @@ teacherCourseSubjectsSection: {
         {
             id: 9, section_number: 1,
             title: 'Сравнительный анализ существующих приложений',
-            description: 'Из материала SQL: topic_id 24',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -326,7 +318,6 @@ teacherCourseSubjectsSection: {
         {
             id: 10, section_number: 1,
             title: 'Выбор инструментов',
-            description: 'Из материала SQL: topic_id 25',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -406,7 +397,6 @@ teacherCourseSubjectsSection: {
         {
             id: 13, section_number: 1,
             title: 'Структура презентации для защиты проекта',
-            description: 'Из материала SQL: topic_id 61',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -442,7 +432,6 @@ teacherCourseSubjectsSection: {
         {
             id: 14, section_number: 1,
             title: 'Репетиция защиты',
-            description: 'Из материала SQL: topic_id 61',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
@@ -464,7 +453,6 @@ teacherCourseSubjectsSection: {
         {
             id: 15, section_number: 1,
             title: 'Финальная проверка и защита',
-            description: 'Из материала SQL: topic_id 61',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
