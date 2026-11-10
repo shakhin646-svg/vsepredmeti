@@ -846,7 +846,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-2': [
     {
-        id: 2, section_number: 2,
+        id: 2, section_number: 1,
         title: 'Практическое занятие. «Сравнительный анализ конфигурации вычислительных машин»',
         content: `
 <div>
@@ -888,7 +888,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-3': [
     {
-        id: 3, section_number: 3,
+        id: 3, section_number: 1,
         title: 'Базовые логические операции и схемы. Таблицы истинности, синтез и оптимизация схем',
         content: `
 <div>
@@ -936,7 +936,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-4': [
     {
-        id: 4, section_number: 4,
+        id: 4, section_number: 1,
         title: 'Сумматоры. Триггеры. Регистры. Мультиплексор, демультиплексор, шифратор, дешифратор, компаратор',
         content: `
 <div>
@@ -996,7 +996,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-5': [
     {
-        id: 5, section_number: 5,
+        id: 5, section_number: 1,
         title: 'Практическое занятие. «Компьютерное моделирование и исследование основных логических элементов ЭВМ»',
         content: `
 <div>
@@ -1036,7 +1036,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-6': [
     {
-        id: 6, section_number: 6,
+        id: 6, section_number: 1,
         title: 'Базовые представления об архитектуре ЭВМ. Принципы фон Неймана. Открытая архитектура. Магистрально-модульный принцип',
         content: `
 <div>
@@ -1098,7 +1098,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-7': [
     {
-        id: 7, section_number: 7,
+        id: 7, section_number: 1,
         title: 'Классификация архитектур вычислительных систем. Параллелизм. Систолические массивы, кубы и гиперкубы. RISC и CISC',
         content: `
 <div>
@@ -1151,7 +1151,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-8': [
     {
-        id: 8, section_number: 8,
+        id: 8, section_number: 1,
         title: 'Поколения микропроцессоров. CISC, RISC, MISC. Характеристики и структура микропроцессора',
         content: `
 <div>
@@ -1201,7 +1201,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-9': [
     {
-        id: 9, section_number: 9,
+        id: 9, section_number: 1,
         title: 'Практическое занятие. «Работа в BIOS»',
         content: `
 <div>
@@ -1242,7 +1242,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-10': [
     {
-        id: 10, section_number: 10,
+        id: 10, section_number: 1,
         title: 'Системы команд процессора. Регистры процессора. Введение в Ассемблер',
         content: `
 <div>
@@ -1298,7 +1298,7 @@ _start:
 
 '3-5-11': [
     {
-        id: 11, section_number: 11,
+        id: 11, section_number: 1,
         title: 'Графические войны 1990-х. Параллелизм и конвейеризация. MMX, SSE, AVX. Суперскаляризация. Матричные и векторные процессоры. Динамическое исполнение',
         content: `
 <div>
@@ -1346,7 +1346,7 @@ _start:
 
 '3-5-12': [
     {
-        id: 12, section_number: 12,
+        id: 12, section_number: 1,
         title: 'Технология Hyper-Threading. Режимы работы процессора. Особенности x86 и x64',
         content: `
 <div>
@@ -1386,7 +1386,7 @@ _start:
 
 '3-5-13': [
     {
-        id: 13, section_number: 13,
+        id: 13, section_number: 1,
         title: 'Системные платы: виды, характеристики, форм-факторы. Типы интерфейсов',
         content: `
 <div>
@@ -1432,7 +1432,7 @@ _start:
 
 '3-5-14': [
     {
-        id: 14, section_number: 14,
+        id: 14, section_number: 1,
         title: 'Принцип организации интерфейсов корпуса ПК. Блоки питания: виды, характеристики, форм-факторы',
         content: `
 <div>
@@ -1470,7 +1470,7 @@ _start:
 
 '3-5-15': [
     {
-        id: 15, section_number: 15,
+        id: 15, section_number: 1,
         title: 'Шины расширения. Прямой доступ к памяти. Прерывания. Драйверы. Спецификация P&P',
         content: `
 <div>
@@ -1510,7 +1510,7 @@ _start:
 
 '3-5-16': [
     {
-        id: 16, section_number: 16,
+        id: 16, section_number: 1,
         title: 'Практическое занятие. Изучение материнской платы. Периферийные устройства и интерфейсы. Клавиатура и мышь',
         content: `
 <div>
@@ -1541,7 +1541,7 @@ _start:
 
 '3-5-17': [
     {
-        id: 17, section_number: 17,
+        id: 17, section_number: 1,
         title: 'Виды памяти. Принципы хранения информации. HDD, приводы CD/DVD/BD, Flash-память',
         content: `
 <div>
@@ -1587,7 +1587,7 @@ _start:
 
 '3-5-18': [
     {
-        id: 18, section_number: 18,
+        id: 18, section_number: 1,
         title: 'Практическое занятие. «Утилиты обслуживания жёстких магнитных дисков, оптических дисков и твердотельных накопителей»',
         content: `
 <div>
@@ -1622,7 +1622,7 @@ _start:
 
 '3-5-19': [
     {
-        id: 19, section_number: 19,
+        id: 19, section_number: 1,
         title: 'Мониторы и видеоадаптеры. Проекционные аппараты. Системы обработки и воспроизведения аудио',
         content: `
 <div>
@@ -1664,7 +1664,7 @@ _start:
 
 '3-5-20': [
     {
-        id: 20, section_number: 20,
+        id: 20, section_number: 1,
         title: 'Принтеры, сканеры, клавиатура, мышь: устройство, принцип действия, подключение',
         content: `
 <div>
@@ -1706,7 +1706,7 @@ _start:
 
 '3-5-21': [
     {
-        id: 21, section_number: 21,
+        id: 21, section_number: 1,
         title: 'Практическое занятие. «Работа с видео драйверами»',
         content: `
 <div>
@@ -1746,7 +1746,7 @@ _start:
 
 '3-5-22': [
     {
-        id: 22, section_number: 22,
+        id: 22, section_number: 1,
         title: 'Практическое занятие. «Конструкция, подключение и инсталляция матричного, струйного и лазерного принтера»',
         content: `
 <div>
@@ -1786,7 +1786,7 @@ _start:
 
 '3-5-23': [
     {
-        id: 23, section_number: 23,
+        id: 23, section_number: 1,
         title: 'Нестандартные периферийные устройства и уровни взаимодействия',
         content: `
 <div>
