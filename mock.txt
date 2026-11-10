@@ -885,9 +885,6 @@ pivot.plot(kind="bar", stacked=True)</pre>
 </div>`
             }
         ],
-teacherCourseSubjectsSection: {
-    // ... 2-2-1 ... 2-2-8 без изменений ...
-
     '3-5-1': [
         { id: 1, section_number: 1, title: 'Понятия аппаратных средств ЭВМ и архитектуры', content: '...' },
         { id: 2, section_number: 2, title: 'История развития ВТ: Домеханический и механический периоды', content: '...' },
