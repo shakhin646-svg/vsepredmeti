@@ -481,4 +481,5 @@ teacherCourseSubjectsSection: {
 </div>`
         }
     ]
-};
+}   // ← закрыть teacherCourseSubjectsSection
+};    // ← закрыть MOCK
