@@ -134,13 +134,12 @@ const MOCK = {
     },
 
     // "teacher_id-course_id-subject_id" -> разделы урока
-// "teacher_id-course_id-subject_id" -> разделы урока
-teacherCourseSubjectsSection: {
-    '2-2-1': [ // Урок 01: Выбор тем, объекта/предмета, целей и задач
-        {
-            id: 1, section_number: 1,
-            title: 'Выбор типа продукта для проекта',
-            content: `
+    teacherCourseSubjectsSection: {
+        '2-2-1': [ // Урок 01: Выбор тем, объекта/предмета, целей и задач
+            {
+                id: 1, section_number: 1,
+                title: 'Выбор типа продукта для проекта',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -155,11 +154,11 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        },
-        {
-            id: 2, section_number: 2,
-            title: 'Выбор темы проекта с учётом продукта',
-            content: `
+            },
+            {
+                id: 2, section_number: 2,
+                title: 'Выбор темы проекта с учётом продукта',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -173,11 +172,11 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        },
-        {
-            id: 3, section_number: 3,
-            title: 'Обоснование актуальности',
-            content: `
+            },
+            {
+                id: 3, section_number: 3,
+                title: 'Обоснование актуальности',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -191,11 +190,11 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        },
-        {
-            id: 4, section_number: 4,
-            title: 'Определение цели и задач',
-            content: `
+            },
+            {
+                id: 4, section_number: 4,
+                title: 'Определение цели и задач',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -209,11 +208,11 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        },
-        {
-            id: 5, section_number: 5,
-            title: 'Объект и предмет исследования',
-            content: `
+            },
+            {
+                id: 5, section_number: 5,
+                title: 'Объект и предмет исследования',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -227,14 +226,14 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-2': [ // Урок 02: Этапы, план и сроки, паспорт проекта
-        {
-            id: 6, section_number: 1,
-            title: 'План реализации и практическая значимость',
-            content: `
+        '2-2-2': [ // Урок 02: Этапы, план и сроки, паспорт проекта
+            {
+                id: 6, section_number: 1,
+                title: 'План реализации и практическая значимость',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -248,12 +247,12 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        },
-        {
-            id: 7, section_number: 2,
-            title: 'Шаблон для ВВЕДЕНИЯ',
-            description: 'Из материала SQL: topic_id 13, section 7',
-            content: `
+            },
+            {
+                id: 7, section_number: 2,
+                title: 'Шаблон для ВВЕДЕНИЯ',
+                description: 'Из материала SQL: topic_id 13, section 7',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -267,14 +266,14 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-3': [ // Урок 03: Информационные ресурсы, сбор материала
-        {
-            id: 8, section_number: 1,
-            title: 'Обоснование выбора и анализ предметной области',
-            content: `
+        '2-2-3': [ // Урок 03: Информационные ресурсы, сбор материала
+            {
+                id: 8, section_number: 1,
+                title: 'Обоснование выбора и анализ предметной области',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -289,14 +288,14 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-4': [ // Урок 04: Реализация проекта
-        {
-            id: 9, section_number: 1,
-            title: 'Сравнительный анализ существующих приложений',
-            content: `
+        '2-2-4': [ // Урок 04: Реализация проекта
+            {
+                id: 9, section_number: 1,
+                title: 'Сравнительный анализ существующих приложений',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -311,14 +310,14 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-5': [ // Урок 05: Реализация проекта
-        {
-            id: 10, section_number: 1,
-            title: 'Выбор инструментов',
-            content: `
+        '2-2-5': [ // Урок 05: Реализация проекта
+            {
+                id: 10, section_number: 1,
+                title: 'Выбор инструментов',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -339,15 +338,15 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-6': [ // Урок 06: Реализация проекта
-        {
-            id: 11, section_number: 1,
-            title: 'Создание продукта: пошаговое руководство',
-            description: 'Из материала SQL: topic_id 58',
-            content: `
+        '2-2-6': [ // Урок 06: Реализация проекта
+            {
+                id: 11, section_number: 1,
+                title: 'Создание продукта: пошаговое руководство',
+                description: 'Из материала SQL: topic_id 58',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -367,15 +366,15 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-7': [ // Урок 07: Реализация проекта
-        {
-            id: 12, section_number: 1,
-            title: 'Шаблоны лучшей работы',
-            description: 'Из материала SQL: topic_id 59',
-            content: `
+        '2-2-7': [ // Урок 07: Реализация проекта
+            {
+                id: 12, section_number: 1,
+                title: 'Шаблоны лучшей работы',
+                description: 'Из материала SQL: topic_id 59',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -390,14 +389,14 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-8': [ // Урок 08: Оформление документации и презентации
-        {
-            id: 13, section_number: 1,
-            title: 'Структура презентации для защиты проекта',
-            content: `
+        '2-2-8': [ // Урок 08: Оформление документации и презентации
+            {
+                id: 13, section_number: 1,
+                title: 'Структура презентации для защиты проекта',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -425,14 +424,14 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-9': [ // Урок 09: Предзащита проекта
-        {
-            id: 14, section_number: 1,
-            title: 'Репетиция защиты',
-            content: `
+        '2-2-9': [ // Урок 09: Предзащита проекта
+            {
+                id: 14, section_number: 1,
+                title: 'Репетиция защиты',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -446,14 +445,14 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ],
+            }
+        ],
 
-    '2-2-10': [ // Урок 10: Предзащита проекта
-        {
-            id: 15, section_number: 1,
-            title: 'Финальная проверка и защита',
-            content: `
+        '2-2-10': [ // Урок 10: Предзащита проекта
+            {
+                id: 15, section_number: 1,
+                title: 'Финальная проверка и защита',
+                content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
@@ -467,7 +466,7 @@ teacherCourseSubjectsSection: {
 </div>
 </div>
 </div>`
-        }
-    ]
-}   // ← закрыть teacherCourseSubjectsSection
+            }
+        ]
+    }   // ← закрыть teacherCourseSubjectsSection
 };    // ← закрыть MOCK
