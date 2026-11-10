@@ -136,187 +136,350 @@ const MOCK = {
     // "teacher_id-course_id-subject_id" -> разделы урока
 // "teacher_id-course_id-subject_id" -> разделы урока
 teacherCourseSubjectsSection: {
-    '2-2-1': [
+    '2-2-1': [ // Урок 01: Выбор тем, объекта/предмета, целей и задач
         {
-            id: 1,
-            section_number: 1,
-            title: 'Введение',
-            description: 'Цели и задачи урока',
+            id: 1, section_number: 1,
+            title: 'Выбор типа продукта для проекта',
+            description: 'Из материала SQL: topic_id 13, section 1',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Индивидуальный проект — это самостоятельная работа, которая позволяет продемонстрировать умение применять полученные знания на практике. Он имеет чёткую структуру и требования к оформлению.</p>
-<p>На этом занятии мы познакомимся с понятием индивидуального проекта, его структурой и требованиями к оформлению. Разберём, из каких частей состоит проект и какие этапы предстоит пройти.</p>
-<p><strong>Структура проекта</strong> обычно включает: титульный лист, введение, основную часть, заключение и список литературы.</p>
+<p>Типы продуктов проекта: оконное приложение, веб-сайт, мобильное приложение, Telegram-бот, видеоклип, мультимедиа, дизайн-макет, иллюстрация, макет, 3D-модель.</p>
+<p><strong>Критерии выбора:</strong> доступность инструментов, соответствие навыкам, сроки, практическая ценность, обучающий потенциал.</p>
 </div>
 <div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
 <div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
 <h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Перечислите основные разделы индивидуального проекта и объясните, для чего нужен каждый из них.</p>
+<p>Выберите тип продукта и обоснуйте выбор по 3–4 критериям.</p>
 </div>
 </div>
 </div>`
         },
         {
-            id: 2,
-            section_number: 2,
-            title: 'Выбор темы проекта',
-            description: 'Практическая часть',
+            id: 2, section_number: 2,
+            title: 'Выбор темы проекта с учётом продукта',
+            description: 'Из материала SQL: topic_id 13, section 2',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Выбор темы — один из самых ответственных этапов. Тема должна быть актуальной, интересной и посильной для выполнения.</p>
-<p>Каждый студент выбирает тему индивидуального проекта и обосновывает её актуальность, формулирует объект и предмет исследования.</p>
-<p><strong>Актуальность</strong> — это обоснование того, почему данная тема важна сейчас. <strong>Объект</strong> — это область исследования, а <strong>предмет</strong> — конкретная сторона объекта, которую вы изучаете.</p>
+<p>Тема должна быть актуальной, интересной и посильной. Свяжите тему с выбранным форматом продукта: например, «Кибербезопасность подростков» → веб-сайт; «ЗОЖ студентов» → Telegram-бот.</p>
 </div>
 <div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
 <div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
 <h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Выберите тему своего проекта, обоснуйте её актуальность и сформулируйте объект и предмет исследования.</p>
+<p>Заполните: «Моя тема — …», «Связь темы с продуктом — …».</p>
 </div>
 </div>
 </div>`
         },
         {
-            id: 3,
-            section_number: 3,
-            title: 'Постановка целей и задач',
-            description: '',
+            id: 3, section_number: 3,
+            title: 'Обоснование актуальности',
+            description: 'Из материала SQL: topic_id 13, section 3',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>После выбора темы необходимо чётко сформулировать цель и задачи проекта. Цель отвечает на вопрос «что нужно получить в итоге?», а задачи — «какие шаги для этого нужно сделать?».</p>
-<p>Формулируются цель и задачи проекта, определяются ожидаемые результаты.</p>
-<p><strong>Цель</strong> обычно одна, а <strong>задач</strong> может быть несколько — они раскрывают путь достижения цели.</p>
+<p>Актуальность = почему это важно сейчас и кому это нужно. Опирайтесь на статистику, тренды и запросы общества.</p>
 </div>
 <div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
 <div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
 <h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Сформулируйте цель и 3–4 задачи для выбранной темы проекта, опишите ожидаемые результаты.</p>
+<p>Напишите 3–5 предложений: проблема, аудитория, польза продукта.</p>
+</div>
+</div>
+</div>`
+        },
+        {
+            id: 4, section_number: 4,
+            title: 'Определение цели и задач',
+            description: 'Из материала SQL: topic_id 13, section 4',
+            content: `
+<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
+<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+<p>Цель — один измеримый результат. Задачи — 4–6 шагов: изучить → проанализировать → спроектировать → реализовать → протестировать.</p>
+</div>
+<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
+<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
+<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<p>Сформулируйте цель и 5 задач для своей темы.</p>
+</div>
+</div>
+</div>`
+        },
+        {
+            id: 5, section_number: 5,
+            title: 'Объект и предмет исследования',
+            description: 'Из материала SQL: topic_id 13, section 5',
+            content: `
+<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
+<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+<p>Объект — широкая область; предмет — конкретный аспект внутри объекта. Предмет всегда уже объекта и связан с продуктом.</p>
+</div>
+<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
+<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
+<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<p>Заполните: «Объект — …», «Предмет — …», проверьте, что предмет уже объекта.</p>
 </div>
 </div>
 </div>`
         }
     ],
-    '2-2-2': [
+
+    '2-2-2': [ // Урок 02: Этапы, план и сроки, паспорт проекта
         {
-            id: 4,
-            section_number: 1,
-            title: 'Этапы проекта',
-            description: 'Способы выделения этапов',
+            id: 6, section_number: 1,
+            title: 'План реализации и практическая значимость',
+            description: 'Из материала SQL: topic_id 13, section 6',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Проектная деятельность состоит из последовательных этапов. Их выделение помогает спланировать работу и не упустить важные шаги.</p>
-<p>Рассматриваются основные этапы проектной деятельности: подготовительный, исследовательский, заключительный.</p>
-<p><strong>Подготовительный этап</strong> — выбор темы и постановка задач. <strong>Исследовательский</strong> — сбор и анализ материала. <strong>Заключительный</strong> — оформление результатов и защита проекта.</p>
+<p>План = этапы + инструменты + сроки. Значимость = кто, где и как использует продукт.</p>
 </div>
 <div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
 <div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
 <h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Перечислите этапы вашего проекта и опишите, что вы будете делать на каждом из них.</p>
+<p>Составьте таблицу этапов (этап / инструменты / срок) и опишите 2–3 группы пользователей.</p>
 </div>
 </div>
 </div>`
         },
         {
-            id: 5,
-            section_number: 2,
-            title: 'План и сроки',
-            description: '',
+            id: 7, section_number: 2,
+            title: 'Шаблон для ВВЕДЕНИЯ',
+            description: 'Из материала SQL: topic_id 13, section 7',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>План-график помогает распределить работу по времени и вовремя отслеживать прогресс. Контрольные точки — это даты, к которым должны быть готовы определённые результаты.</p>
-<p>Составление плана-графика выполнения проекта и определение контрольных точек.</p>
-<p>План удобно оформлять в виде таблицы с колонками: этап, содержание работы, срок выполнения.</p>
+<p>Структура введения: актуальность, цель, задачи, объект, предмет, практическая значимость, план.</p>
 </div>
 <div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
 <div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
 <h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Составьте план-график своего проекта с указанием сроков и контрольных точек.</p>
-</div>
-</div>
-</div>`
-        },
-        {
-            id: 6,
-            section_number: 3,
-            title: 'Паспорт проекта',
-            description: 'Создание паспорта проекта',
-            content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Паспорт проекта — это краткая сводка основных сведений о проекте. Он позволяет быстро познакомиться с работой и оценить её.</p>
-<p>Оформление паспорта проекта по заданному шаблону.</p>
-<p>В паспорт обычно входят: тема, автор, цель, задачи, этапы, ожидаемые результаты и форма представления.</p>
-</div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Заполните паспорт проекта по предложенному шаблону.</p>
+<p>Заполните шаблон введения по своему проекту.</p>
 </div>
 </div>
 </div>`
         }
     ],
-    '2-2-3': [
+
+    '2-2-3': [ // Урок 03: Информационные ресурсы, сбор материала
         {
-            id: 7,
-            section_number: 1,
-            title: 'Информационные ресурсы',
-            description: '',
+            id: 8, section_number: 1,
+            title: 'Обоснование выбора и анализ предметной области',
+            description: 'Из материала SQL: topic_id 14 (веб-сайт)',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Для выполнения проекта необходимо уметь находить и оценивать информацию. Источники могут быть самыми разными — от печатных изданий до электронных баз данных.</p>
-<p>Обзор источников информации: библиотеки, базы данных, интернет-ресурсы.</p>
-<p>При работе с источниками важно проверять их достоверность и актуальность.</p>
+<p>Обоснование выбора: почему тема актуальна сейчас. Анализ предметной области: основные понятия, участники, тренды, проблемные точки.</p>
+<p>Объект — широкая область; предмет — конкретный аспект. Целевая аудитория — портрет пользователя.</p>
 </div>
 <div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
 <div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
 <h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Составьте список из 3–5 информационных ресурсов по теме вашего проекта.</p>
+<p>Напишите обоснование и анализ для своего продукта по 5 пунктам: актуальность, проблема, аудитория, понятия, тренды.</p>
 </div>
 </div>
 </div>`
-        },
+        }
+    ],
+
+    '2-2-4': [ // Урок 04: Реализация проекта
         {
-            id: 8,
-            section_number: 2,
-            title: 'Сбор материала',
-            description: '',
+            id: 9, section_number: 1,
+            title: 'Сравнительный анализ существующих приложений',
+            description: 'Из материала SQL: topic_id 24',
             content: `
 <div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
 <div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Собранный материал нужно систематизировать: сгруппировать по разделам, выделить главное, отбросить лишнее.</p>
-<p>Практическая работа по сбору и систематизации материала по теме проекта.</p>
-<p>Удобно вести записи в виде таблиц, схем или карточек с источниками.</p>
+<p><strong>Критерии сравнения:</strong> целевая аудитория, функциональность/контент, интерактивность, дизайн/UX, достоверность, доступность.</p>
+<p>Пример (веб-сайт): «Цифровая грамотность», «Безопасность дети.рф», «Твой безопасный интернет» — выводы: мало интерактива, слабая адаптация под мобильные.</p>
 </div>
 <div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
 <h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
 <div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
 <h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Соберите и систематизируйте материал по теме проекта, оформив его в виде таблицы или схемы.</p>
+<p>Найдите 3–5 аналогов, заполните таблицу сравнения и сформулируйте, что вы сделаете лучше.</p>
+</div>
+</div>
+</div>`
+        }
+    ],
+
+    '2-2-5': [ // Урок 05: Реализация проекта
+        {
+            id: 10, section_number: 1,
+            title: 'Выбор инструментов',
+            description: 'Из материала SQL: topic_id 25',
+            content: `
+<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
+<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+<p>Выбор инструментов зависит от типа продукта:</p>
+<ul>
+<li>Веб-сайт: HTML/CSS/JS, Bootstrap, React/Vue, Django/Laravel, MySQL/PostgreSQL, WordPress</li>
+<li>Видеоклип: DaVinci Resolve (бесплатно), CapCut, Blender</li>
+<li>Дизайн-макет: Figma (бесплатно), Inkscape (бесплатно), GIMP, Canva</li>
+<li>Telegram-бот: Python + aiogram, SQLite, Railway/PythonAnywhere</li>
+<li>Мобильное приложение: Flutter, React Native, MIT App Inventor</li>
+</ul>
+</div>
+<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
+<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
+<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<p>Обоснуйте выбор 2–3 инструментов для своего продукта (доступность, функциональность, сроки).</p>
+</div>
+</div>
+</div>`
+        }
+    ],
+
+    '2-2-6': [ // Урок 06: Реализация проекта
+        {
+            id: 11, section_number: 1,
+            title: 'Создание продукта: пошаговое руководство',
+            description: 'Из материала SQL: topic_id 58',
+            content: `
+<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
+<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+<p>Пошаговые руководства по созданию продукта (6 шагов):</p>
+<ul>
+<li><strong>Веб-сайт:</strong> цель/структура → прототип → HTML → CSS → JS → публикация</li>
+<li><strong>Видеоклип:</strong> сценарий → раскадровка → съёмка → монтаж → цветокоррекция/звук → экспорт</li>
+<li><strong>Дизайн-макет:</strong> ТЗ → цвета/шрифты → черновик в Figma → проверка CRAP → обратная связь → экспорт</li>
+<li><strong>Telegram-бот:</strong> BotFather → окружение → базовый код → функционал → обработка ошибок → деплой</li>
+</ul>
+</div>
+<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
+<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
+<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<p>Выполните шаги для своего продукта и приложите скриншоты/ссылки на каждом этапе.</p>
+</div>
+</div>
+</div>`
+        }
+    ],
+
+    '2-2-7': [ // Урок 07: Реализация проекта
+        {
+            id: 12, section_number: 1,
+            title: 'Шаблоны лучшей работы',
+            description: 'Из материала SQL: topic_id 59',
+            content: `
+<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
+<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+<p><strong>Критерии оценки лучшей работы:</strong> функциональность, качество исполнения, дизайн/UX, документация, оригинальность.</p>
+<p>Структура проекта (пример, веб-сайт): index.html, css/style.css, js/main.js, images/, README.md.</p>
+</div>
+<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
+<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
+<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<p>Оформите свою работу по шаблону (README + структура папок + скриншоты/ссылки).</p>
+</div>
+</div>
+</div>`
+        }
+    ],
+
+    '2-2-8': [ // Урок 08: Оформление документации и презентации
+        {
+            id: 13, section_number: 1,
+            title: 'Структура презентации для защиты проекта',
+            description: 'Из материала SQL: topic_id 61',
+            content: `
+<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
+<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+<p><strong>Структура (10–15 слайдов):</strong></p>
+<ol>
+<li>Титульный лист</li>
+<li>Актуальность и проблема</li>
+<li>Цель и задачи</li>
+<li>Объект и предмет</li>
+<li>Гипотеза</li>
+<li>Этапы работы (инструменты, результаты)</li>
+<li>Практическая значимость</li>
+<li>Выводы</li>
+<li>Перспективы</li>
+<li>Источники</li>
+<li>«Спасибо за внимание»</li>
+</ol>
+<p><strong>Требования:</strong> единый стиль, минимум текста (≤7 строк), визуализация, шрифт ≥24 pt, защита 5–7 минут.</p>
+</div>
+<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
+<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
+<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<p>Создайте презентацию по шаблону для своего продукта (укажите слайды 2–12 с содержанием).</p>
+</div>
+</div>
+</div>`
+        }
+    ],
+
+    '2-2-9': [ // Урок 09: Предзащита проекта
+        {
+            id: 14, section_number: 1,
+            title: 'Репетиция защиты',
+            description: 'Из материала SQL: topic_id 61',
+            content: `
+<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
+<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+<p>Предзащита — репетиция финального выступления (5–7 минут). Подготовьте ответы на возможные вопросы комиссии.</p>
+</div>
+<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
+<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
+<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<p>Проведите репетицию и запишите 3 возможных вопроса комиссии с ответами.</p>
+</div>
+</div>
+</div>`
+        }
+    ],
+
+    '2-2-10': [ // Урок 10: Предзащита проекта
+        {
+            id: 15, section_number: 1,
+            title: 'Финальная проверка и защита',
+            description: 'Из материала SQL: topic_id 61',
+            content: `
+<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
+<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+<p>Перед защитой проверьте: цель достигнута, задачи выполнены, продукт работает, презентация готова, документация оформлена.</p>
+</div>
+<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
+<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
+<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
+<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<p>Проведите самооценку по чек-листу и запишите 3 сильные стороны и 1 зону роста своего проекта.</p>
 </div>
 </div>
 </div>`
         }
     ]
-}
+}}
 };
