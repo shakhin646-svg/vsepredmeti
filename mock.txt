@@ -3,14 +3,14 @@ const MOCK = {
         { id: 1, name: 'Уроки' }
     ],
     teachers: [
-        { id: 1, fio: '5 класс', educational_id: 1 },
+       // { id: 1, fio: '5 класс', educational_id: 1 },
         { id: 2, fio: '1 курс',  educational_id: 1 },
         { id: 3, fio: '2 курс',  educational_id: 1 }
     ],
 
     // teacher_id -> курсы
     teacherCourses: {
-        1: [ { id: 1, name: 'Математика' } ],
+       // 1: [ { id: 1, name: 'Математика' } ],
         2: [ { id: 2, name: 'Инд_проект' }, { id: 3, name: 'Информатика_ПР' } ],
         3: [ { id: 4, name: 'Информационные технологии' }, { id: 5, name: 'Арх апп средств' } ]
     },
