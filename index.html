@@ -327,6 +327,9 @@
 <script>
 let MOCK = null;
 
+/* ============================================================
+ *  ЗАГРУЗКА MOCK
+ * ============================================================ */
 function evalMockSource(text) {
     const src = text.trim();
     if (!src) throw new Error('mock.txt пуст');
@@ -362,20 +365,23 @@ async function loadMock() {
     return result;
 }
 
+/* ============================================================
+ *  MOCK AJAX — все действия из PHP + новые
+ * ============================================================ */
 function mockAjax(params) {
     const action = params.ajax;
+
     if (action === 'get_teacher_courses') {
         return MOCK.teacherCourses?.[params.teacher_id] || [];
     }
     if (action === 'get_teacher_course_subjects') {
         return MOCK.teacherCourseSubjects?.[params.teacher_id + '-' + params.course_id] || [];
     }
+    if (action === 'get_topics') {
+        return MOCK.topics?.[params.subject_id] || [];
+    }
     if (action === 'get_materials') {
         return MOCK.materials?.[params.topic_id] || [];
-    }
-
-          if (action === 'get_topics') {
-        return MOCK.topics?.[params.subject_id] || [];
     }
     if (action === 'get_sections') {
         return MOCK.sections?.[params.topic_id] || [];
@@ -406,6 +412,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
+    /* ============================================================
+     *  КОНФИГУРАЦИЯ
+     * ============================================================ */
     const config = {
         selectors: {
             educationalButtons: '.educational-button',
@@ -417,31 +426,52 @@ document.addEventListener('DOMContentLoaded', async function () {
             teacherCoursesList: '#teacherCoursesList',
             teacherSubjectsList: '#teacherSubjectsList',
             selectedTeacherTitle: '#selectedTeacherTitle',
-            topicDescriptionSection: '#topicDescriptionSection',
-            topicDescription: '#topicDescription',
-            descriptionText: '#descriptionText',
-            lessonMaterials: '#lessonMaterials'
+
+            // Материалы теперь внутри аккордеона
+            lessonMaterials: '#lessonMaterials',
+
+            // Новые блоки
+            topicsWrap: '#js-topics-wrap',
+            topics: '#js-topics',
+            topicDesc: '#js-topic-desc',
+            topicDescText: '#js-topic-desc-text',
+            sectionsWrap: '#js-sections-wrap',
+            sections: '#js-sections',
+            materialsWrap: '#js-materials-wrap',
+            lessonTasksWrap: '#js-lesson-tasks-wrap',
+            lessonTasks: '#js-lesson-tasks',
+            websitesWrap: '#js-websites-wrap',
+            websites: '#js-websites'
         },
         classes: {
             hidden: 'hidden', error: 'error', emptyMessage: 'empty-message',
             activeSubject: 'active-subject',
             activeEducational: 'active-educational', activeTeacher: 'active-teacher',
-            activeCourse: 'active-course'
+            activeCourse: 'active-course', activeTopic: 'active-topic'
         }
     };
     const elements = {};
-    for (const [k, sel] of Object.entries(config.selectors)) elements[k] = document.querySelector(sel);
+    for (const [k, sel] of Object.entries(config.selectors)) {
+        elements[k] = document.querySelector(sel);
+    }
 
     const teachersSection = document.getElementById('teachersSection');
     const teacherSubjectsSection = document.getElementById('teacherSubjectsContainer');
 
+    /* ============================================================
+     *  СОСТОЯНИЕ
+     * ============================================================ */
     const state = {
         currentEducational: 0,
         currentTeacher: null,
         currentCourse: null,
-        currentSubject: null
+        currentSubject: null,
+        currentTopic: null
     };
 
+    /* ============================================================
+     *  РЕНДЕР СПИСКОВ
+     * ============================================================ */
     function renderEducationals() {
         const list = MOCK.educationals || [];
         document.getElementById('educationalButtons').innerHTML =
@@ -452,6 +482,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             `).join('') ||
             `<p class="${config.classes.emptyMessage}">Нет доступных образовательных учреждений</p>`;
     }
+
     function renderAllTeachers() {
         const list = MOCK.teachers || [];
         elements.allTeachersList.innerHTML =
@@ -464,6 +495,113 @@ document.addEventListener('DOMContentLoaded', async function () {
             `<p class="${config.classes.emptyMessage}">Нет доступных преподавателей</p>`;
     }
 
+    function renderCourses(courses) {
+        elements.teacherCoursesList.innerHTML = courses.map(c => `
+            <button class="course-button" data-course-id="${c.id}" data-course-name="${escapeHtml(c.name)}">
+                ${escapeHtml(c.name)}
+            </button>
+        `).join('');
+    }
+
+    function renderSubjects(subjects) {
+        elements.teacherSubjectsList.innerHTML = subjects.map(s => `
+            <button class="subject-button"
+                    data-subject-id="${s.id}"
+                    data-subject-name="${escapeHtml(s.name)}">
+                ${escapeHtml(s.name)}
+            </button>
+        `).join('');
+    }
+
+    function renderTopics(topics) {
+        elements.topics.innerHTML = topics.map(t => `
+            <button class="topic-button"
+                    data-topic-id="${t.id}"
+                    data-topic-description="${escapeHtml(t.description || '')}">
+                ${escapeHtml(t.topic_name)}
+            </button>
+        `).join('');
+    }
+
+    function renderSections(sections) {
+        elements.sections.innerHTML = sections.map(s => `
+            <div class="accordion__item">
+                <button class="accordion__toggle" aria-expanded="false" data-section-id="${s.id}">
+                    <span>${s.section_number ? s.section_number + '. ' : ''}${escapeHtml(s.title)}</span>
+                    <i class="fas fa-chevron-down accordion__icon"></i>
+                </button>
+                <div class="accordion__body" id="section-body-${s.id}">
+                    ${s.description ? '<p>' + escapeHtml(s.description) + '</p>' : ''}
+                    ${s.content ? '<div>' + s.content + '</div>' : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderMaterials(materials) {
+        elements.lessonMaterials.innerHTML = `
+            <div class="materials-container fade-in">
+                <div class="materials-grid">${materials.map(renderMaterialCard).join('')}</div>
+            </div>
+        `;
+    }
+
+    function renderMaterialCard(material) {
+        return `
+            <div class="material-card" data-url="${escapeHtml(material.file_url)}">
+                <div style="position:relative;">${getMaterialIcon(material.file_type, material.file_url)}</div>
+                <div class="material-info">
+                    <div class="material-title">${escapeHtml(material.title)}</div>
+                    <span class="material-type type-${material.file_type}">${getMaterialTypeLabel(material.file_type)}</span>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderTasks(tasks) {
+        elements.lessonTasks.innerHTML = tasks.map(task => `
+            <div class="lesson-task-item">
+                <div class="lesson-task-item__row">
+                    <span class="lesson-task-item__num">${task.zadan_number}</span>
+                    <div>
+                        <h4 class="lesson-task-item__title">${escapeHtml(task.zadani_title || 'Без названия')}</h4>
+                        <p class="lesson-task-item__desc">${escapeHtml(task.zadan_name || '')}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderWebsites(websites) {
+        elements.websites.innerHTML = websites.map(w => `
+            <div class="website-item">
+                <a class="website-button" href="${escapeHtml(w.url)}" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt"></i> ${escapeHtml(w.website_name)}
+                </a>
+                ${w.description ? `<p class="website-description">${escapeHtml(w.description)}</p>` : ''}
+            </div>
+        `).join('');
+    }
+
+    function getMaterialIcon(type, url) {
+        const icons = {
+            image: `<img src="${url}" class="material-thumbnail" alt="">`,
+            video: `<div class="material-thumbnail" style="background:#111; display:flex; align-items:center; justify-content:center;"><i class="fas fa-play" style="font-size:26px; color:#fff;"></i></div>`,
+            audio: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-music" style="font-size:30px; color:#9c27b0;"></i></div>`,
+            document: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-file-alt" style="font-size:30px; color:#ff9800;"></i></div>`,
+            default: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-file" style="font-size:30px; color:#6c757d;"></i></div>`
+        };
+        return icons[type] || icons.default;
+    }
+
+    function getMaterialTypeLabel(type) {
+        return { image: 'Изображение', video: 'Видео', audio: 'Аудио', document: 'Текст' }[type] || 'Файл';
+    }
+
+    /* ============================================================
+     *  ОБРАБОТЧИКИ КЛИКОВ
+     * ============================================================ */
+
     function handleEducationalClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.educationalId, 10);
@@ -475,8 +613,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (isSame) {
             state.currentEducational = 0;
             teachersSection.classList.add('hidden');
-            teacherSubjectsSection.style.display = 'none';
-            teacherSubjectsSection.classList.add('hidden');
             resetTeacherSelection();
             return;
         }
@@ -484,11 +620,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         state.currentEducational = id;
         btn.classList.add(config.classes.activeEducational);
         filterTeachers();
-
         teachersSection.classList.remove('hidden');
-        teacherSubjectsSection.style.display = 'none';
-        teacherSubjectsSection.classList.add('hidden');
-
         resetTeacherSelection();
     }
 
@@ -510,8 +642,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 b.style.display = 'inline-block');
 
             elements.teacherCoursesContainer.style.display = 'none';
-            teacherSubjectsSection.classList.add('hidden');
-            teacherSubjectsSection.style.display = 'none';
             resetSubjectSelection();
             return;
         }
@@ -521,17 +651,13 @@ document.addEventListener('DOMContentLoaded', async function () {
         state.currentSubject = null;
 
         document.querySelectorAll(config.selectors.teacherItems).forEach(b => {
-            if (b === btn) b.style.display = 'inline-block';
-            else b.style.display = 'none';
+            b.style.display = (b === btn) ? 'inline-block' : 'none';
         });
 
         btn.classList.add(config.classes.activeTeacher);
 
         elements.teacherCoursesContainer.style.display = 'block';
         loadTeacherCourses(id, name);
-
-        teacherSubjectsSection.classList.add('hidden');
-        teacherSubjectsSection.style.display = 'none';
         resetSubjectSelection();
     }
 
@@ -551,8 +677,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             document.querySelectorAll(config.selectors.courseButtons).forEach(b =>
                 b.style.display = 'inline-block');
 
-            teacherSubjectsSection.classList.add('hidden');
-            teacherSubjectsSection.style.display = 'none';
             resetSubjectSelection();
             return;
         }
@@ -562,8 +686,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         btn.classList.add(config.classes.activeCourse);
 
         document.querySelectorAll(config.selectors.courseButtons).forEach(b => {
-            if (b === btn) b.style.display = 'inline-block';
-            else b.style.display = 'none';
+            b.style.display = (b === btn) ? 'inline-block' : 'none';
         });
 
         const teacherName = document.querySelector('.teacher-item.active-teacher')?.dataset.teacherName || '';
@@ -574,7 +697,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     function handleSubjectClick(e) {
         const btn = e.currentTarget;
         const id = parseInt(btn.dataset.subjectId, 10);
-        const description = btn.dataset.subjectDescription || '';
         const isSame = state.currentSubject === id;
 
         document.querySelectorAll('.subject-button').forEach(b =>
@@ -584,13 +706,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             state.currentSubject = null;
             document.querySelectorAll('.subject-button').forEach(b =>
                 b.style.display = 'inline-block');
-
-            // 🔽 Вернуть сетку 6-в-ряд
             elements.teacherSubjectsList.classList.remove('single-active');
-
-            elements.topicDescriptionSection.style.display = 'none';
-            elements.lessonMaterials.innerHTML =
-                '<p class="empty-message">Выберите урок для просмотра материалов</p>';
+            resetTopicSelection();
             return;
         }
 
@@ -598,18 +715,251 @@ document.addEventListener('DOMContentLoaded', async function () {
         btn.classList.add(config.classes.activeSubject);
 
         document.querySelectorAll('.subject-button').forEach(b => {
-            if (b === btn) b.style.display = 'inline-block';
-            else b.style.display = 'none';
+            b.style.display = (b === btn) ? 'inline-block' : 'none';
         });
-
-        // 🔽 Оставить только нажатый урок по центру
         elements.teacherSubjectsList.classList.add('single-active');
 
-        elements.topicDescriptionSection.style.display = 'block';
-        elements.descriptionText.textContent = description || 'Описание отсутствует';
-
-        loadMaterials(id);
+        // Показать блок тем и загрузить их
+        loadTopics(id);
+        resetTopicSelection();
     }
+
+    function handleTopicClick(e) {
+        const btn = e.currentTarget;
+        const id = parseInt(btn.dataset.topicId, 10);
+        const description = btn.dataset.topicDescription || '';
+        const isSame = state.currentTopic === id;
+
+        document.querySelectorAll('.topic-button').forEach(b =>
+            b.classList.remove(config.classes.activeTopic));
+
+        if (isSame) {
+            // Повторное нажатие — сброс темы
+            state.currentTopic = null;
+            document.querySelectorAll('.topic-button').forEach(b =>
+                b.style.display = 'inline-block');
+            resetTopicContent();
+            return;
+        }
+
+        state.currentTopic = id;
+        btn.classList.add(config.classes.activeTopic);
+
+        // Скрыть остальные темы
+        document.querySelectorAll('.topic-button').forEach(b => {
+            b.style.display = (b === btn) ? 'inline-block' : 'none';
+        });
+
+        // Описание темы
+        elements.topicDescText.textContent = description || 'Описание отсутствует';
+        elements.topicDesc.classList.remove(config.classes.hidden);
+
+        // Показать все блоки темы
+        elements.sectionsWrap.classList.remove(config.classes.hidden);
+        elements.materialsWrap.classList.remove(config.classes.hidden);
+        elements.lessonTasksWrap.classList.remove(config.classes.hidden);
+        elements.websitesWrap.classList.remove(config.classes.hidden);
+
+        // Закрыть аккордеоны (свежий вид)
+        closeAllAccordions();
+
+        // Загрузить содержимое
+        loadSections(id);
+        loadMaterials(id);
+        loadRandomTasks(id);
+        loadWebsites(id);
+    }
+
+    /* ============================================================
+     *  ЗАГРУЗКА ДАННЫХ
+     * ============================================================ */
+
+    async function fetchData(url, params = {}) {
+        try {
+            await new Promise(r => setTimeout(r, 30));
+            return mockAjax(params);
+        } catch (error) { return { error: error.message }; }
+    }
+
+    async function loadTeacherCourses(teacherId, teacherName) {
+        elements.teacherCoursesList.innerHTML = '';
+        elements.selectedTeacherTitle.textContent = teacherName;
+        elements.teacherCoursesContainer.style.display = 'block';
+
+        const data = await fetchData('', { ajax: 'get_teacher_courses', teacher_id: teacherId });
+        if (data.error) { showError(elements.teacherCoursesList, data.error); return; }
+        if (!data.length) { showEmptyMessage(elements.teacherCoursesList, 'Нет курсов'); return; }
+        renderCourses(data);
+        bindTeacherCourseEvents();
+    }
+
+    async function loadTeacherCourseSubjects(teacherId, teacherName, courseId, courseName) {
+        const data = await fetchData('', {
+            ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
+        });
+
+        elements.teacherSubjectsContainer.classList.remove(config.classes.hidden);
+        elements.teacherSubjectsContainer.style.display = 'flex';
+        elements.teacherSubjectsList.classList.remove('single-active');
+
+        if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
+        if (!data.length) {
+            showEmptyMessage(elements.teacherSubjectsList, 'Материалы для этого урока ещё готовятся');
+            return;
+        }
+        renderSubjects(data);
+        bindSubjectEvents();
+    }
+
+    async function loadTopics(subjectId) {
+        elements.topicsWrap.classList.remove(config.classes.hidden);
+        elements.topics.innerHTML = '<p class="loading">Загрузка тем…</p>';
+
+        const data = await fetchData('', { ajax: 'get_topics', subject_id: subjectId });
+        if (data.error) { showError(elements.topics, data.error); return; }
+        if (!data.length) {
+            showEmptyMessage(elements.topics, 'Нет тем для этого урока');
+            return;
+        }
+        renderTopics(data);
+        bindTopicEvents();
+    }
+
+    async function loadMaterials(topicId) {
+        elements.lessonMaterials.innerHTML = '<p class="loading">Загрузка материалов…</p>';
+        const data = await fetchData('', { ajax: 'get_materials', topic_id: topicId });
+        if (data.error) { showError(elements.lessonMaterials, data.error); return; }
+        if (!data.length) {
+            showEmptyMessage(elements.lessonMaterials, 'Материалы для этой темы не найдены');
+            return;
+        }
+        renderMaterials(data);
+    }
+
+    async function loadSections(topicId) {
+        elements.sections.innerHTML = '<p class="loading">Загрузка разделов…</p>';
+        const data = await fetchData('', { ajax: 'get_sections', topic_id: topicId });
+        if (data.error) { showError(elements.sections, data.error); return; }
+        if (!data.length) {
+            showEmptyMessage(elements.sections, 'Нет разделов для этой темы');
+            return;
+        }
+        renderSections(data);
+    }
+
+    async function loadRandomTasks(topicId) {
+        elements.lessonTasks.innerHTML = '<p class="loading">Загрузка заданий…</p>';
+        const data = await fetchData('', { ajax: 'get_random_ai_tasks', topic_id: topicId });
+        if (data.error) { showError(elements.lessonTasks, data.error); return; }
+        if (!data.tasks || !data.tasks.length) {
+            showEmptyMessage(elements.lessonTasks, 'Нет заданий для этой темы');
+            return;
+        }
+        renderTasks(data.tasks);
+    }
+
+    async function loadWebsites(topicId) {
+        elements.websites.innerHTML = '<p class="loading">Загрузка сайтов…</p>';
+        const data = await fetchData('', { ajax: 'get_websites', topic_id: topicId });
+        if (data.error) { showError(elements.websites, data.error); return; }
+        if (!data.length) {
+            showEmptyMessage(elements.websites, 'Нет сайтов для этой темы');
+            return;
+        }
+        renderWebsites(data);
+    }
+
+    /* ============================================================
+     *  СБРОСЫ
+     * ============================================================ */
+
+    function resetTeacherSelection() {
+        document.querySelectorAll(config.selectors.teacherItems).forEach(b => {
+            b.classList.remove(config.classes.activeTeacher);
+            b.style.display = 'inline-block';
+        });
+        elements.teacherCoursesContainer.style.display = 'none';
+        state.currentTeacher = null;
+        state.currentCourse = null;
+        resetSubjectSelection();
+    }
+
+    function resetSubjectSelection() {
+        document.querySelectorAll('.subject-button').forEach(b => {
+            b.classList.remove(config.classes.activeSubject);
+            b.style.display = 'inline-block';
+        });
+        elements.teacherSubjectsList.classList.remove('single-active');
+        elements.teacherSubjectsContainer.classList.add(config.classes.hidden);
+        elements.teacherSubjectsContainer.style.display = 'none';
+        state.currentSubject = null;
+        resetTopicSelection();
+    }
+
+    function resetTopicSelection() {
+        state.currentTopic = null;
+        document.querySelectorAll('.topic-button').forEach(b => {
+            b.classList.remove(config.classes.activeTopic);
+            b.style.display = 'inline-block';
+        });
+        elements.topicsWrap.classList.add(config.classes.hidden);
+        elements.topicDesc.classList.add(config.classes.hidden);
+        resetTopicContent();
+    }
+
+    function resetTopicContent() {
+        elements.sectionsWrap.classList.add(config.classes.hidden);
+        elements.materialsWrap.classList.add(config.classes.hidden);
+        elements.lessonTasksWrap.classList.add(config.classes.hidden);
+        elements.websitesWrap.classList.add(config.classes.hidden);
+
+        elements.sections.innerHTML = '';
+        elements.lessonMaterials.innerHTML =
+            '<p class="empty-message">Выберите тему для просмотра материалов</p>';
+        elements.lessonTasks.innerHTML =
+            '<p class="empty-message">Выберите тему для просмотра заданий</p>';
+        elements.websites.innerHTML = '';
+
+        closeAllAccordions();
+    }
+
+    /* ============================================================
+     *  АККОРДЕОНЫ
+     * ============================================================ */
+
+    function closeAllAccordions() {
+        document.querySelectorAll('.accordion-body.is-open').forEach(body =>
+            body.classList.remove('is-open'));
+        document.querySelectorAll('.accordion-header[aria-expanded="true"]').forEach(h =>
+            h.setAttribute('aria-expanded', 'false'));
+        document.querySelectorAll('.accordion__toggle[aria-expanded="true"]').forEach(h =>
+            h.setAttribute('aria-expanded', 'false'));
+        document.querySelectorAll('.accordion__body.is-open').forEach(b =>
+            b.classList.remove('is-open'));
+    }
+
+    /* ============================================================
+     *  ПРИВЯЗКА СОБЫТИЙ
+     * ============================================================ */
+
+    function bindTeacherCourseEvents() {
+        document.querySelectorAll('#teacherCoursesList .course-button').forEach(b =>
+            b.addEventListener('click', handleTeacherCourseClick));
+    }
+
+    function bindSubjectEvents() {
+        document.querySelectorAll('#teacherSubjectsList .subject-button').forEach(b =>
+            b.addEventListener('click', handleSubjectClick));
+    }
+
+    function bindTopicEvents() {
+        document.querySelectorAll('#js-topics .topic-button').forEach(b =>
+            b.addEventListener('click', handleTopicClick));
+    }
+
+    /* ============================================================
+     *  УТИЛИТЫ
+     * ============================================================ */
 
     function filterTeachers() {
         const edu = state.currentEducational;
@@ -624,127 +974,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    async function fetchData(url, params = {}) {
-        try {
-            await new Promise(r => setTimeout(r, 30));
-            return mockAjax(params);
-        } catch (error) { return { error: error.message }; }
-    }
-    async function loadTeacherCourses(teacherId, teacherName) {
-        elements.teacherCoursesList.innerHTML = '';
-        elements.selectedTeacherTitle.textContent = teacherName;
-        elements.teacherCoursesContainer.style.display = 'block';
-        const data = await fetchData('', { ajax: 'get_teacher_courses', teacher_id: teacherId });
-        if (data.error) { showError(elements.teacherCoursesList, data.error); return; }
-        if (!data.length) { showEmptyMessage(elements.teacherCoursesList, '  '); return; }
-        renderCourses(data); bindTeacherCourseEvents();
-    }
-    async function loadTeacherCourseSubjects(teacherId, teacherName, courseId, courseName) {
-        const data = await fetchData('', {
-            ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
-        });
-        elements.teacherSubjectsContainer.classList.remove('hidden');
-        elements.teacherSubjectsContainer.style.display = 'flex';
-        // 🔽 при новом списке сбрасываем «одиночный» режим
-        elements.teacherSubjectsList.classList.remove('single-active');
-        if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
-        if (!data.length) {
-            showEmptyMessage(elements.teacherSubjectsList, 'Материалы для этого урока ещё готовятся'); return;
-        }
-        renderSubjects(data); bindSubjectEvents();
-    }
-    async function loadMaterials(subjectId) {
-        const data = await fetchData('', { ajax: 'get_materials', topic_id: subjectId });
-        if (data.error) { showError(elements.lessonMaterials, data.error); return; }
-        if (!data.length) showEmptyMessage(elements.lessonMaterials, 'Материалы для этой темы не найдены');
-        else renderMaterials(data);
-        elements.lessonMaterials.style.display = 'block';
-    }
-
-    function renderCourses(courses) {
-        elements.teacherCoursesList.innerHTML = courses.map(c => `
-            <button class="course-button" data-course-id="${c.id}" data-course-name="${escapeHtml(c.name)}">
-                ${escapeHtml(c.name)}
-            </button>
-        `).join('');
-    }
-    function renderSubjects(subjects) {
-        elements.teacherSubjectsList.innerHTML = subjects.map(s => `
-            <button class="subject-button"
-                    data-subject-id="${s.id}"
-                    data-subject-name="${escapeHtml(s.name)}"
-                    data-subject-description="${escapeHtml(s.description || '')}">
-                ${escapeHtml(s.name)}
-            </button>
-        `).join('');
-    }
-    function renderMaterials(materials) {
-        elements.lessonMaterials.innerHTML = `
-            <div class="materials-container fade-in">
-                <div class="materials-grid">${materials.map(renderMaterialCard).join('')}</div>
-            </div>
-        `;
-    }
-    function renderMaterialCard(material) {
-        return `
-            <div class="material-card" data-url="${escapeHtml(material.file_url)}">
-                <div style="position:relative;">${getMaterialIcon(material.file_type, material.file_url)}</div>
-                <div class="material-info">
-                    <div class="material-title">${escapeHtml(material.title)}</div>
-                    <span class="material-type type-${material.file_type}">${getMaterialTypeLabel(material.file_type)}</span>
-                </div>
-            </div>
-        `;
-    }
-    function getMaterialIcon(type, url) {
-        const icons = {
-            image: `<img src="${url}" class="material-thumbnail" alt="">`,
-            video: `<div class="material-thumbnail" style="background:#111; display:flex; align-items:center; justify-content:center;"><i class="fas fa-play" style="font-size:26px; color:#fff;"></i></div>`,
-            audio: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-music" style="font-size:30px; color:#9c27b0;"></i></div>`,
-            document: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-file-alt" style="font-size:30px; color:#ff9800;"></i></div>`,
-            default: `<div class="material-thumbnail" style="background:#f5f5f5; display:flex; align-items:center; justify-content:center;"><i class="fas fa-file" style="font-size:30px; color:#6c757d;"></i></div>`
-        };
-        return icons[type] || icons.default;
-    }
-    function getMaterialTypeLabel(type) {
-        return { image: 'Изображение', video: 'Видео', audio: 'Аудио', document: 'Текст' }[type] || 'Файл';
-    }
-
-    function resetTeacherSelection() {
-        document.querySelectorAll(config.selectors.teacherItems).forEach(b => {
-            b.classList.remove(config.classes.activeTeacher);
-            b.style.display = 'inline-block';
-        });
-        elements.teacherCoursesContainer.style.display = 'none';
-        elements.teacherSubjectsContainer.classList.add('hidden');
-        elements.teacherSubjectsContainer.style.display = 'none';
-        state.currentTeacher = null;
-        state.currentCourse = null;
-        resetSubjectSelection();
-    }
-    function resetSubjectSelection() {
-        document.querySelectorAll('.subject-button').forEach(b => {
-            b.classList.remove(config.classes.activeSubject);
-            b.style.display = 'inline-block';
-        });
-        // 🔽 сбросить «одиночный» режим
-        elements.teacherSubjectsList.classList.remove('single-active');
-        elements.topicDescriptionSection.style.display = 'none';
-        elements.lessonMaterials.innerHTML =
-            '<p class="empty-message">Выберите урок для просмотра материалов</p>';
-        state.currentSubject = null;
-    }
-    function bindTeacherCourseEvents() {
-        document.querySelectorAll('#teacherCoursesList .course-button').forEach(b =>
-            b.addEventListener('click', handleTeacherCourseClick));
-    }
-    function bindSubjectEvents() {
-        document.querySelectorAll('#teacherSubjectsList .subject-button').forEach(b =>
-            b.addEventListener('click', handleSubjectClick));
-    }
     function showError(container, msg) {
         container.innerHTML = `<p class="${config.classes.error}">${escapeHtml(msg)}</p>`;
     }
+
     function showEmptyMessage(container, msg) {
         container.innerHTML = `<p class="${config.classes.emptyMessage}">${escapeHtml(msg)}</p>`;
     }
@@ -754,6 +987,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (!card) return;
         openMaterial(card.dataset.url);
     });
+
+    /* ============================================================
+     *  ИНИЦИАЛИЗАЦИЯ
+     * ============================================================ */
 
     renderEducationals();
     renderAllTeachers();
@@ -766,6 +1003,29 @@ document.addEventListener('DOMContentLoaded', async function () {
     teachersSection.classList.add('hidden');
     teacherSubjectsSection.classList.add('hidden');
     teacherSubjectsSection.style.display = 'none';
+
+    // Делегированный обработчик аккордеонов
+    document.addEventListener('click', (e) => {
+        // Вложенный аккордеон (разделы темы)
+        const toggle = e.target.closest('.accordion__toggle');
+        if (toggle) {
+            const body = document.getElementById('section-body-' + toggle.dataset.sectionId);
+            if (!body) return;
+            const isOpen = body.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', String(isOpen));
+            return;
+        }
+
+        // Верхний аккордеон (секции)
+        const header = e.target.closest('.accordion-header[data-toggle="section"]');
+        if (header) {
+            const section = document.querySelector(header.dataset.target);
+            const body = section?.querySelector('.accordion-body');
+            if (!body) return;
+            const isOpen = body.classList.toggle('is-open');
+            header.setAttribute('aria-expanded', String(isOpen));
+        }
+    });
 });
 
 function openMaterial(fileUrl) {
@@ -775,6 +1035,7 @@ function openMaterial(fileUrl) {
     }
     window.open(fileUrl, '_blank');
 }
+
 function escapeHtml(unsafe) {
     return String(unsafe ?? '')
         .replace(/&/g, '&amp;').replace(/</g, '&lt;')
