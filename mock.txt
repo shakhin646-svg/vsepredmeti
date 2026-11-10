@@ -136,105 +136,99 @@ const MOCK = {
     // "teacher_id-course_id-subject_id" -> разделы урока
     teacherCourseSubjectsSection: {
 
-        // ============================================================
-        // 2-2-1
-        // ============================================================
-        '2-2-1': [
-            {
-                id: 1, section_number: 1,
-                title: 'Выбор типа продукта для проекта',
-                content:
-'<div class=\"step-content active\" id=\"step-1\">\r\n     <!-- Теоретическая часть: Типы продуктов -->\r\n    <div class=\"theory-box\">\r\n        <h3><i class=\"fas fa-cogs\"></i> Теоретическая часть: Типы продуктов проекта</h3>\r\n        <p>Исходя из темы «создание программы для обработки оценок», можно выбрать один из множества форматов реализации. Ниже представлены основные категории и конкретные типы продуктов, которые могут быть созданы в рамках проекта.</p>\r\n        \r\n        <div class=\"info-grid\">\r\n            <!-- Программирование: Оконное приложение -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-desktop\"></i> Оконное приложение</h4>\r\n                <p><strong>Программирование.</strong> Десктопное приложение для Windows/macOS/Linux. Пример: Python + Tkinter/PyQt. Классический вариант для локального использования.</p>\r\n            </div>\r\n            <!-- Программирование: Веб-сайт -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-globe\"></i> Веб-сайт</h4>\r\n                <p><strong>Цифровой продукт.</strong> Информационный или интерактивный сайт. Пример: Flask/Django. Доступен онлайн, требует хостинга.</p>\r\n            </div>\r\n            <!-- Программирование: Мобильное приложение -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-mobile-alt\"></i> Мобильное приложение</h4>\r\n                <p><strong>Программирование.</strong> Приложение для iOS или Android. Пример: React Native / Kotlin / Swift. Удобно для использования со смартфона.</p>\r\n            </div>\r\n            <!-- Программирование: Телеграм-бот -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fab fa-telegram\"></i> Телеграм-бот</h4>\r\n                <p><strong>Программирование.</strong> Автоматизированный бот для Telegram. Пример: Python + Aiogram. Простой интерфейс через чат.</p>\r\n            </div>\r\n            <!-- Мультимедиа: Видеоклип -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-video\"></i> Видеоклип</h4>\r\n                <p><strong>Мультимедиа.</strong> Короткий видео-ролик по теме проекта. Может использоваться для объяснения принципов работы или презентации.</p>\r\n            </div>\r\n            <!-- Мультимедиа: Мультимедийный продукт -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-play-circle\"></i> Мультимедийный продукт</h4>\r\n                <p><strong>Мультимедиа.</strong> Презентация, интерактивное приложение, объединяющее текст, графику, видео и звук.</p>\r\n            </div>\r\n            <!-- Дизайн: Дизайн-макет -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-paint-brush\"></i> Дизайн-макет</h4>\r\n                <p><strong>Дизайн.</strong> Макет приложения, сайта или печатного издания. Создаётся в Figma, Adobe XD и других инструментах.</p>\r\n            </div>\r\n            <!-- Дизайн: Иллюстрация/серия иллюстраций -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-palette\"></i> Иллюстрация / серия иллюстраций</h4>\r\n                <p><strong>Дизайн.</strong> Художественные иллюстрации по теме проекта. Могут быть частью интерфейса или самостоятельным продуктом.</p>\r\n            </div>\r\n            <!-- Прототипирование: Макет -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-cube\"></i> Макет</h4>\r\n                <p><strong>Прототипирование.</strong> Физический или цифровой макет объекта. Позволяет визуализировать концепцию.</p>\r\n            </div>\r\n            <!-- Моделирование: Модель -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-cubes\"></i> Модель</h4>\r\n                <p><strong>Моделирование.</strong> 3D-модель, математическая или концептуальная модель процесса или системы.</p>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Подсказки для выбора продукта -->\r\n        <div style=\"margin-top: 30px;\">\r\n            <h4><i class=\"fas fa-lightbulb\"></i> Подсказки для выбора продукта</h4>\r\n            <div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;\">\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #007bff;\">\r\n                    <strong><i class=\"fas fa-desktop\"></i> Оконные приложения</strong><br>\r\n                    Выбирайте, если у вас есть опыт программирования (Python, C#, Java) и интерес к созданию десктопных программ.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #28a745;\">\r\n                    <strong><i class=\"fas fa-globe\"></i> Веб-сайты</strong><br>\r\n                    Идеально для начинающих. Используйте HTML/CSS/JavaScript или конструкторы сайтов.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #17a2b8;\">\r\n                    <strong><i class=\"fas fa-mobile-alt\"></i> Мобильные приложения</strong><br>\r\n                    Выбирайте, если вы хотите создавать приложения для смартфонов и знакомы с Kotlin/Java или React Native.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #ffc107;\">\r\n                    <strong><i class=\"fab fa-telegram\"></i> Телеграм-боты</strong><br>\r\n                    Простые в разработке боты для Telegram на Python или JavaScript.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #dc3545;\">\r\n                    <strong><i class=\"fas fa-video\"></i> Видеоклип</strong><br>\r\n                    Подойдёт, если вы умеете работать с видеоредакторами (Adobe Premiere, DaVinci Resolve) и хотите наглядно представить результаты.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #6f42c1;\">\r\n                    <strong><i class=\"fas fa-play-circle\"></i> Мультимедийный продукт</strong><br>\r\n                    Для тех, кто владеет инструментами создания презентаций (PowerPoint, Canva) или интерактивных приложений.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #fd7e14;\">\r\n                    <strong><i class=\"fas fa-paint-brush\"></i> Дизайн-макет</strong><br>\r\n                    Если вы знакомы с Figma, Sketch или Adobe XD и хотите создать прототип интерфейса.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #e83e8c;\">\r\n                    <strong><i class=\"fas fa-palette\"></i> Иллюстрация</strong><br>\r\n                    Выбирайте при наличии художественных навыков и опыта в Adobe Illustrator, Procreate или аналогичных программах.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #20c997;\">\r\n                    <strong><i class=\"fas fa-cube\"></i> Макет (прототипирование)</strong><br>\r\n                    Подходит, если вы интересуетесь 3D-моделированием (Blender, Tinkercad) или созданием физических прототипов.\r\n                </div>\r\n                <div style=\"background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #6c757d;\">\r\n                    <strong><i class=\"fas fa-cubes\"></i> Модель (моделирование)</strong><br>\r\n                    Для тех, кто хочет создать математическую, концептуальную или 3D-модель с использованием специализированного ПО.\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Критерии выбора типа продукта -->\r\n        <div style=\"margin-top: 30px; background: #f0f7ff; padding: 20px; border-radius: 8px;\">\r\n            <h4><i class=\"fas fa-check-circle\"></i> Критерии выбора типа продукта</h4>\r\n            <ul style=\"columns: 2; column-gap: 30px; list-style-type: none; padding-left: 0;\">\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Доступность инструментов:</strong> Есть ли у вас необходимое ПО и оборудование?</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Соответствие навыкам:</strong> Соответствует ли продукт вашему текущему уровню знаний?</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Временные рамки:</strong> Можете ли вы завершить продукт за сроки проекта?</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Практическая ценность:</strong> Будет ли продукт полезен для целевой аудитории?</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Соответствие теме:</strong> Естественно ли продукт вытекает из темы исследования?</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Обучающий потенциал:</strong> Поможет ли создание продукта развить новые навыки?</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Ресурсная обеспеченность:</strong> Есть ли доступ к необходимым данным, API, библиотекам?</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Возможность тестирования:</strong> Можете ли вы протестировать продукт на реальных пользователях?</li>\r\n            </ul>\r\n        </div>\r\n\r\n\r\n    </div>\r\n</div>'
-            },
-            {
-                id: 2, section_number: 2,
-                title: 'Выбор темы проекта с учётом продукта',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    '2-2-1': [
+    {
+        id: 1, section_number: 1,
+        title: 'Выбор типа продукта для проекта',
+        content:
+'<div>\r\n    <div>\r\n        <h3>Теоретическая часть: Типы продуктов проекта</h3>\r\n        <p>Исходя из темы «создание программы для обработки оценок», можно выбрать один из множества форматов реализации. Ниже представлены основные категории и конкретные типы продуктов, которые могут быть созданы в рамках проекта.</p>\r\n        \r\n        <div>\r\n            <div>\r\n                <h4>Оконное приложение</h4>\r\n                <p><strong>Программирование.</strong> Десктопное приложение для Windows/macOS/Linux. Пример: Python + Tkinter/PyQt. Классический вариант для локального использования.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Веб-сайт</h4>\r\n                <p><strong>Цифровой продукт.</strong> Информационный или интерактивный сайт. Пример: Flask/Django. Доступен онлайн, требует хостинга.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Мобильное приложение</h4>\r\n                <p><strong>Программирование.</strong> Приложение для iOS или Android. Пример: React Native / Kotlin / Swift. Удобно для использования со смартфона.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Телеграм-бот</h4>\r\n                <p><strong>Программирование.</strong> Автоматизированный бот для Telegram. Пример: Python + Aiogram. Простой интерфейс через чат.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Видеоклип</h4>\r\n                <p><strong>Мультимедиа.</strong> Короткий видео-ролик по теме проекта. Может использоваться для объяснения принципов работы или презентации.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Мультимедийный продукт</h4>\r\n                <p><strong>Мультимедиа.</strong> Презентация, интерактивное приложение, объединяющее текст, графику, видео и звук.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Дизайн-макет</h4>\r\n                <p><strong>Дизайн.</strong> Макет приложения, сайта или печатного издания. Создаётся в Figma, Adobe XD и других инструментах.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Иллюстрация / серия иллюстраций</h4>\r\n                <p><strong>Дизайн.</strong> Художественные иллюстрации по теме проекта. Могут быть частью интерфейса или самостоятельным продуктом.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Макет</h4>\r\n                <p><strong>Прототипирование.</strong> Физический или цифровой макет объекта. Позволяет визуализировать концепцию.</p>\r\n            </div>\r\n            <div>\r\n                <h4>Модель</h4>\r\n                <p><strong>Моделирование.</strong> 3D-модель, математическая или концептуальная модель процесса или системы.</p>\r\n            </div>\r\n        </div>\r\n\r\n        <div>\r\n            <h4>Подсказки для выбора продукта</h4>\r\n            <div>\r\n                <div>\r\n                    <strong>Оконные приложения</strong><br>\r\n                    Выбирайте, если у вас есть опыт программирования (Python, C#, Java) и интерес к созданию десктопных программ.\r\n                </div>\r\n                <div>\r\n                    <strong>Веб-сайты</strong><br>\r\n                    Идеально для начинающих. Используйте HTML/CSS/JavaScript или конструкторы сайтов.\r\n                </div>\r\n                <div>\r\n                    <strong>Мобильные приложения</strong><br>\r\n                    Выбирайте, если вы хотите создавать приложения для смартфонов и знакомы с Kotlin/Java или React Native.\r\n                </div>\r\n                <div>\r\n                    <strong>Телеграм-боты</strong><br>\r\n                    Простые в разработке боты для Telegram на Python или JavaScript.\r\n                </div>\r\n                <div>\r\n                    <strong>Видеоклип</strong><br>\r\n                    Подойдёт, если вы умеете работать с видеоредакторами (Adobe Premiere, DaVinci Resolve) и хотите наглядно представить результаты.\r\n                </div>\r\n                <div>\r\n                    <strong>Мультимедийный продукт</strong><br>\r\n                    Для тех, кто владеет инструментами создания презентаций (PowerPoint, Canva) или интерактивных приложений.\r\n                </div>\r\n                <div>\r\n                    <strong>Дизайн-макет</strong><br>\r\n                    Если вы знакомы с Figma, Sketch или Adobe XD и хотите создать прототип интерфейса.\r\n                </div>\r\n                <div>\r\n                    <strong>Иллюстрация</strong><br>\r\n                    Выбирайте при наличии художественных навыков и опыта в Adobe Illustrator, Procreate или аналогичных программах.\r\n                </div>\r\n                <div>\r\n                    <strong>Макет (прототипирование)</strong><br>\r\n                    Подходит, если вы интересуетесь 3D-моделированием (Blender, Tinkercad) или созданием физических прототипов.\r\n                </div>\r\n                <div>\r\n                    <strong>Модель (моделирование)</strong><br>\r\n                    Для тех, кто хочет создать математическую, концептуальную или 3D-модель с использованием специализированного ПО.\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div>\r\n            <h4>Критерии выбора типа продукта</h4>\r\n            <ul>\r\n                <li><strong>Доступность инструментов:</strong> Есть ли у вас необходимое ПО и оборудование?</li>\r\n                <li><strong>Соответствие навыкам:</strong> Соответствует ли продукт вашему текущему уровню знаний?</li>\r\n                <li><strong>Временные рамки:</strong> Можете ли вы завершить продукт за сроки проекта?</li>\r\n                <li><strong>Практическая ценность:</strong> Будет ли продукт полезен для целевой аудитории?</li>\r\n                <li><strong>Соответствие теме:</strong> Естественно ли продукт вытекает из темы исследования?</li>\r\n                <li><strong>Обучающий потенциал:</strong> Поможет ли создание продукта развить новые навыки?</li>\r\n                <li><strong>Ресурсная обеспеченность:</strong> Есть ли доступ к необходимым данным, API, библиотекам?</li>\r\n                <li><strong>Возможность тестирования:</strong> Можете ли вы протестировать продукт на реальных пользователях?</li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>'
+    },
+    {
+        id: 2, section_number: 2,
+        title: 'Выбор темы проекта с учётом продукта',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Тема должна быть актуальной, интересной и посильной. Свяжите тему с выбранным форматом продукта: например, «Кибербезопасность подростков» → веб-сайт; «ЗОЖ студентов» → Telegram-бот.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Заполните: «Моя тема — …», «Связь темы с продуктом — …».</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 3, section_number: 3,
-                title: 'Обоснование актуальности',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 3, section_number: 3,
+        title: 'Обоснование актуальности',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Актуальность = почему это важно сейчас и кому это нужно. Опирайтесь на статистику, тренды и запросы общества.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Напишите 3–5 предложений: проблема, аудитория, польза продукта.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 4, section_number: 4,
-                title: 'Определение цели и задач',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 4, section_number: 4,
+        title: 'Определение цели и задач',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Цель — один измеримый результат. Задачи — 4–6 шагов: изучить → проанализировать → спроектировать → реализовать → протестировать.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Сформулируйте цель и 5 задач для своей темы.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 5, section_number: 5,
-                title: 'Объект и предмет исследования',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 5, section_number: 5,
+        title: 'Объект и предмет исследования',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Объект — широкая область; предмет — конкретный аспект внутри объекта. Предмет всегда уже объекта и связан с продуктом.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Заполните: «Объект — …», «Предмет — …», проверьте, что предмет уже объекта.</p>
 </div>
 </div>
 </div>`
-            }
-        ],
+    }
+],
 
-        // ============================================================
-        // 2-2-2
-        // ============================================================
-        '2-2-2': [
-            {
-                id: 6, section_number: 1,
-                title: 'Этапы проекта, план и сроки',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+'2-2-2': [
+    {
+        id: 6, section_number: 1,
+        title: 'Этапы проекта, план и сроки',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Проект выполняется поэтапно. Выделяют <strong>подготовительный, исследовательский и заключительный</strong> этапы. Для каждого этапа определяют содержание работы, инструменты и сроки.</p>
 <p>План-график удобно оформлять в виде таблицы. <strong>Контрольные точки</strong> — даты, к которым должны быть готовы промежуточные результаты. Практическая значимость показывает, кто и как сможет использовать продукт.</p>
-<div style="text-align:center; margin: 20px 0;">
-<svg viewBox="0 0 640 140" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto; font-family:Arial, sans-serif;">
+<div>
+<svg viewBox="0 0 640 140" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="640" height="140" fill="#ffffff" stroke="#007bff" stroke-width="2" rx="8"/>
 <text x="320" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#007bff">Этапы проекта</text>
 <rect x="20" y="50" width="170" height="50" fill="#e3f2fd" stroke="#2196f3" rx="8"/>
@@ -253,25 +247,25 @@ const MOCK = {
 </svg>
 </div>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Составьте таблицу этапов (этап / инструменты / срок) и опишите 2–3 группы пользователей вашего продукта.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 7, section_number: 2,
-                title: 'Шаблон для ВВЕДЕНИЯ',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 7, section_number: 2,
+        title: 'Шаблон для ВВЕДЕНИЯ',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Введение — первая содержательная часть пояснительной записки. Оно раскрывает замысел проекта и содержит обязательные элементы: <strong>актуальность, цель, задачи, объект, предмет, практическую значимость и план</strong>.</p>
-<div style="background:#fff;border:1px solid #d0e3ff;border-radius:8px;padding:18px;margin-top:15px;">
-<p style="margin:0 0 8px 0;font-weight:bold;color:#0056b3;">Пример готового введения (тема «Разработка веб-сайта по кибербезопасности для подростков»)</p>
+<div>
+<p>Пример готового введения (тема «Разработка веб-сайта по кибербезопасности для подростков»)</p>
 <p><strong>Актуальность.</strong> Подростки проводят в социальных сетях значительную часть времени, но часто не знают, как защитить личные данные и распознать мошенников. Существующие ресурсы ориентированы на взрослых и не учитывают особенности подростковой аудитории.</p>
 <p><strong>Цель проекта:</strong> разработать интерактивный веб-сайт, который в доступной форме объясняет правила безопасного поведения в социальных сетях.</p>
 <p><strong>Задачи проекта:</strong> 1) изучить основные угрозы; 2) проанализировать существующие аналоги; 3) спроектировать структуру сайта; 4) реализовать сайт с интерактивными тестами; 5) протестировать и собрать обратную связь.</p>
@@ -281,128 +275,122 @@ const MOCK = {
 <p><strong>План реализации:</strong> 1) анализ (1 нед.); 2) проектирование (1 нед.); 3) разработка (2 нед.); 4) тестирование (1 нед.); 5) оформление (1 нед.).</p>
 </div>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Заполните шаблон введения по своему проекту, опираясь на приведённый пример.</p>
 </div>
 </div>
 </div>`
-            }
-        ],
+    }
+],
 
-        // ============================================================
-        // 2-2-3
-        // ============================================================
-        '2-2-3': [
-            {
-                id: 8, section_number: 1,
-                title: 'Обоснование выбора и анализ предметной области',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+'2-2-3': [
+    {
+        id: 8, section_number: 1,
+        title: 'Обоснование выбора и анализ предметной области',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p><strong>Обоснование выбора темы</strong> — это ответ на вопрос, почему тема актуальна именно сейчас. <strong>Анализ предметной области</strong> включает основные понятия, участников процесса, современные тренды и проблемные точки.</p>
 <p>Объект исследования — широкая область; предмет — конкретный аспект внутри неё. Целевая аудитория — портрет пользователя продукта.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Напишите обоснование и анализ для своего продукта по 5 пунктам: актуальность, проблема, аудитория, понятия, тренды.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 9, section_number: 2,
-                title: 'Информационные ресурсы',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 9, section_number: 2,
+        title: 'Информационные ресурсы',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Для проекта необходимо уметь находить и оценивать информацию. Источники бывают печатными и электронными. Основные виды: библиотеки, базы данных, интернет-ресурсы.</p>
 <p>При работе с источниками важно проверять их <strong>достоверность</strong> и <strong>актуальность</strong>.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Составьте список из 3–5 информационных ресурсов по теме вашего проекта.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 10, section_number: 3,
-                title: 'Сбор материала',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 10, section_number: 3,
+        title: 'Сбор материала',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Собранный материал нужно систематизировать: сгруппировать по разделам, выделить главное, отбросить лишнее. Удобно вести записи в виде таблиц, схем или карточек с указанием источника.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Соберите и систематизируйте материал по теме проекта, оформив его в виде таблицы или схемы.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 11, section_number: 4,
-                title: 'Проверка достоверности информации',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 11, section_number: 4,
+        title: 'Проверка достоверности информации',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Не всякая информация в интернете правдива. Признаки недостоверных сведений: отсутствие автора и даты, «кричащий» заголовок, ошибки, отсутствие ссылок на первоисточники.</p>
 <p>Способы проверки: перекрёстная проверка по нескольким источникам, поиск первоисточника, использование сервисов фактчекинга.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Проверьте одну найденную вами новость по 2–3 альтернативным источникам и запишите вывод о её достоверности.</p>
 </div>
 </div>
 </div>`
-            }
-        ],
+    }
+],
 
-        // ============================================================
-        // 2-2-4
-        // ============================================================
-        '2-2-4': [
-            {
-                id: 12, section_number: 1,
-                title: 'Сравнительный анализ существующих решений',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+'2-2-4': [
+    {
+        id: 12, section_number: 1,
+        title: 'Сравнительный анализ существующих решений',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p><strong>Критерии сравнения:</strong> целевая аудитория, функциональность и контент, интерактивность, дизайн/UX, достоверность, доступность.</p>
 <p>Пример анализа веб-сайтов по кибербезопасности: «Цифровая грамотность», «Безопасность дети.рф», «Твой безопасный интернет». Выводы: мало интерактива, слабая адаптация под мобильные устройства.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Найдите 3–5 аналогов, заполните таблицу сравнения и сформулируйте, что вы сделаете лучше.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 13, section_number: 2,
-                title: 'Выбор инструментов',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 13, section_number: 2,
+        title: 'Выбор инструментов',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Выбор инструментов зависит от типа продукта:</p>
 <ul>
 <li>Веб-сайт: HTML/CSS/JS, Bootstrap, React/Vue, Django/Laravel, MySQL/PostgreSQL, WordPress</li>
@@ -412,22 +400,22 @@ const MOCK = {
 <li>Мобильное приложение: Flutter, React Native, MIT App Inventor</li>
 </ul>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Обоснуйте выбор 2–3 инструментов для своего продукта (доступность, функциональность, сроки).</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 14, section_number: 3,
-                title: 'Создание продукта: пошаговое руководство',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 14, section_number: 3,
+        title: 'Создание продукта: пошаговое руководство',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Пошаговые руководства по созданию продукта (6 шагов):</p>
 <ul>
 <li><strong>Веб-сайт:</strong> цель/структура → прототип → HTML → CSS → JS → публикация</li>
@@ -436,26 +424,26 @@ const MOCK = {
 <li><strong>Telegram-бот:</strong> BotFather → окружение → базовый код → функционал → обработка ошибок → деплой</li>
 </ul>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Выполните шаги для своего продукта и приложите скриншоты/ссылки на каждом этапе.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 15, section_number: 4,
-                title: 'Шаблоны лучшей работы',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 15, section_number: 4,
+        title: 'Шаблоны лучшей работы',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p><strong>Критерии оценки лучшей работы:</strong> функциональность, качество исполнения, дизайн/UX, документация, оригинальность.</p>
 <p>Структура проекта (пример, веб-сайт): index.html, css/style.css, js/main.js, images/, README.md.</p>
-<div style="text-align:center; margin: 15px 0;">
-<svg viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto; font-family:Arial, sans-serif;">
+<div>
+<svg viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg">
 <rect x="0" y="0" width="420" height="120" fill="#ffffff" stroke="#007bff" stroke-width="2" rx="8"/>
 <text x="210" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#007bff">Структура проекта</text>
 <rect x="20" y="38" width="90" height="30" fill="#e3f2fd" stroke="#2196f3" rx="4"/>
@@ -471,92 +459,78 @@ const MOCK = {
 </svg>
 </div>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Оформите свою работу по шаблону (README + структура папок + скриншоты/ссылки).</p>
 </div>
 </div>
 </div>`
-            }
-        ],
+    }
+],
 
-        // ============================================================
-        // 2-2-5
-        // ============================================================
-        '2-2-5': [
-            {
-                id: 16, section_number: 1,
-                title: 'Реализация проекта',
-                content: `
-<div class="step-content active" id="step-2">
+'2-2-5': [
+    {
+        id: 16, section_number: 1,
+        title: 'Реализация проекта',
+        content: `
+<div id="step-2">
 
-    <!-- Заголовок -->
-    <h4 style="margin-top: 30px;"><i class="fas fa-cubes"></i> Примеры реализации в зависимости от продукта</h4>
-    <p style="margin-bottom: 24px; color: #3c5777;">
+    <h4>Примеры реализации в зависимости от продукта</h4>
+    <p>
         Для каждого типа продукта — рекомендуемый стек, пошаговое решение и фрагмент логики,
         который напрямую реализует предмет исследования.
     </p>
 
-    <!-- Сетка карточек -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+    <div>
 
-        <!-- 1. Оконное приложение -->
-        <div style="background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 8px 20px -6px rgba(0,40,80,0.08); border: 1px solid #dfeaf5;">
-            <h4 style="display: flex; align-items: center; gap: 10px; color: #103a62; margin-bottom: 6px;">
-                <i class="fas fa-desktop" style="color: #2a7de1;"></i> Оконное приложение
-            </h4>
-            <p style="color: #567190; font-size: 0.88rem; margin-bottom: 12px;">Python + Tkinter / PyQt</p>
-            <ol style="padding-left: 20px; font-size: 0.9rem; color: #2e4057; line-height: 1.7;">
+        <div>
+            <h4>Оконное приложение</h4>
+            <p>Python + Tkinter / PyQt</p>
+            <ol>
                 <li>Установить Python и библиотеки: <code>pip install pandas matplotlib</code></li>
                 <li>Создать окно Tkinter с Canvas для графика</li>
                 <li>Загрузить CSV с оценками студентов</li>
                 <li>Сгруппировать по группам и посчитать средний балл</li>
                 <li>Построить график через Matplotlib и встроить в Canvas</li>
             </ol>
-            <p style="font-size: 0.88rem; font-weight: 600; color: #1e4663; margin: 14px 0 4px;"><i class="fas fa-code" style="color: #2a7de1;"></i> Фрагмент логики:</p>
-            <pre style="background: #f0f7ff; padding: 10px 12px; border-radius: 10px; font-size: 0.78rem; overflow-x: auto; margin: 0; color: #0b2b4a;">df = pd.read_csv("students.csv")
+            <p>Фрагмент логики:</p>
+            <pre>df = pd.read_csv("students.csv")
 avg = df.groupby("group")["grade"].mean()
 ax.plot(avg.index, avg.values)
 canvas.draw()</pre>
         </div>
 
-        <!-- 2. Мобильное приложение -->
-        <div style="background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 8px 20px -6px rgba(0,40,80,0.08); border: 1px solid #dfeaf5;">
-            <h4 style="display: flex; align-items: center; gap: 10px; color: #103a62; margin-bottom: 6px;">
-                <i class="fas fa-mobile-alt" style="color: #28a745;"></i> Мобильное приложение
-            </h4>
-            <p style="color: #567190; font-size: 0.88rem; margin-bottom: 12px;">React Native / Flutter</p>
-            <ol style="padding-left: 20px; font-size: 0.9rem; color: #2e4057; line-height: 1.7;">
+        <div>
+            <h4>Мобильное приложение</h4>
+            <p>React Native / Flutter</p>
+            <ol>
                 <li>Инициализировать проект: <code>npx create-expo-app</code> или <code>flutter create</code></li>
                 <li>Подключить шагомер (Expo Pedometer / Flutter pedometer)</li>
                 <li>Создать экран с прогрессом и очками</li>
                 <li>Настроить push-уведомления (Expo Notifications)</li>
                 <li>Добавить геймификацию: очки за каждые 100 шагов</li>
             </ol>
-            <p style="font-size: 0.88rem; font-weight: 600; color: #1e4663; margin: 14px 0 4px;"><i class="fas fa-code" style="color: #28a745;"></i> Фрагмент логики:</p>
-            <pre style="background: #f0f7ff; padding: 10px 12px; border-radius: 10px; font-size: 0.78rem; overflow-x: auto; margin: 0; color: #0b2b4a;">const addPoints = (steps) => {
+            <p>Фрагмент логики:</p>
+            <pre>const addPoints = (steps) => {
   const points = Math.floor(steps / 100);
   setUser({ ...user, points: user.points + points });
 };</pre>
         </div>
 
-        <!-- 3. Телеграм-бот -->
-        <div style="background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 8px 20px -6px rgba(0,40,80,0.08); border: 1px solid #dfeaf5;">
-            <h4 style="display: flex; align-items: center; gap: 10px; color: #103a62; margin-bottom: 6px;">
-                <i class="fab fa-telegram" style="color: #2a7de1;"></i> Телеграм-бот
-            </h4>
-            <p style="color: #567190; font-size: 0.88rem; margin-bottom: 12px;">Python + aiogram / pyTelegramBotAPI</p>
-            <ol style="padding-left: 20px; font-size: 0.9rem; color: #2e4057; line-height: 1.7;">
+        <div>
+            <h4>Телеграм-бот</h4>
+            <p>Python + aiogram / pyTelegramBotAPI</p>
+            <ol>
                 <li>Получить токен у @BotFather</li>
                 <li>Установить библиотеку: <code>pip install pyTelegramBotAPI</code></li>
                 <li>Создать обработчики команд <code>/start</code> и <code>/test</code></li>
                 <li>Сформировать Inline-клавиатуру с вариантами ответов</li>
                 <li>Сохранять результаты в SQLite</li>
             </ol>
-            <p style="font-size: 0.88rem; font-weight: 600; color: #1e4663; margin: 14px 0 4px;"><i class="fas fa-code" style="color: #2a7de1;"></i> Фрагмент логики:</p>
-            <pre style="background: #f0f7ff; padding: 10px 12px; border-radius: 10px; font-size: 0.78rem; overflow-x: auto; margin: 0; color: #0b2b4a;">@bot.message_handler(commands=['test'])
+            <p>Фрагмент логики:</p>
+            <pre>@bot.message_handler(commands=['test'])
 def send_quiz(message):
     markup = InlineKeyboardMarkup()
     for opt in options:
@@ -564,101 +538,86 @@ def send_quiz(message):
     bot.send_message(message.chat.id, "Вопрос...", reply_markup=markup)</pre>
         </div>
 
-        <!-- 4. Интерактивный веб-сайт -->
-        <div style="background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 8px 20px -6px rgba(0,40,80,0.08); border: 1px solid #dfeaf5;">
-            <h4 style="display: flex; align-items: center; gap: 10px; color: #103a62; margin-bottom: 6px;">
-                <i class="fas fa-globe" style="color: #e6a017;"></i> Интерактивный веб-сайт
-            </h4>
-            <p style="color: #567190; font-size: 0.88rem; margin-bottom: 12px;">HTML + Leaflet / D3.js</p>
-            <ol style="padding-left: 20px; font-size: 0.9rem; color: #2e4057; line-height: 1.7;">
+        <div>
+            <h4>Интерактивный веб-сайт</h4>
+            <p>HTML + Leaflet / D3.js</p>
+            <ol>
                 <li>Подключить Leaflet через CDN</li>
                 <li>Инициализировать карту с центром на городе</li>
                 <li>Загрузить GeoJSON с точками загрязнений</li>
                 <li>Отобразить точки как circleMarker с цветом по уровню</li>
                 <li>Добавить фильтрацию по районам</li>
             </ol>
-            <p style="font-size: 0.88rem; font-weight: 600; color: #1e4663; margin: 14px 0 4px;"><i class="fas fa-code" style="color: #e6a017;"></i> Фрагмент логики:</p>
-            <pre style="background: #f0f7ff; padding: 10px 12px; border-radius: 10px; font-size: 0.78rem; overflow-x: auto; margin: 0; color: #0b2b4a;">L.geoJSON(data, {
+            <p>Фрагмент логики:</p>
+            <pre>L.geoJSON(data, {
   pointToLayer: (f, latlng) =>
     L.circleMarker(latlng, { radius: 8 })
 }).addTo(map);</pre>
         </div>
 
-        <!-- 5. Мультимедийная презентация -->
-        <div style="background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 8px 20px -6px rgba(0,40,80,0.08); border: 1px solid #dfeaf5;">
-            <h4 style="display: flex; align-items: center; gap: 10px; color: #103a62; margin-bottom: 6px;">
-                <i class="fas fa-play-circle" style="color: #8b5cf6;"></i> Мультимедийная презентация
-            </h4>
-            <p style="color: #567190; font-size: 0.88rem; margin-bottom: 12px;">HTML/CSS + GSAP / PowerPoint</p>
-            <ol style="padding-left: 20px; font-size: 0.9rem; color: #2e4057; line-height: 1.7;">
+        <div>
+            <h4>Мультимедийная презентация</h4>
+            <p>HTML/CSS + GSAP / PowerPoint</p>
+            <ol>
                 <li>Создать HTML-структуру с секциями таймлайна</li>
                 <li>Подключить GSAP и ScrollTrigger через CDN</li>
                 <li>Добавить видео и аудио через <code>&lt;video&gt;</code> и <code>&lt;audio&gt;</code></li>
                 <li>Настроить анимацию появления элементов при скролле</li>
                 <li>Добавить навигацию по клику на этапы</li>
             </ol>
-            <p style="font-size: 0.88rem; font-weight: 600; color: #1e4663; margin: 14px 0 4px;"><i class="fas fa-code" style="color: #8b5cf6;"></i> Фрагмент логики:</p>
-            <pre style="background: #f0f7ff; padding: 10px 12px; border-radius: 10px; font-size: 0.78rem; overflow-x: auto; margin: 0; color: #0b2b4a;">gsap.to(".timeline-item", {
+            <p>Фрагмент логики:</p>
+            <pre>gsap.to(".timeline-item", {
   scrollTrigger: { trigger: ".timeline" },
   x: 200, opacity: 1
 });</pre>
         </div>
 
-        <!-- 6. Веб-приложение (SPA) -->
-        <div style="background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 8px 20px -6px rgba(0,40,80,0.08); border: 1px solid #dfeaf5;">
-            <h4 style="display: flex; align-items: center; gap: 10px; color: #103a62; margin-bottom: 6px;">
-                <i class="fas fa-laptop-code" style="color: #dc3545;"></i> Веб-приложение (SPA)
-            </h4>
-            <p style="color: #567190; font-size: 0.88rem; margin-bottom: 12px;">React + Chart.js</p>
-            <ol style="padding-left: 20px; font-size: 0.9rem; color: #2e4057; line-height: 1.7;">
+        <div>
+            <h4>Веб-приложение (SPA)</h4>
+            <p>React + Chart.js</p>
+            <ol>
                 <li>Создать React-проект: <code>npx create-react-app</code></li>
                 <li>Установить Chart.js: <code>npm install chart.js react-chartjs-2</code></li>
                 <li>Создать компонент дашборда с графиком прогресса</li>
                 <li>Добавить систему уровней и бейджей</li>
                 <li>Сохранять прогресс в localStorage</li>
             </ol>
-            <p style="font-size: 0.88rem; font-weight: 600; color: #1e4663; margin: 14px 0 4px;"><i class="fas fa-code" style="color: #dc3545;"></i> Фрагмент логики:</p>
-            <pre style="background: #f0f7ff; padding: 10px 12px; border-radius: 10px; font-size: 0.78rem; overflow-x: auto; margin: 0; color: #0b2b4a;">&lt;Line data={{
+            <p>Фрагмент логики:</p>
+            <pre>&lt;Line data={{
   labels: weeks,
   datasets: [{ data: progress }]
 }} /&gt;</pre>
         </div>
 
-        <!-- 7. Игровое приложение (Unity) -->
-        <div style="background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 8px 20px -6px rgba(0,40,80,0.08); border: 1px solid #dfeaf5;">
-            <h4 style="display: flex; align-items: center; gap: 10px; color: #103a62; margin-bottom: 6px;">
-                <i class="fas fa-gamepad" style="color: #1e8b4c;"></i> Игровое приложение (Unity)
-            </h4>
-            <p style="color: #567190; font-size: 0.88rem; margin-bottom: 12px;">Unity (C#) + 2D/3D</p>
-            <ol style="padding-left: 20px; font-size: 0.9rem; color: #2e4057; line-height: 1.7;">
+        <div>
+            <h4>Игровое приложение (Unity)</h4>
+            <p>Unity (C#) + 2D/3D</p>
+            <ol>
                 <li>Создать 2D-сцену с дорогой и знаками</li>
                 <li>Добавить персонажа и управление</li>
                 <li>Реализовать систему очков и жизней</li>
                 <li>Добавить проверку выбора знака</li>
                 <li>Настроить UI с отображением счёта</li>
             </ol>
-            <p style="font-size: 0.88rem; font-weight: 600; color: #1e4663; margin: 14px 0 4px;"><i class="fas fa-code" style="color: #1e8b4c;"></i> Фрагмент логики:</p>
-            <pre style="background: #f0f7ff; padding: 10px 12px; border-radius: 10px; font-size: 0.78rem; overflow-x: auto; margin: 0; color: #0b2b4a;">void OnSignClick(Sign sign) {
+            <p>Фрагмент логики:</p>
+            <pre>void OnSignClick(Sign sign) {
   if (sign.id == targetSign) score += 10;
   else lives--;
 }</pre>
         </div>
 
-        <!-- 8. Аналитический отчёт -->
-        <div style="background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 8px 20px -6px rgba(0,40,80,0.08); border: 1px solid #dfeaf5;">
-            <h4 style="display: flex; align-items: center; gap: 10px; color: #103a62; margin-bottom: 6px;">
-                <i class="fas fa-chart-line" style="color: #6b46c1;"></i> Аналитический отчёт
-            </h4>
-            <p style="color: #567190; font-size: 0.88rem; margin-bottom: 12px;">Jupyter + Pandas + Matplotlib</p>
-            <ol style="padding-left: 20px; font-size: 0.9rem; color: #2e4057; line-height: 1.7;">
+        <div>
+            <h4>Аналитический отчёт</h4>
+            <p>Jupyter + Pandas + Matplotlib</p>
+            <ol>
                 <li>Установить библиотеки: <code>pip install pandas matplotlib</code></li>
                 <li>Загрузить и очистить данные о продажах</li>
                 <li>Построить сводную таблицу (pivot)</li>
                 <li>Создать гистограмму продаж по месяцам и категориям</li>
                 <li>Экспортировать отчёт в HTML или PDF</li>
             </ol>
-            <p style="font-size: 0.88rem; font-weight: 600; color: #1e4663; margin: 14px 0 4px;"><i class="fas fa-code" style="color: #6b46c1;"></i> Фрагмент логики:</p>
-            <pre style="background: #f0f7ff; padding: 10px 12px; border-radius: 10px; font-size: 0.78rem; overflow-x: auto; margin: 0; color: #0b2b4a;">pivot = df.pivot_table(
+            <p>Фрагмент логики:</p>
+            <pre>pivot = df.pivot_table(
   index="month", columns="category",
   values="sales", aggfunc="sum")
 pivot.plot(kind="bar", stacked=True)</pre>
@@ -666,225 +625,216 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
     </div>
 </div>`
-            }
-        ],
+    }
+],
 
-        // ============================================================
-        // 2-2-6
-        // ============================================================
-        '2-2-6': [
-            {
-                id: 20, section_number: 1,
-                title: 'Создание продукта: подготовка',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+'2-2-6': [
+    {
+        id: 20, section_number: 1,
+        title: 'Создание продукта: подготовка',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>На этапе реализации важно перейти от теории к практике: определить инструменты и материалы, составить последовательность действий.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Составьте список инструментов и материалов, необходимых для реализации вашего проекта. Опишите первый практический шаг.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 21, section_number: 2,
-                title: 'Создание продукта: основной этап',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 21, section_number: 2,
+        title: 'Создание продукта: основной этап',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Основной этап — создание продукта проекта. Работайте по плану, фиксируйте промежуточные результаты и возникшие трудности. Ведите дневник проекта.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Опишите, что уже сделано по проекту, и составьте план на следующее занятие.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 22, section_number: 3,
-                title: 'Создание продукта: доработка',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 22, section_number: 3,
+        title: 'Создание продукта: доработка',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Проверьте соответствие результата поставленной цели и задачам. Соберите обратную связь от одногруппников или руководителя и внесите правки.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Запишите 3 замечания к вашему проекту и способы их устранения.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 23, section_number: 4,
-                title: 'Создание продукта: завершение',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 23, section_number: 4,
+        title: 'Создание продукта: завершение',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Завершающий этап — собрать все части продукта воедино, проверить работоспособность и подготовить материалы к представлению.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Проверьте готовность продукта по чек-листу: цель достигнута, задачи выполнены, продукт работает.</p>
 </div>
 </div>
 </div>`
-            }
-        ],
+    }
+],
 
-        // ============================================================
-        // 2-2-7
-        // ============================================================
-        '2-2-7': [
-            {
-                id: 24, section_number: 1,
-                title: 'Критерии оценки лучшей работы',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+'2-2-7': [
+    {
+        id: 24, section_number: 1,
+        title: 'Критерии оценки лучшей работы',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p><strong>Критерии оценки лучшей работы:</strong> функциональность, качество исполнения, дизайн/UX, документация, оригинальность.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Оцените свой проект по каждому критерию (1–5 баллов) и обоснуйте оценки.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 25, section_number: 2,
-                title: 'Структура проекта',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 25, section_number: 2,
+        title: 'Структура проекта',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Структура проекта (пример, веб-сайт): index.html, css/style.css, js/main.js, images/, README.md.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Составьте структуру папок своего проекта и приложите скриншот.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 26, section_number: 3,
-                title: 'Оформление README',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 26, section_number: 3,
+        title: 'Оформление README',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>README — это описание проекта. Оно содержит название, описание, технологии, функциональность и ссылку на демо.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Напишите README для своего проекта по предложенному шаблону.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 27, section_number: 4,
-                title: 'Публикация и презентация работы',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 27, section_number: 4,
+        title: 'Публикация и презентация работы',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Публикация проекта позволяет показать результат другим. Для веб-проектов используют GitHub Pages и Netlify, для ботов — хостинг, для видео — YouTube/RuTube.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Опубликуйте свой проект и приложите ссылку.</p>
 </div>
 </div>
 </div>`
-            }
-        ],
+    }
+],
 
-        // ============================================================
-        // 2-2-8
-        // ============================================================
-        '2-2-8': [
-            {
-                id: 28, section_number: 1,
-                title: 'Структура презентации для защиты проекта',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+'2-2-8': [
+    {
+        id: 28, section_number: 1,
+        title: 'Структура презентации для защиты проекта',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p><strong>Структура (10–15 слайдов):</strong> титульный, актуальность, цель и задачи, объект и предмет, гипотеза, этапы, практическая значимость, выводы, перспективы, источники, «Спасибо за внимание».</p>
 <p><strong>Требования:</strong> единый стиль, минимум текста, визуализация, шрифт ≥24 pt, защита 5–7 минут.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Создайте презентацию по шаблону для своего продукта (укажите слайды 2–12 с содержанием).</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 29, section_number: 2,
-                title: 'Оформление слайдов',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 29, section_number: 2,
+        title: 'Оформление слайдов',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Единый стиль презентации: цвета (2–3 основных), шрифты (не более 2), выравнивание, отступы. Визуализация: схемы, скриншоты, диаграммы.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Оформите 3 слайда в едином стиле и приложите скриншоты.</p>
 </div>
 </div>
 </div>`
-            },
-            {
-                id: 30, section_number: 3,
-                title: 'Репетиция защиты',
-                content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
+    },
+    {
+        id: 30, section_number: 3,
+        title: 'Репетиция защиты',
+        content: `
+<div>
+<div>
+<h3>Изучаем урок</h3>
 <p>Предзащита — репетиция финального выступления (5–7 минут). Подготовьте ответы на возможные вопросы комиссии.</p>
 </div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
+<div>
+<h3>Решаем вместе</h3>
+<div>
+<h4>Задание</h4>
 <p>Проведите репетицию и запишите 3 возможных вопроса комиссии с ответами.</p>
 </div>
 </div>
 </div>`
-            }
-        ],
+    }
+],    
     '3-5-1': [
         { id: 1, section_number: 1, title: 'Понятия аппаратных средств ЭВМ и архитектуры', content: '...' },
         { id: 2, section_number: 2, title: 'История развития ВТ: Домеханический и механический периоды', content: '...' },
