@@ -258,21 +258,63 @@
             <div id="teacherSubjectsList" class="subjects-list" style="margin: 10px 0;"></div>
         </div>
 
-        <div id="topicDescriptionSection" style="display: none;" class="section">
-            <div id="topicDescription" style="margin-top: 5px; padding: 15px;
-                                              background: #f5f5f5; border-radius: 5px;">
-                <h4 style="margin-bottom: 10px; color: #333;">Описание темы</h4>
-                <p id="descriptionText" style="color: #666;">Описание отсутствует</p>
-            </div>
-        </div>
+<!-- ============ НОВЫЙ БЛОК: Темы ============ -->
+<div id="js-topics-wrap" class="section hidden" aria-live="polite">
+    <h2 style="margin-bottom: 10px;">Темы урока</h2>
+    <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите тему</p>
+    <div id="js-topics" class="topics-list"></div>
 
-        <div class="section" style="margin-bottom: 10px;">
-            <h2 style="margin-bottom: 10px;">Материалы урока</h2>
-            <div id="lessonMaterials">
-                <p class="empty-message">Выберите урок для просмотра материалов</p>
-            </div>
-        </div>
+    <div id="js-topic-desc" class="topic-description hidden">
+        <h4>Описание темы</h4>
+        <p id="js-topic-desc-text">Описание отсутствует</p>
+    </div>
+</div>
 
+<!-- ============ НОВЫЙ БЛОК: Разделы темы ============ -->
+<section id="js-sections-wrap" class="section hidden" aria-live="polite">
+    <h2 style="margin-bottom: 15px;"><i class="fas fa-list-ol"></i> Разделы темы</h2>
+    <div id="js-sections" style="text-align: left;"></div>
+</section>
+
+<!-- ============ НОВЫЙ БЛОК: Материалы (аккордеон) ============ -->
+<section id="js-materials-wrap" class="section accordion-section hidden">
+    <h2 class="accordion-header" data-toggle="section" data-target="#js-materials-wrap" aria-expanded="false">
+        <span><i class="fas fa-folder-open"></i> Материалы урока</span>
+        <i class="fas fa-chevron-down accordion-icon"></i>
+    </h2>
+    <div class="accordion-body">
+        <div id="lessonMaterials" aria-live="polite">
+            <p class="empty-message">Выберите тему для просмотра материалов</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============ НОВЫЙ БЛОК: Задания для урока ============ -->
+<section id="js-lesson-tasks-wrap" class="section accordion-section hidden">
+    <h2 class="accordion-header" data-toggle="section" data-target="#js-lesson-tasks-wrap" aria-expanded="false">
+        <span><i class="fas fa-tasks"></i> Задания для урока</span>
+        <i class="fas fa-chevron-down accordion-icon"></i>
+    </h2>
+    <div class="accordion-body">
+        <p style="font-size: 0.9em; margin-bottom: 10px; text-align: center; color: #666;">
+            Случайные задания по выбранной теме
+        </p>
+        <div id="js-lesson-tasks">
+            <p class="empty-message">Выберите тему для просмотра заданий</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============ НОВЫЙ БЛОК: Полезные сайты ============ -->
+<section id="js-websites-wrap" class="section accordion-section hidden" aria-live="polite">
+    <h2 class="accordion-header" data-toggle="section" data-target="#js-websites-wrap" aria-expanded="false">
+        <span><i class="fas fa-globe"></i> Полезные сайты</span>
+        <i class="fas fa-chevron-down accordion-icon"></i>
+    </h2>
+    <div class="accordion-body">
+        <div id="js-websites"></div>
+    </div>
+</section>
     </div><!-- /appContent -->
 </div>
 
@@ -330,6 +372,19 @@ function mockAjax(params) {
     }
     if (action === 'get_materials') {
         return MOCK.materials?.[params.topic_id] || [];
+    }
+
+          if (action === 'get_topics') {
+        return MOCK.topics?.[params.subject_id] || [];
+    }
+    if (action === 'get_sections') {
+        return MOCK.sections?.[params.topic_id] || [];
+    }
+    if (action === 'get_random_ai_tasks') {
+        return { tasks: MOCK.aiTasks?.[params.topic_id] || [] };
+    }
+    if (action === 'get_websites') {
+        return MOCK.websites?.[params.topic_id] || [];
     }
     return { error: 'Неизвестный AJAX-запрос' };
 }
