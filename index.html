@@ -68,12 +68,14 @@
     .topics-list, .teachers-list, .courses-list, .subjects-list {
         display: flex; flex-wrap: wrap; justify-content: center; }
 
+    /* 🔽 СЕКЦИЯ УРОКОВ — центрируем содержимое по горизонтали */
     #teacherSubjectsContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
+    /* 🔽 Сетка уроков: 6 в ряд */
     #teacherSubjectsList {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
@@ -90,6 +92,7 @@
         box-sizing: border-box;
     }
 
+    /* 🔽 Когда выбран один урок — центрируем его в одиночку */
     #teacherSubjectsList.single-active {
         display: flex;
         justify-content: center;
@@ -106,164 +109,6 @@
 
     .external-link { color: #0515f0; text-decoration: none; font-size: 14px;
                      margin-top: 15px; padding: 10px; }
-
-    /* ============ НОВЫЕ БЛОКИ ИЗ PHP ============ */
-
-    /* Описание темы */
-    .topic-description {
-        background: #fff3e0;
-        padding: 15px;
-        border-radius: 8px;
-        margin: 10px 0;
-        border-left: 4px solid #FF9800;
-        text-align: center;
-    }
-    .topic-description h4 {
-        color: #E65100;
-        margin-bottom: 8px;
-        font-size: 1.1rem;
-    }
-    .topic-description p {
-        color: #666;
-        font-size: 1rem;
-    }
-
-    /* Аккордеон (общий) */
-    .accordion-section { padding: 0; overflow: hidden; }
-    .accordion-header {
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px;
-        background: #f8f9fa;
-        transition: background 0.3s ease;
-        user-select: none;
-        font-size: 1.1rem;
-        color: #1eb300;
-        text-align: left;
-    }
-    .accordion-header:hover { background: #e9ecef; }
-    .accordion-header span { display: flex; align-items: center; gap: 8px; }
-    .accordion-icon { transition: transform 0.3s ease; }
-    .accordion-header[aria-expanded="true"] .accordion-icon { transform: rotate(180deg); }
-
-    .accordion-body {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-        padding: 0 15px;
-    }
-    .accordion-body.is-open {
-        max-height: 3000px;
-        padding: 15px;
-    }
-
-    /* Разделы темы (вложенный аккордеон) */
-    .accordion__item {
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        overflow: hidden;
-        text-align: left;
-    }
-    .accordion__toggle {
-        width: 100%;
-        padding: 12px 15px;
-        background: #f8f9fa;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1rem;
-        transition: background 0.3s ease;
-        text-align: left;
-        color: #333;
-    }
-    .accordion__toggle:hover { background: #e9ecef; }
-    .accordion__icon { transition: transform 0.3s ease; }
-    .accordion__toggle[aria-expanded="true"] .accordion__icon { transform: rotate(180deg); }
-    .accordion__body {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-        padding: 0 15px;
-        text-align: left;
-    }
-    .accordion__body.is-open {
-        max-height: 2000px;
-        padding: 15px;
-    }
-    .accordion__body p { margin-bottom: 8px; color: #555; }
-
-    /* Задания для урока */
-    .lesson-task-item {
-        background: #f8f9fa;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 10px;
-        transition: all 0.3s ease;
-        text-align: left;
-    }
-    .lesson-task-item:hover {
-        transform: translateX(5px);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .lesson-task-item__row {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    .lesson-task-item__num {
-        background: #4CAF50;
-        color: white;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        flex-shrink: 0;
-    }
-    .lesson-task-item__title {
-        margin: 0 0 5px 0;
-        color: #333;
-        font-size: 1rem;
-    }
-    .lesson-task-item__desc {
-        margin: 0;
-        color: #666;
-        font-size: 0.95rem;
-    }
-
-    /* Полезные сайты */
-    .website-item {
-        margin-bottom: 10px;
-        text-align: center;
-    }
-    .website-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 18px;
-        background: #FF9800;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: all .3s;
-        text-decoration: none;
-    }
-    .website-button:hover { background: #F57C00; transform: translateY(-2px); }
-    .website-description {
-        color: #666;
-        font-size: 0.85rem;
-        margin: 5px 0 0;
-    }
 
     @media (max-width: 768px) {
         .container { border-radius: 0; box-shadow: none; }
@@ -286,15 +131,13 @@
 
     <div id="appContent" class="hidden">
 
-        <!-- Образовательные учреждения -->
         <div class="section" style="margin-bottom: 1px;">
             <p style="font-size: 0.9em; margin-bottom: 10px;"> </p>
             <div class="educational-buttons" id="educationalButtons"></div>
         </div>
 
-        <!-- Преподаватели / Курсы -->
         <div id="teachersSection" class="section hidden" style="margin-bottom: 1px;">
-            <h2 style="margin-bottom: 10px;">Курсы / Классы</h2>
+            <h2 style="margin-bottom: 10px;">Курсы / Классы </h2>
             <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите курс / класс</p>
             <div id="allTeachersList" class="teachers-list"></div>
             <div id="teacherCoursesContainer" style="display: none;">
@@ -303,70 +146,26 @@
             </div>
         </div>
 
-        <!-- Предметы (уроки) -->
         <div id="teacherSubjectsContainer" class="section" style="display: none;">
-            <h2 style="margin-bottom: 10px;">Уроки</h2>
-            <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите урок для просмотра тем</p>
+            <h2 style="margin-bottom: 10px;">Уроки </h2>
+            <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите урок для просмотра описания</p>
             <div id="teacherSubjectsList" class="subjects-list" style="margin: 10px 0;"></div>
         </div>
 
-        <!-- ============ НОВЫЙ БЛОК: Темы ============ -->
-        <div id="js-topics-wrap" class="section hidden" aria-live="polite">
-            <h2 style="margin-bottom: 10px;">Темы урока</h2>
-            <p style="font-size: 0.9em; margin-bottom: 10px;">Выберите тему</p>
-            <div id="js-topics" class="topics-list"></div>
-
-            <div id="js-topic-desc" class="topic-description hidden">
-                <h4>Описание темы</h4>
-                <p id="js-topic-desc-text">Описание отсутствует</p>
+        <div id="topicDescriptionSection" style="display: none;" class="section">
+            <div id="topicDescription" style="margin-top: 5px; padding: 15px;
+                                              background: #f5f5f5; border-radius: 5px;">
+                <h4 style="margin-bottom: 10px; color: #333;">Описание темы</h4>
+                <p id="descriptionText" style="color: #666;">Описание отсутствует</p>
             </div>
         </div>
 
-        <!-- ============ НОВЫЙ БЛОК: Разделы темы ============ -->
-        <section id="js-sections-wrap" class="section hidden" aria-live="polite">
-            <h2 style="margin-bottom: 15px;"><i class="fas fa-list-ol"></i> Разделы темы</h2>
-            <div id="js-sections" style="text-align: left;"></div>
-        </section>
-
-        <!-- ============ НОВЫЙ БЛОК: Материалы (аккордеон) ============ -->
-        <section id="js-materials-wrap" class="section accordion-section hidden">
-            <h2 class="accordion-header" data-toggle="section" data-target="#js-materials-wrap" aria-expanded="false">
-                <span><i class="fas fa-folder-open"></i> Материалы урока</span>
-                <i class="fas fa-chevron-down accordion-icon"></i>
-            </h2>
-            <div class="accordion-body">
-                <div id="lessonMaterials" aria-live="polite">
-                    <p class="empty-message">Выберите тему для просмотра материалов</p>
-                </div>
+        <div class="section" style="margin-bottom: 10px;">
+            <h2 style="margin-bottom: 10px;">Материалы урока</h2>
+            <div id="lessonMaterials">
+                <p class="empty-message">Выберите урок для просмотра материалов</p>
             </div>
-        </section>
-
-        <!-- ============ НОВЫЙ БЛОК: Задания для урока ============ -->
-        <section id="js-lesson-tasks-wrap" class="section accordion-section hidden">
-            <h2 class="accordion-header" data-toggle="section" data-target="#js-lesson-tasks-wrap" aria-expanded="false">
-                <span><i class="fas fa-tasks"></i> Задания для урока</span>
-                <i class="fas fa-chevron-down accordion-icon"></i>
-            </h2>
-            <div class="accordion-body">
-                <p style="font-size: 0.9em; margin-bottom: 10px; text-align: center; color: #666;">
-                    Случайные задания по выбранной теме
-                </p>
-                <div id="js-lesson-tasks">
-                    <p class="empty-message">Выберите тему для просмотра заданий</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ НОВЫЙ БЛОК: Полезные сайты ============ -->
-        <section id="js-websites-wrap" class="section accordion-section hidden" aria-live="polite">
-            <h2 class="accordion-header" data-toggle="section" data-target="#js-websites-wrap" aria-expanded="false">
-                <span><i class="fas fa-globe"></i> Полезные сайты</span>
-                <i class="fas fa-chevron-down accordion-icon"></i>
-            </h2>
-            <div class="accordion-body">
-                <div id="js-websites"></div>
-            </div>
-        </section>
+        </div>
 
     </div><!-- /appContent -->
 </div>
@@ -380,9 +179,6 @@
 <script>
 let MOCK = null;
 
-/* ============================================================
- *  ЗАГРУЗКА MOCK
- * ============================================================ */
 function evalMockSource(text) {
     const src = text.trim();
     if (!src) throw new Error('mock.txt пуст');
@@ -418,32 +214,16 @@ async function loadMock() {
     return result;
 }
 
-/* ============================================================
- *  MOCK AJAX — все действия из PHP + новые
- * ============================================================ */
 function mockAjax(params) {
     const action = params.ajax;
-
     if (action === 'get_teacher_courses') {
         return MOCK.teacherCourses?.[params.teacher_id] || [];
     }
     if (action === 'get_teacher_course_subjects') {
         return MOCK.teacherCourseSubjects?.[params.teacher_id + '-' + params.course_id] || [];
     }
-    if (action === 'get_topics') {
-        return MOCK.topics?.[params.subject_id] || [];
-    }
     if (action === 'get_materials') {
         return MOCK.materials?.[params.topic_id] || [];
-    }
-    if (action === 'get_sections') {
-        return MOCK.sections?.[params.topic_id] || [];
-    }
-    if (action === 'get_random_ai_tasks') {
-        return { tasks: MOCK.aiTasks?.[params.topic_id] || [] };
-    }
-    if (action === 'get_websites') {
-        return MOCK.websites?.[params.topic_id] || [];
     }
     return { error: 'Неизвестный AJAX-запрос' };
 }
@@ -465,63 +245,52 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
-    /* ============================================================
-     *  ССЫЛКИ НА ЭЛЕМЕНТЫ
-     * ============================================================ */
-    const elements = {
-        educationalButtons: document.getElementById('educationalButtons'),
-        allTeachersList: document.getElementById('allTeachersList'),
-        teacherCoursesContainer: document.getElementById('teacherCoursesContainer'),
-        teacherCoursesList: document.getElementById('teacherCoursesList'),
-        selectedTeacherTitle: document.getElementById('selectedTeacherTitle'),
-        teacherSubjectsContainer: document.getElementById('teacherSubjectsContainer'),
-        teacherSubjectsList: document.getElementById('teacherSubjectsList'),
-        lessonMaterials: document.getElementById('lessonMaterials'),
-
-        // Новые блоки
-        topicsWrap: document.getElementById('js-topics-wrap'),
-        topics: document.getElementById('js-topics'),
-        topicDesc: document.getElementById('js-topic-desc'),
-        topicDescText: document.getElementById('js-topic-desc-text'),
-
-        sectionsWrap: document.getElementById('js-sections-wrap'),
-        sections: document.getElementById('js-sections'),
-
-        materialsWrap: document.getElementById('js-materials-wrap'),
-
-        lessonTasksWrap: document.getElementById('js-lesson-tasks-wrap'),
-        lessonTasks: document.getElementById('js-lesson-tasks'),
-
-        websitesWrap: document.getElementById('js-websites-wrap'),
-        websites: document.getElementById('js-websites')
+    const config = {
+        selectors: {
+            educationalButtons: '.educational-button',
+            teacherItems: '.teacher-item',
+            courseButtons: '.course-button',
+            teacherCoursesContainer: '#teacherCoursesContainer',
+            teacherSubjectsContainer: '#teacherSubjectsContainer',
+            allTeachersList: '#allTeachersList',
+            teacherCoursesList: '#teacherCoursesList',
+            teacherSubjectsList: '#teacherSubjectsList',
+            selectedTeacherTitle: '#selectedTeacherTitle',
+            topicDescriptionSection: '#topicDescriptionSection',
+            topicDescription: '#topicDescription',
+            descriptionText: '#descriptionText',
+            lessonMaterials: '#lessonMaterials'
+        },
+        classes: {
+            hidden: 'hidden', error: 'error', emptyMessage: 'empty-message',
+            activeSubject: 'active-subject',
+            activeEducational: 'active-educational', activeTeacher: 'active-teacher',
+            activeCourse: 'active-course'
+        }
     };
+    const elements = {};
+    for (const [k, sel] of Object.entries(config.selectors)) elements[k] = document.querySelector(sel);
 
     const teachersSection = document.getElementById('teachersSection');
+    const teacherSubjectsSection = document.getElementById('teacherSubjectsContainer');
 
-    /* ============================================================
-     *  СОСТОЯНИЕ
-     * ============================================================ */
     const state = {
         currentEducational: 0,
         currentTeacher: null,
         currentCourse: null,
-        currentSubject: null,
-        currentTopic: null
+        currentSubject: null
     };
 
-    /* ============================================================
-     *  РЕНДЕР СПИСКОВ
-     * ============================================================ */
     function renderEducationals() {
         const list = MOCK.educationals || [];
-        elements.educationalButtons.innerHTML =
+        document.getElementById('educationalButtons').innerHTML =
             list.map(x => `
                 <button class="educational-button"
-                        data-educational-id="${x.id}">${escapeHtml(x.name)}</button>
+                        data-educational-id="${x.id}"
+                        data-original-text="${escapeHtml(x.name)}">${escapeHtml(x.name)}</button>
             `).join('') ||
-            `<p class="empty-message">Нет доступных образовательных учреждений</p>`;
+            `<p class="${config.classes.emptyMessage}">Нет доступных образовательных учреждений</p>`;
     }
-
     function renderAllTeachers() {
         const list = MOCK.teachers || [];
         elements.allTeachersList.innerHTML =
@@ -531,7 +300,204 @@ document.addEventListener('DOMContentLoaded', async function () {
                         data-teacher-name="${escapeHtml(t.fio)}"
                         data-educational-id="${t.educational_id}">${escapeHtml(t.fio)}</button>
             `).join('') ||
-            `<p class="empty-message">Нет доступных преподавателей</p>`;
+            `<p class="${config.classes.emptyMessage}">Нет доступных преподавателей</p>`;
+    }
+
+    function handleEducationalClick(e) {
+        const btn = e.currentTarget;
+        const id = parseInt(btn.dataset.educationalId, 10);
+        const isSame = state.currentEducational === id;
+
+        document.querySelectorAll(config.selectors.educationalButtons).forEach(b =>
+            b.classList.remove(config.classes.activeEducational));
+
+        if (isSame) {
+            state.currentEducational = 0;
+            teachersSection.classList.add('hidden');
+            teacherSubjectsSection.style.display = 'none';
+            teacherSubjectsSection.classList.add('hidden');
+            resetTeacherSelection();
+            return;
+        }
+
+        state.currentEducational = id;
+        btn.classList.add(config.classes.activeEducational);
+        filterTeachers();
+
+        teachersSection.classList.remove('hidden');
+        teacherSubjectsSection.style.display = 'none';
+        teacherSubjectsSection.classList.add('hidden');
+
+        resetTeacherSelection();
+    }
+
+    function handleTeacherClick(e) {
+        const btn = e.currentTarget;
+        const id = parseInt(btn.dataset.teacherId, 10);
+        const name = btn.dataset.teacherName;
+        const isSame = state.currentTeacher === id;
+
+        document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
+            b.classList.remove(config.classes.activeTeacher));
+
+        if (isSame) {
+            state.currentTeacher = null;
+            state.currentCourse = null;
+            state.currentSubject = null;
+
+            document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
+                b.style.display = 'inline-block');
+
+            elements.teacherCoursesContainer.style.display = 'none';
+            teacherSubjectsSection.classList.add('hidden');
+            teacherSubjectsSection.style.display = 'none';
+            resetSubjectSelection();
+            return;
+        }
+
+        state.currentTeacher = id;
+        state.currentCourse = null;
+        state.currentSubject = null;
+
+        document.querySelectorAll(config.selectors.teacherItems).forEach(b => {
+            if (b === btn) b.style.display = 'inline-block';
+            else b.style.display = 'none';
+        });
+
+        btn.classList.add(config.classes.activeTeacher);
+
+        elements.teacherCoursesContainer.style.display = 'block';
+        loadTeacherCourses(id, name);
+
+        teacherSubjectsSection.classList.add('hidden');
+        teacherSubjectsSection.style.display = 'none';
+        resetSubjectSelection();
+    }
+
+    function handleTeacherCourseClick(e) {
+        const btn = e.currentTarget;
+        const id = parseInt(btn.dataset.courseId, 10);
+        const name = btn.dataset.courseName;
+        const isSame = state.currentCourse === id;
+
+        document.querySelectorAll(config.selectors.courseButtons).forEach(b =>
+            b.classList.remove(config.classes.activeCourse));
+
+        if (isSame) {
+            state.currentCourse = null;
+            state.currentSubject = null;
+
+            document.querySelectorAll(config.selectors.courseButtons).forEach(b =>
+                b.style.display = 'inline-block');
+
+            teacherSubjectsSection.classList.add('hidden');
+            teacherSubjectsSection.style.display = 'none';
+            resetSubjectSelection();
+            return;
+        }
+
+        state.currentCourse = id;
+        state.currentSubject = null;
+        btn.classList.add(config.classes.activeCourse);
+
+        document.querySelectorAll(config.selectors.courseButtons).forEach(b => {
+            if (b === btn) b.style.display = 'inline-block';
+            else b.style.display = 'none';
+        });
+
+        const teacherName = document.querySelector('.teacher-item.active-teacher')?.dataset.teacherName || '';
+        loadTeacherCourseSubjects(state.currentTeacher, teacherName, id, name);
+        resetSubjectSelection();
+    }
+
+    function handleSubjectClick(e) {
+        const btn = e.currentTarget;
+        const id = parseInt(btn.dataset.subjectId, 10);
+        const description = btn.dataset.subjectDescription || '';
+        const isSame = state.currentSubject === id;
+
+        document.querySelectorAll('.subject-button').forEach(b =>
+            b.classList.remove(config.classes.activeSubject));
+
+        if (isSame) {
+            state.currentSubject = null;
+            document.querySelectorAll('.subject-button').forEach(b =>
+                b.style.display = 'inline-block');
+
+            // 🔽 Вернуть сетку 6-в-ряд
+            elements.teacherSubjectsList.classList.remove('single-active');
+
+            elements.topicDescriptionSection.style.display = 'none';
+            elements.lessonMaterials.innerHTML =
+                '<p class="empty-message">Выберите урок для просмотра материалов</p>';
+            return;
+        }
+
+        state.currentSubject = id;
+        btn.classList.add(config.classes.activeSubject);
+
+        document.querySelectorAll('.subject-button').forEach(b => {
+            if (b === btn) b.style.display = 'inline-block';
+            else b.style.display = 'none';
+        });
+
+        // 🔽 Оставить только нажатый урок по центру
+        elements.teacherSubjectsList.classList.add('single-active');
+
+        elements.topicDescriptionSection.style.display = 'block';
+        elements.descriptionText.textContent = description || 'Описание отсутствует';
+
+        loadMaterials(id);
+    }
+
+    function filterTeachers() {
+        const edu = state.currentEducational;
+        document.querySelectorAll(config.selectors.teacherItems).forEach(t => {
+            const tEdu = parseInt(t.dataset.educationalId, 10);
+            if (edu === 0 || tEdu === edu) t.style.display = 'inline-block';
+            else { t.style.display = 'none'; t.classList.remove(config.classes.activeTeacher); }
+        });
+        if (state.currentTeacher && edu !== 0) {
+            const active = document.querySelector('.teacher-item.active-teacher');
+            if (active && parseInt(active.dataset.educationalId, 10) !== edu) resetTeacherSelection();
+        }
+    }
+
+    async function fetchData(url, params = {}) {
+        try {
+            await new Promise(r => setTimeout(r, 30));
+            return mockAjax(params);
+        } catch (error) { return { error: error.message }; }
+    }
+    async function loadTeacherCourses(teacherId, teacherName) {
+        elements.teacherCoursesList.innerHTML = '';
+        elements.selectedTeacherTitle.textContent = teacherName;
+        elements.teacherCoursesContainer.style.display = 'block';
+        const data = await fetchData('', { ajax: 'get_teacher_courses', teacher_id: teacherId });
+        if (data.error) { showError(elements.teacherCoursesList, data.error); return; }
+        if (!data.length) { showEmptyMessage(elements.teacherCoursesList, '  '); return; }
+        renderCourses(data); bindTeacherCourseEvents();
+    }
+    async function loadTeacherCourseSubjects(teacherId, teacherName, courseId, courseName) {
+        const data = await fetchData('', {
+            ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
+        });
+        elements.teacherSubjectsContainer.classList.remove('hidden');
+        elements.teacherSubjectsContainer.style.display = 'flex';
+        // 🔽 при новом списке сбрасываем «одиночный» режим
+        elements.teacherSubjectsList.classList.remove('single-active');
+        if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
+        if (!data.length) {
+            showEmptyMessage(elements.teacherSubjectsList, 'Материалы для этого урока ещё готовятся'); return;
+        }
+        renderSubjects(data); bindSubjectEvents();
+    }
+    async function loadMaterials(subjectId) {
+        const data = await fetchData('', { ajax: 'get_materials', topic_id: subjectId });
+        if (data.error) { showError(elements.lessonMaterials, data.error); return; }
+        if (!data.length) showEmptyMessage(elements.lessonMaterials, 'Материалы для этой темы не найдены');
+        else renderMaterials(data);
+        elements.lessonMaterials.style.display = 'block';
     }
 
     function renderCourses(courses) {
@@ -541,42 +507,16 @@ document.addEventListener('DOMContentLoaded', async function () {
             </button>
         `).join('');
     }
-
     function renderSubjects(subjects) {
         elements.teacherSubjectsList.innerHTML = subjects.map(s => `
             <button class="subject-button"
                     data-subject-id="${s.id}"
-                    data-subject-name="${escapeHtml(s.name)}">
+                    data-subject-name="${escapeHtml(s.name)}"
+                    data-subject-description="${escapeHtml(s.description || '')}">
                 ${escapeHtml(s.name)}
             </button>
         `).join('');
     }
-
-    function renderTopics(topics) {
-        elements.topics.innerHTML = topics.map(t => `
-            <button class="topic-button"
-                    data-topic-id="${t.id}"
-                    data-topic-description="${escapeHtml(t.description || '')}">
-                ${escapeHtml(t.topic_name)}
-            </button>
-        `).join('');
-    }
-
-    function renderSections(sections) {
-        elements.sections.innerHTML = sections.map(s => `
-            <div class="accordion__item">
-                <button class="accordion__toggle" aria-expanded="false" data-section-id="${s.id}">
-                    <span>${s.section_number ? s.section_number + '. ' : ''}${escapeHtml(s.title)}</span>
-                    <i class="fas fa-chevron-down accordion__icon"></i>
-                </button>
-                <div class="accordion__body" id="section-body-${s.id}">
-                    ${s.description ? '<p>' + escapeHtml(s.description) + '</p>' : ''}
-                    ${s.content ? '<div>' + s.content + '</div>' : ''}
-                </div>
-            </div>
-        `).join('');
-    }
-
     function renderMaterials(materials) {
         elements.lessonMaterials.innerHTML = `
             <div class="materials-container fade-in">
@@ -584,7 +524,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             </div>
         `;
     }
-
     function renderMaterialCard(material) {
         return `
             <div class="material-card" data-url="${escapeHtml(material.file_url)}">
@@ -596,32 +535,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             </div>
         `;
     }
-
-    function renderTasks(tasks) {
-        elements.lessonTasks.innerHTML = tasks.map(task => `
-            <div class="lesson-task-item">
-                <div class="lesson-task-item__row">
-                    <span class="lesson-task-item__num">${task.zadan_number}</span>
-                    <div>
-                        <h4 class="lesson-task-item__title">${escapeHtml(task.zadani_title || 'Без названия')}</h4>
-                        <p class="lesson-task-item__desc">${escapeHtml(task.zadan_name || '')}</p>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function renderWebsites(websites) {
-        elements.websites.innerHTML = websites.map(w => `
-            <div class="website-item">
-                <a class="website-button" href="${escapeHtml(w.url)}" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-external-link-alt"></i> ${escapeHtml(w.website_name)}
-                </a>
-                ${w.description ? `<p class="website-description">${escapeHtml(w.description)}</p>` : ''}
-            </div>
-        `).join('');
-    }
-
     function getMaterialIcon(type, url) {
         const icons = {
             image: `<img src="${url}" class="material-thumbnail" alt="">`,
@@ -632,411 +545,47 @@ document.addEventListener('DOMContentLoaded', async function () {
         };
         return icons[type] || icons.default;
     }
-
     function getMaterialTypeLabel(type) {
         return { image: 'Изображение', video: 'Видео', audio: 'Аудио', document: 'Текст' }[type] || 'Файл';
     }
 
-    /* ============================================================
-     *  ОБРАБОТЧИКИ КЛИКОВ
-     * ============================================================ */
-
-    function handleEducationalClick(e) {
-        const btn = e.currentTarget;
-        const id = parseInt(btn.dataset.educationalId, 10);
-        const isSame = state.currentEducational === id;
-
-        document.querySelectorAll('.educational-button').forEach(b =>
-            b.classList.remove('active-educational'));
-
-        if (isSame) {
-            state.currentEducational = 0;
-            teachersSection.classList.add('hidden');
-            resetTeacherSelection();
-            return;
-        }
-
-        state.currentEducational = id;
-        btn.classList.add('active-educational');
-        filterTeachers();
-        teachersSection.classList.remove('hidden');
-        resetTeacherSelection();
-    }
-
-    function handleTeacherClick(e) {
-        const btn = e.currentTarget;
-        const id = parseInt(btn.dataset.teacherId, 10);
-        const name = btn.dataset.teacherName;
-        const isSame = state.currentTeacher === id;
-
-        document.querySelectorAll('.teacher-item').forEach(b =>
-            b.classList.remove('active-teacher'));
-
-        if (isSame) {
-            state.currentTeacher = null;
-            state.currentCourse = null;
-            state.currentSubject = null;
-            document.querySelectorAll('.teacher-item').forEach(b =>
-                b.style.display = 'inline-block');
-            elements.teacherCoursesContainer.style.display = 'none';
-            resetSubjectSelection();
-            return;
-        }
-
-        state.currentTeacher = id;
-        state.currentCourse = null;
-        state.currentSubject = null;
-
-        document.querySelectorAll('.teacher-item').forEach(b => {
-            b.style.display = (b === btn) ? 'inline-block' : 'none';
-        });
-        btn.classList.add('active-teacher');
-
-        elements.teacherCoursesContainer.style.display = 'block';
-        loadTeacherCourses(id, name);
-        resetSubjectSelection();
-    }
-
-    function handleTeacherCourseClick(e) {
-        const btn = e.currentTarget;
-        const id = parseInt(btn.dataset.courseId, 10);
-        const name = btn.dataset.courseName;
-        const isSame = state.currentCourse === id;
-
-        document.querySelectorAll('.course-button').forEach(b =>
-            b.classList.remove('active-course'));
-
-        if (isSame) {
-            state.currentCourse = null;
-            state.currentSubject = null;
-            document.querySelectorAll('.course-button').forEach(b =>
-                b.style.display = 'inline-block');
-            resetSubjectSelection();
-            return;
-        }
-
-        state.currentCourse = id;
-        state.currentSubject = null;
-        btn.classList.add('active-course');
-
-        document.querySelectorAll('.course-button').forEach(b => {
-            b.style.display = (b === btn) ? 'inline-block' : 'none';
-        });
-
-        const teacherName = document.querySelector('.teacher-item.active-teacher')?.dataset.teacherName || '';
-        loadTeacherCourseSubjects(state.currentTeacher, teacherName, id, name);
-        resetSubjectSelection();
-    }
-
-    function handleSubjectClick(e) {
-        const btn = e.currentTarget;
-        const id = parseInt(btn.dataset.subjectId, 10);
-        const isSame = state.currentSubject === id;
-
-        document.querySelectorAll('.subject-button').forEach(b =>
-            b.classList.remove('active-subject'));
-
-        if (isSame) {
-            state.currentSubject = null;
-            document.querySelectorAll('.subject-button').forEach(b =>
-                b.style.display = 'inline-block');
-            elements.teacherSubjectsList.classList.remove('single-active');
-            resetTopicSelection();
-            return;
-        }
-
-        state.currentSubject = id;
-        btn.classList.add('active-subject');
-
-        document.querySelectorAll('.subject-button').forEach(b => {
-            b.style.display = (b === btn) ? 'inline-block' : 'none';
-        });
-        elements.teacherSubjectsList.classList.add('single-active');
-
-        // Показать блок тем и загрузить их
-        loadTopics(id);
-        resetTopicSelection();
-    }
-
-    function handleTopicClick(e) {
-        const btn = e.currentTarget;
-        const id = parseInt(btn.dataset.topicId, 10);
-        const description = btn.dataset.topicDescription || '';
-        const isSame = state.currentTopic === id;
-
-        document.querySelectorAll('.topic-button').forEach(b =>
-            b.classList.remove('active-topic'));
-
-        if (isSame) {
-            // Повторное нажатие — полный сброс темы
-            state.currentTopic = null;
-            document.querySelectorAll('.topic-button').forEach(b =>
-                b.style.display = 'inline-block');
-            resetTopicContent();
-            return;
-        }
-
-        state.currentTopic = id;
-        btn.classList.add('active-topic');
-
-        // Скрыть остальные темы
-        document.querySelectorAll('.topic-button').forEach(b => {
-            b.style.display = (b === btn) ? 'inline-block' : 'none';
-        });
-
-        // Описание темы
-        elements.topicDescText.textContent = description || 'Описание отсутствует';
-        elements.topicDesc.classList.remove('hidden');
-
-        // Показать все блоки темы
-        elements.sectionsWrap.classList.remove('hidden');
-        elements.materialsWrap.classList.remove('hidden');
-        elements.lessonTasksWrap.classList.remove('hidden');
-        elements.websitesWrap.classList.remove('hidden');
-
-        // Открыть аккордеоны (свежий вид)
-        closeAllAccordions();
-
-        // Загрузить содержимое
-        loadSections(id);
-        loadMaterials(id);
-        loadRandomTasks(id);
-        loadWebsites(id);
-    }
-
-    /* ============================================================
-     *  ЗАГРУЗКА ДАННЫХ
-     * ============================================================ */
-
-    async function fetchData(params = {}) {
-        try {
-            await new Promise(r => setTimeout(r, 30));
-            return mockAjax(params);
-        } catch (error) { return { error: error.message }; }
-    }
-
-    async function loadTeacherCourses(teacherId, teacherName) {
-        elements.teacherCoursesList.innerHTML = '';
-        elements.selectedTeacherTitle.textContent = teacherName;
-        elements.teacherCoursesContainer.style.display = 'block';
-
-        const data = await fetchData({ ajax: 'get_teacher_courses', teacher_id: teacherId });
-        if (data.error) { showError(elements.teacherCoursesList, data.error); return; }
-        if (!data.length) { showEmptyMessage(elements.teacherCoursesList, 'Нет курсов'); return; }
-        renderCourses(data);
-        bindTeacherCourseEvents();
-    }
-
-    async function loadTeacherCourseSubjects(teacherId, teacherName, courseId, courseName) {
-        const data = await fetchData({
-            ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
-        });
-
-        elements.teacherSubjectsContainer.classList.remove('hidden');
-        elements.teacherSubjectsContainer.style.display = 'flex';
-        elements.teacherSubjectsList.classList.remove('single-active');
-
-        if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
-        if (!data.length) {
-            showEmptyMessage(elements.teacherSubjectsList, 'Материалы для этого урока ещё готовятся');
-            return;
-        }
-        renderSubjects(data);
-        bindSubjectEvents();
-    }
-
-    async function loadTopics(subjectId) {
-        elements.topicsWrap.classList.remove('hidden');
-        elements.topics.innerHTML = '<p class="loading">Загрузка тем…</p>';
-
-        const data = await fetchData({ ajax: 'get_topics', subject_id: subjectId });
-        if (data.error) { showError(elements.topics, data.error); return; }
-        if (!data.length) {
-            showEmptyMessage(elements.topics, 'Нет тем для этого урока');
-            return;
-        }
-        renderTopics(data);
-        bindTopicEvents();
-    }
-
-    async function loadSections(topicId) {
-        elements.sections.innerHTML = '<p class="loading">Загрузка разделов…</p>';
-        const data = await fetchData({ ajax: 'get_sections', topic_id: topicId });
-        if (data.error) { showError(elements.sections, data.error); return; }
-        if (!data.length) {
-            showEmptyMessage(elements.sections, 'Нет разделов для этой темы');
-            return;
-        }
-        renderSections(data);
-    }
-
-    async function loadMaterials(topicId) {
-        elements.lessonMaterials.innerHTML = '<p class="loading">Загрузка материалов…</p>';
-        const data = await fetchData({ ajax: 'get_materials', topic_id: topicId });
-        if (data.error) { showError(elements.lessonMaterials, data.error); return; }
-        if (!data.length) {
-            showEmptyMessage(elements.lessonMaterials, 'Материалы для этой темы не найдены');
-            return;
-        }
-        renderMaterials(data);
-    }
-
-    async function loadRandomTasks(topicId) {
-        elements.lessonTasks.innerHTML = '<p class="loading">Загрузка заданий…</p>';
-        const data = await fetchData({ ajax: 'get_random_ai_tasks', topic_id: topicId });
-        if (data.error) { showError(elements.lessonTasks, data.error); return; }
-        if (!data.tasks || !data.tasks.length) {
-            showEmptyMessage(elements.lessonTasks, 'Нет заданий для этой темы');
-            return;
-        }
-        renderTasks(data.tasks);
-    }
-
-    async function loadWebsites(topicId) {
-        elements.websites.innerHTML = '<p class="loading">Загрузка сайтов…</p>';
-        const data = await fetchData({ ajax: 'get_websites', topic_id: topicId });
-        if (data.error) { showError(elements.websites, data.error); return; }
-        if (!data.length) {
-            showEmptyMessage(elements.websites, 'Нет сайтов для этой темы');
-            return;
-        }
-        renderWebsites(data);
-    }
-
-    /* ============================================================
-     *  СБРОСЫ
-     * ============================================================ */
-
     function resetTeacherSelection() {
-        document.querySelectorAll('.teacher-item').forEach(b => {
-            b.classList.remove('active-teacher');
+        document.querySelectorAll(config.selectors.teacherItems).forEach(b => {
+            b.classList.remove(config.classes.activeTeacher);
             b.style.display = 'inline-block';
         });
         elements.teacherCoursesContainer.style.display = 'none';
+        elements.teacherSubjectsContainer.classList.add('hidden');
+        elements.teacherSubjectsContainer.style.display = 'none';
         state.currentTeacher = null;
         state.currentCourse = null;
         resetSubjectSelection();
     }
-
     function resetSubjectSelection() {
         document.querySelectorAll('.subject-button').forEach(b => {
-            b.classList.remove('active-subject');
+            b.classList.remove(config.classes.activeSubject);
             b.style.display = 'inline-block';
         });
+        // 🔽 сбросить «одиночный» режим
         elements.teacherSubjectsList.classList.remove('single-active');
-        elements.teacherSubjectsContainer.classList.add('hidden');
-        elements.teacherSubjectsContainer.style.display = 'none';
-        state.currentSubject = null;
-        resetTopicSelection();
-    }
-
-    function resetTopicSelection() {
-        // Сброс выбранной темы
-        state.currentTopic = null;
-        document.querySelectorAll('.topic-button').forEach(b => {
-            b.classList.remove('active-topic');
-            b.style.display = 'inline-block';
-        });
-        elements.topicsWrap.classList.add('hidden');
-        elements.topicDesc.classList.add('hidden');
-        resetTopicContent();
-    }
-
-    function resetTopicContent() {
-        elements.sectionsWrap.classList.add('hidden');
-        elements.materialsWrap.classList.add('hidden');
-        elements.lessonTasksWrap.classList.add('hidden');
-        elements.websitesWrap.classList.add('hidden');
-
-        elements.sections.innerHTML = '';
+        elements.topicDescriptionSection.style.display = 'none';
         elements.lessonMaterials.innerHTML =
-            '<p class="empty-message">Выберите тему для просмотра материалов</p>';
-        elements.lessonTasks.innerHTML =
-            '<p class="empty-message">Выберите тему для просмотра заданий</p>';
-        elements.websites.innerHTML = '';
-
-        closeAllAccordions();
+            '<p class="empty-message">Выберите урок для просмотра материалов</p>';
+        state.currentSubject = null;
     }
-
-    /* ============================================================
-     *  АККОРДЕОНЫ
-     * ============================================================ */
-
-    function closeAllAccordions() {
-        document.querySelectorAll('.accordion-body.is-open').forEach(body =>
-            body.classList.remove('is-open'));
-        document.querySelectorAll('.accordion-header[aria-expanded="true"]').forEach(h =>
-            h.setAttribute('aria-expanded', 'false'));
-        document.querySelectorAll('.accordion__toggle[aria-expanded="true"]').forEach(h =>
-            h.setAttribute('aria-expanded', 'false'));
-        document.querySelectorAll('.accordion__body.is-open').forEach(b =>
-            b.classList.remove('is-open'));
-    }
-
-    // Общий обработчик кликов по аккордеонам
-    document.addEventListener('click', (e) => {
-        // Вложенный аккордеон (разделы темы)
-        const toggle = e.target.closest('.accordion__toggle');
-        if (toggle) {
-            const body = document.getElementById('section-body-' + toggle.dataset.sectionId);
-            if (!body) return;
-            const isOpen = body.classList.toggle('is-open');
-            toggle.setAttribute('aria-expanded', String(isOpen));
-            return;
-        }
-
-        // Верхний аккордеон (секции)
-        const header = e.target.closest('.accordion-header[data-toggle="section"]');
-        if (header) {
-            const section = document.querySelector(header.dataset.target);
-            const body = section?.querySelector('.accordion-body');
-            if (!body) return;
-            const isOpen = body.classList.toggle('is-open');
-            header.setAttribute('aria-expanded', String(isOpen));
-        }
-    });
-
-    /* ============================================================
-     *  ПРИВЯЗКА СОБЫТИЙ
-     * ============================================================ */
-
     function bindTeacherCourseEvents() {
         document.querySelectorAll('#teacherCoursesList .course-button').forEach(b =>
             b.addEventListener('click', handleTeacherCourseClick));
     }
-
     function bindSubjectEvents() {
         document.querySelectorAll('#teacherSubjectsList .subject-button').forEach(b =>
             b.addEventListener('click', handleSubjectClick));
     }
-
-    function bindTopicEvents() {
-        document.querySelectorAll('#js-topics .topic-button').forEach(b =>
-            b.addEventListener('click', handleTopicClick));
-    }
-
-    /* ============================================================
-     *  УТИЛИТЫ
-     * ============================================================ */
-
-    function filterTeachers() {
-        const edu = state.currentEducational;
-        document.querySelectorAll('.teacher-item').forEach(t => {
-            const tEdu = parseInt(t.dataset.educationalId, 10);
-            if (edu === 0 || tEdu === edu) t.style.display = 'inline-block';
-            else { t.style.display = 'none'; t.classList.remove('active-teacher'); }
-        });
-        if (state.currentTeacher && edu !== 0) {
-            const active = document.querySelector('.teacher-item.active-teacher');
-            if (active && parseInt(active.dataset.educationalId, 10) !== edu) resetTeacherSelection();
-        }
-    }
-
     function showError(container, msg) {
-        container.innerHTML = `<p class="error">${escapeHtml(msg)}</p>`;
+        container.innerHTML = `<p class="${config.classes.error}">${escapeHtml(msg)}</p>`;
     }
     function showEmptyMessage(container, msg) {
-        container.innerHTML = `<p class="empty-message">${escapeHtml(msg)}</p>`;
+        container.innerHTML = `<p class="${config.classes.emptyMessage}">${escapeHtml(msg)}</p>`;
     }
 
     elements.lessonMaterials.addEventListener('click', event => {
@@ -1045,21 +594,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         openMaterial(card.dataset.url);
     });
 
-    /* ============================================================
-     *  ИНИЦИАЛИЗАЦИЯ
-     * ============================================================ */
-
     renderEducationals();
     renderAllTeachers();
-    document.querySelectorAll('.educational-button').forEach(b =>
+    document.querySelectorAll(config.selectors.educationalButtons).forEach(b =>
         b.addEventListener('click', handleEducationalClick));
-    document.querySelectorAll('.teacher-item').forEach(b =>
+    document.querySelectorAll(config.selectors.teacherItems).forEach(b =>
         b.addEventListener('click', handleTeacherClick));
     filterTeachers();
 
     teachersSection.classList.add('hidden');
-    elements.teacherSubjectsContainer.style.display = 'none';
-    elements.teacherSubjectsContainer.classList.add('hidden');
+    teacherSubjectsSection.classList.add('hidden');
+    teacherSubjectsSection.style.display = 'none';
 });
 
 function openMaterial(fileUrl) {
@@ -1069,7 +614,6 @@ function openMaterial(fileUrl) {
     }
     window.open(fileUrl, '_blank');
 }
-
 function escapeHtml(unsafe) {
     return String(unsafe ?? '')
         .replace(/&/g, '&amp;').replace(/</g, '&lt;')
