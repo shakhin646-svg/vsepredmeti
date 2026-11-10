@@ -110,6 +110,44 @@
     .external-link { color: #0515f0; text-decoration: none; font-size: 14px;
                      margin-top: 15px; padding: 10px; }
 
+    /* 🔽 Стили для разделов (аккордеон) */
+    .section-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        overflow: hidden;
+        text-align: left;
+    }
+    .section-item__toggle {
+        width: 100%;
+        padding: 12px 15px;
+        background: #f8f9fa;
+        border: none;
+        text-align: left;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: inherit;
+        transition: background .25s ease;
+    }
+    .section-item__toggle:hover { background: #e9ecef; }
+    .section-item__icon { transition: transform .25s ease; color: #666; }
+    .section-item__toggle[aria-expanded="true"] .section-item__icon { transform: rotate(180deg); }
+    .section-item__body {
+        display: none;
+        padding: 15px;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        line-height: 1.7;
+        text-align: left;
+    }
+    .section-item__body.is-open { display: block; }
+    .section-item__description { color: #666; margin-bottom: 10px; font-style: italic; }
+
     @media (max-width: 768px) {
         .container { border-radius: 0; box-shadow: none; }
         #teacherSubjectsList {
@@ -157,6 +195,14 @@
                                               background: #f5f5f5; border-radius: 5px;">
                 <h4 style="margin-bottom: 10px; color: #333;">Описание темы</h4>
                 <p id="descriptionText" style="color: #666;">Описание отсутствует</p>
+            </div>
+        </div>
+
+        <!-- 🔽 НОВЫЙ БЛОК: Разделы темы -->
+        <div id="lessonSectionsSection" class="section" style="display: none; margin-bottom: 10px;">
+            <h2 style="margin-bottom: 10px;">Разделы темы</h2>
+            <div id="lessonSections">
+                <p class="empty-message">Выберите урок для просмотра разделов</p>
             </div>
         </div>
 
@@ -216,11 +262,17 @@ async function loadMock() {
 
 function mockAjax(params) {
     const action = params.ajax;
+
     if (action === 'get_teacher_courses') {
         return MOCK.teacherCourses?.[params.teacher_id] || [];
     }
     if (action === 'get_teacher_course_subjects') {
         return MOCK.teacherCourseSubjects?.[params.teacher_id + '-' + params.course_id] || [];
+    }
+    if (action === 'get_sections') {
+        // Ключ: teacher_id-course_id-subject_id
+        const key = params.teacher_id + '-' + params.course_id + '-' + params.topic_id;
+        return MOCK.teacherCourseSubjectsSection?.[key] || [];
     }
     if (action === 'get_materials') {
         return MOCK.materials?.[params.topic_id] || [];
@@ -259,6 +311,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             topicDescriptionSection: '#topicDescriptionSection',
             topicDescription: '#topicDescription',
             descriptionText: '#descriptionText',
+            lessonSectionsSection: '#lessonSectionsSection',
+            lessonSections: '#lessonSections',
             lessonMaterials: '#lessonMaterials'
         },
         classes: {
@@ -424,10 +478,16 @@ document.addEventListener('DOMContentLoaded', async function () {
             document.querySelectorAll('.subject-button').forEach(b =>
                 b.style.display = 'inline-block');
 
-            // 🔽 Вернуть сетку 6-в-ряд
+            // Вернуть сетку 6-в-ряд
             elements.teacherSubjectsList.classList.remove('single-active');
 
             elements.topicDescriptionSection.style.display = 'none';
+
+            // 🔽 Скрыть разделы
+            elements.lessonSectionsSection.style.display = 'none';
+            elements.lessonSections.innerHTML =
+                '<p class="empty-message">Выберите урок для просмотра разделов</p>';
+
             elements.lessonMaterials.innerHTML =
                 '<p class="empty-message">Выберите урок для просмотра материалов</p>';
             return;
@@ -441,12 +501,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             else b.style.display = 'none';
         });
 
-        // 🔽 Оставить только нажатый урок по центру
+        // Оставить только нажатый урок по центру
         elements.teacherSubjectsList.classList.add('single-active');
 
         elements.topicDescriptionSection.style.display = 'block';
         elements.descriptionText.textContent = description || 'Описание отсутствует';
 
+        // 🔽 Загрузить разделы и материалы
+        loadSections(id);
         loadMaterials(id);
     }
 
@@ -469,6 +531,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             return mockAjax(params);
         } catch (error) { return { error: error.message }; }
     }
+
     async function loadTeacherCourses(teacherId, teacherName) {
         elements.teacherCoursesList.innerHTML = '';
         elements.selectedTeacherTitle.textContent = teacherName;
@@ -478,13 +541,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (!data.length) { showEmptyMessage(elements.teacherCoursesList, '  '); return; }
         renderCourses(data); bindTeacherCourseEvents();
     }
+
     async function loadTeacherCourseSubjects(teacherId, teacherName, courseId, courseName) {
         const data = await fetchData('', {
             ajax: 'get_teacher_course_subjects', teacher_id: teacherId, course_id: courseId
         });
         elements.teacherSubjectsContainer.classList.remove('hidden');
         elements.teacherSubjectsContainer.style.display = 'flex';
-        // 🔽 при новом списке сбрасываем «одиночный» режим
+        // при новом списке сбрасываем «одиночный» режим
         elements.teacherSubjectsList.classList.remove('single-active');
         if (data.error) { showError(elements.teacherSubjectsList, data.error); return; }
         if (!data.length) {
@@ -492,6 +556,48 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
         renderSubjects(data); bindSubjectEvents();
     }
+
+    async function loadSections(topicId) {
+        const data = await fetchData('', {
+            ajax: 'get_sections',
+            teacher_id: state.currentTeacher,
+            course_id: state.currentCourse,
+            topic_id: topicId
+        });
+
+        const sectionEl = elements.lessonSectionsSection;
+        sectionEl.style.display = 'block';
+
+        if (data.error) {
+            showError(elements.lessonSections, data.error);
+            return;
+        }
+        if (!data.length) {
+            elements.lessonSections.innerHTML =
+                '<p class="empty-message">Разделы для этой темы не найдены</p>';
+            return;
+        }
+
+        elements.lessonSections.innerHTML = data.map(section => `
+            <div class="section-item">
+                <button class="section-item__toggle" aria-expanded="false"
+                        data-section-id="${section.id}">
+                    <span>
+                        ${section.section_number ? section.section_number + '. ' : ''}
+                        ${escapeHtml(section.title)}
+                    </span>
+                    <i class="fas fa-chevron-down section-item__icon"></i>
+                </button>
+                <div class="section-item__body" id="section-body-${section.id}">
+                    ${section.description
+                        ? '<p class="section-item__description">' + escapeHtml(section.description) + '</p>'
+                        : ''}
+                    ${section.content ? '<div>' + section.content + '</div>' : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
     async function loadMaterials(subjectId) {
         const data = await fetchData('', { ajax: 'get_materials', topic_id: subjectId });
         if (data.error) { showError(elements.lessonMaterials, data.error); return; }
@@ -566,9 +672,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             b.classList.remove(config.classes.activeSubject);
             b.style.display = 'inline-block';
         });
-        // 🔽 сбросить «одиночный» режим
+        // сбросить «одиночный» режим
         elements.teacherSubjectsList.classList.remove('single-active');
         elements.topicDescriptionSection.style.display = 'none';
+
+        // 🔽 Скрыть разделы
+        elements.lessonSectionsSection.style.display = 'none';
+        elements.lessonSections.innerHTML =
+            '<p class="empty-message">Выберите урок для просмотра разделов</p>';
+
         elements.lessonMaterials.innerHTML =
             '<p class="empty-message">Выберите урок для просмотра материалов</p>';
         state.currentSubject = null;
@@ -594,6 +706,19 @@ document.addEventListener('DOMContentLoaded', async function () {
         openMaterial(card.dataset.url);
     });
 
+    // 🔽 Обработчик клика по аккордеону раздела
+    elements.lessonSections.addEventListener('click', event => {
+        const toggle = event.target.closest('.section-item__toggle');
+        if (!toggle) return;
+
+        const sectionId = toggle.dataset.sectionId;
+        const body = document.getElementById('section-body-' + sectionId);
+        if (!body) return;
+
+        const isOpen = body.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
     renderEducationals();
     renderAllTeachers();
     document.querySelectorAll(config.selectors.educationalButtons).forEach(b =>
@@ -605,6 +730,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     teachersSection.classList.add('hidden');
     teacherSubjectsSection.classList.add('hidden');
     teacherSubjectsSection.style.display = 'none';
+
+    // 🔽 Изначально скрыть блок разделов
+    elements.lessonSectionsSection.style.display = 'none';
 });
 
 function openMaterial(fileUrl) {
