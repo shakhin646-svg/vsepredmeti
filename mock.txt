@@ -488,89 +488,9 @@ teacherCourseSubjectsSection: {
     '2-2-5': [
         {
             id: 16, section_number: 1,
-            title: 'Структура презентации для защиты проекта',
+            title: 'Реализация  проекта',
             content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p><strong>Структура (10–15 слайдов):</strong></p>
-<ol>
-<li>Титульный лист</li>
-<li>Актуальность и проблема</li>
-<li>Цель и задачи</li>
-<li>Объект и предмет</li>
-<li>Гипотеза</li>
-<li>Этапы работы (инструменты, результаты)</li>
-<li>Практическая значимость</li>
-<li>Выводы</li>
-<li>Перспективы</li>
-<li>Источники</li>
-<li>«Спасибо за внимание»</li>
-</ol>
-<p><strong>Требования:</strong> единый стиль, минимум текста (≤7 строк), визуализация, шрифт ≥24 pt, защита 5–7 минут.</p>
-</div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Создайте каркас презентации: укажите названия всех слайдов и ключевые тезисы.</p>
-</div>
-</div>
-</div>`
-        },
-        {
-            id: 17, section_number: 2,
-            title: 'Репетиция защиты',
-            content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Предзащита — репетиция финального выступления (5–7 минут). Подготовьте ответы на возможные вопросы комиссии. Отрепетируйте выступление 3–5 раз.</p>
-</div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Проведите репетицию и запишите 3 возможных вопроса комиссии с ответами.</p>
-</div>
-</div>
-</div>`
-        },
-        {
-            id: 18, section_number: 3,
-            title: 'Финальная проверка и защита',
-            content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Перед защитой проверьте: цель достигнута, задачи выполнены, продукт работает, презентация готова, документация оформлена.</p>
-</div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Проведите самооценку по чек-листу и запишите 3 сильные стороны и 1 зону роста своего проекта.</p>
-</div>
-</div>
-</div>`
-        },
-        {
-            id: 19, section_number: 4,
-            title: 'Оформление документации проекта',
-            content: `
-<div class="step-content active" style="font-size: 18px !important; line-height: 1.5 !important; text-align: left !important;">
-<div class="theory-box" style="background-color: #eef7ff !important; border-left: 4px solid #007bff !important; padding: 25px !important; margin-bottom: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Изучаем урок</h3>
-<p>Документация проекта включает введение, теоретическую часть, практическую часть, заключение и список литературы. Соблюдайте требования к оформлению: шрифт Times New Roman 14 пт, интервал 1,5, поля 2/2/3/1,5 см.</p>
-</div>
-<div class="practice-box" style="background-color: #f9f9f9 !important; border-left: 4px solid #28a745 !important; padding: 25px !important; border-radius: 8px !important;">
-<h3 style="color: #28a745 !important; font-size: 24px !important; margin-top: 0 !important;">Решаем вместе</h3>
-<div class="task-item" style="background-color: #fff !important; border: 1px solid #ddd !important; border-radius: 8px !important; padding: 20px !important; margin-bottom: 20px !important;">
-<h4 style="color: #007bff !important; font-size: 24px !important; margin-top: 0 !important;">Задание</h4>
-<p>Оформите титульный лист и оглавление пояснительной записки по требованиям.</p>
-</div>
-</div>
-</div>`
+<div class=\"step-content active\" id=\"step-2\">\r\n     <!-- Теоретическая часть: Объект и предмет исследования -->\r\n    <div class=\"theory-box\">\r\n        <h3><i class=\"fas fa-search\"></i> Теоретическая часть: Объект и предмет исследования</h3>\r\n        <p><strong>Объект исследования</strong> — это та область реальности, явление или процесс, на который направлено ваше внимание. Объект отвечает на вопрос «Что изучается?» в широком смысле.</p>\r\n        <p><strong>Предмет исследования</strong> — это конкретный аспект, свойство или отношение внутри объекта, которое будет подробно рассмотрено в проекте и отражено в создаваемом продукте. Предмет отвечает на вопрос «Что именно и под каким углом изучается?».</p>\r\n        <p>Правильное определение объекта и предмета помогает сфокусировать работу и точно понять, что должен демонстрировать ваш продукт. Объект всегда шире, предмет — уже и конкретнее.</p>\r\n\r\n        <!-- Расширенные примеры для разных продуктов -->\r\n        <h4 style=\"margin-top: 30px;\"><i class=\"fas fa-table\"></i> Примеры объекта и предмета в зависимости от темы и продукта</h4>\r\n        <div class=\"info-grid\">\r\n            <!-- Существующие примеры (8 шт.) -->\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-desktop\"></i> Оконное приложение</h4>\r\n                <p><strong>Тема:</strong> Анализ успеваемости студентов</p>\r\n                <p><strong>Продукт:</strong> Оконное приложение (Python + Tkinter)</p>\r\n                <p><strong>Объект:</strong> Процесс анализа учебной успеваемости в вузе</p>\r\n                <p><strong>Предмет:</strong> Методы визуализации и статистической обработки образовательных данных (средний балл, динамика, распределение оценок)</p>\r\n            </div>\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-mobile-alt\"></i> Мобильное приложение</h4>\r\n                <p><strong>Тема:</strong> Здоровый образ жизни студентов</p>\r\n                <p><strong>Продукт:</strong> Мобильное приложение (React Native)</p>\r\n                <p><strong>Объект:</strong> Поведенческие привычки студентов в области ЗОЖ (питание, сон, физическая активность)</p>\r\n                <p><strong>Предмет:</strong> Методы мотивации и трекинга физической активности с использованием геймификации и напоминаний</p>\r\n            </div>\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fab fa-telegram\"></i> Телеграм-бот</h4>\r\n                <p><strong>Тема:</strong> Влияние соцсетей на подростков</p>\r\n                <p><strong>Продукт:</strong> Телеграм-бот с рекомендациями</p>\r\n                <p><strong>Объект:</strong> Поведение подростков в социальных сетях и его влияние на психоэмоциональное состояние</p>\r\n                <p><strong>Предмет:</strong> Факторы, влияющие на цифровую гигиену, и методы информирования через интерактивный бот (тесты, советы, статистика)</p>\r\n            </div>\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-globe\"></i> Интерактивный веб-сайт</h4>\r\n                <p><strong>Тема:</strong> Экологические проблемы города</p>\r\n                <p><strong>Продукт:</strong> Интерактивный веб-сайт с картой загрязнений</p>\r\n                <p><strong>Объект:</strong> Экологическая ситуация в городской среде (воздух, вода, отходы)</p>\r\n                <p><strong>Предмет:</strong> Методы визуализации экологических данных на интерактивной карте с отображением источников загрязнения и зон риска</p>\r\n            </div>\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-play-circle\"></i> Мультимедийная презентация</h4>\r\n                <p><strong>Тема:</strong> История видеоигр</p>\r\n                <p><strong>Продукт:</strong> Мультимедийная презентация с таймлайном</p>\r\n                <p><strong>Объект:</strong> Развитие индустрии видеоигр с 1970-х годов до наших дней</p>\r\n                <p><strong>Предмет:</strong> Ключевые этапы, технологические прорывы и их влияние на игровой дизайн (смена поколений консолей, появление 3D, онлайн-игр)</p>\r\n            </div>\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-laptop-code\"></i> Веб-приложение (SPA)</h4>\r\n                <p><strong>Тема:</strong> Онлайн-курсы по программированию</p>\r\n                <p><strong>Продукт:</strong> Одностраничное веб-приложение для трекинга прогресса</p>\r\n                <p><strong>Объект:</strong> Процесс самообучения программированию с использованием онлайн-ресурсов</p>\r\n                <p><strong>Предмет:</strong> Методы отслеживания прогресса и визуализации учебных достижений (диаграммы, прогресс-бары, система достижений)</p>\r\n            </div>\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-gamepad\"></i> Игровое приложение (Unity)</h4>\r\n                <p><strong>Тема:</strong> Изучение правил дорожного движения детьми</p>\r\n                <p><strong>Продукт:</strong> Обучающая игра на Unity</p>\r\n                <p><strong>Объект:</strong> Процесс обучения детей младшего школьного возраста правилам безопасного поведения на дороге</p>\r\n                <p><strong>Предмет:</strong> Игровые механики и визуальные симуляции, способствующие запоминанию знаков и ситуаций ПДД</p>\r\n            </div>\r\n            <div class=\"info-card\">\r\n                <h4><i class=\"fas fa-chart-line\"></i> Аналитический отчёт (Python + Pandas)</h4>\r\n                <p><strong>Тема:</strong> Анализ продаж интернет-магазина</p>\r\n                <p><strong>Продукт:</strong> Jupyter Notebook с расчётами и графиками</p>\r\n                <p><strong>Объект:</strong> Процесс коммерческой деятельности интернет-магазина (продажи, клиенты, товары)</p>\r\n                <p><strong>Предмет:</strong> Статистические методы и визуализация для выявления сезонности, популярных категорий и удержания клиентов</p>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Рекомендации по формулировке (расширенные) -->\r\n        <div style=\"margin-top: 30px; background: #f0f7ff; padding: 20px; border-radius: 8px;\">\r\n            <h4><i class=\"fas fa-check-circle\"></i> Как правильно сформулировать объект и предмет?</h4>\r\n            <ul style=\"list-style-type: none; padding-left: 0;\">\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Объект</strong> всегда шире, чем предмет. Объект — это область, явление или процесс, а предмет — конкретный аспект внутри этой области.</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Предмет</strong> должен быть непосредственно связан с функционалом вашего продукта. Спросите себя: «Что именно мой продукт будет показывать, анализировать или улучшать?» Ответ и будет предметом.</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-check\" style=\"color: #28a745; margin-right: 8px;\"></i> <strong>Проверка:</strong> Объект и предмет не должны дублировать друг друга. Предмет — это часть объекта, которую вы выделяете и изучаете детально.</li>\r\n            </ul>\r\n        </div>\r\n\r\n        <!-- Типичные ошибки -->\r\n        <div style=\"margin-top: 30px; background: #fff0f0; padding: 20px; border-radius: 8px; border-left: 4px solid #dc3545;\">\r\n            <h4><i class=\"fas fa-exclamation-triangle\"></i> Типичные ошибки при определении объекта и предмета</h4>\r\n            <ul style=\"list-style-type: none; padding-left: 0;\">\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-times\" style=\"color: #dc3545; margin-right: 8px;\"></i> <strong>Слишком широкий объект:</strong> например, «Человек» вместо «Процесс адаптации первокурсников». Объект должен быть конкретным и соответствовать масштабу проекта.</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-times\" style=\"color: #dc3545; margin-right: 8px;\"></i> <strong>Предмет совпадает с объектом:</strong> объект «Успеваемость студентов», предмет «Успеваемость студентов». Так быть не должно — предмет уже.</li>\r\n                <li style=\"margin-bottom: 10px;\"><i class=\"fas fa-times\" style=\"color: #dc3545; margin-right: 8px;\"></i> <strong>Предмет не связан с продуктом:</strong> если продукт — мобильное приложение, а предмет сформулирован как «теоретические основы», не ясно, как они будут реализованы.</li>\r\n            </ul>\r\n        </div>\r\n\r\n        <!-- Задания для ученика -->\r\n        <div style=\"margin-top: 30px;\">\r\n            <h4><i class=\"fas fa-tasks\"></i> Задания</h4>\r\n\r\n            <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #007bff;\">\r\n                <h5><i class=\"fas fa-pencil-alt\"></i> ЗАДАНИЕ 1. Определение объекта исследования</h5>\r\n                <p>Исходя из выбранной вами темы и типа продукта, сформулируйте <strong>объект исследования</strong>. Запишите его одним-двумя предложениями.</p>\r\n                <p><em>Пример для темы «Анализ успеваемости студентов» и продукта «Оконное приложение»:</em><br>\r\n                <strong>Объект исследования:</strong> Процесс анализа учебной успеваемости.</p>\r\n                <p><strong>Ваш объект исследования:</strong> _________________________________________________________</p>\r\n            </div>\r\n\r\n            <div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #28a745;\">\r\n                <h5><i class=\"fas fa-pencil-alt\"></i> ЗАДАНИЕ 2. Определение предмета исследования</h5>\r\n                <p>Определите <strong>предмет исследования</strong>, который будет непосредственно реализован в вашем продукте. Запишите его.</p>\r\n                <p><em>Пример для темы «Анализ успеваемости студентов» и продукта «Оконное приложение»:</em><br>\r\n                <strong>Предмет исследования:</strong> Методы визуализации и анализа образовательных данных.</p>\r\n                <p><strong>Ваш предмет исследования:</strong> _________________________________________________________</p>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Подсказка -->\r\n        <p style=\"margin-top: 25px; font-style: italic; color: #555;\">\r\n            <i class=\"fas fa-lightbulb\" style=\"color: #ffc107;\"></i> Помните: объект и предмет должны быть согласованы с темой вашего проекта и возможностями выбранного продукта. Если вы затрудняетесь, вернитесь к примерам своего типа продукта и попробуйте адаптировать формулировку под свою тему.\r\n        </p>\r\n    </div>\`
         }
     ],
 
