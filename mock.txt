@@ -2578,7 +2578,7 @@ pivot.plot(kind="bar", stacked=True)</pre>
 
 '3-5-7': [
     {
-        id: 7, section_number: 7,
+        id: 7, section_number: 1,
         title: 'Классификация архитектур вычислительных систем. Параллелизм. Систолические массивы, кубы и гиперкубы. RISC и CISC',
         content: `
 <div class="step-content active" id="step-7">
