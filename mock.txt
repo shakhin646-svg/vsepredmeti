@@ -8,7 +8,7 @@ const MOCK = {
 
     // teacher_id -> курсы
     teacherCourses: {
-        2: [ { id: 2, name: Математика' }  ]
+        2: [ { id: 2, name: 'Математика' }  ]
     },
 
     // "teacher_id-course_id" -> предметы (id = subject_id из таблицы subjects)
