@@ -1,6 +1,6 @@
 const MOCK = {
     educationals: [
-        { id: 1, name: 'Уроки' }
+        { id: 1, name: 'Набиев Ш. М.' }
     ],
     teachers: [
         { id: 2, fio: '5 класс',  educational_id: 1 } 
